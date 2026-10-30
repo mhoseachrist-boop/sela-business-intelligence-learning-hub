@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function verified() {
+      return request.auth != null && request.auth.token.email_verified == true;
+    }
+    function isStaff() {
+      return verified()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin','trainer'];
+    }
+
+    // Profiles: each person reads and creates only their own, always as 'student'.
+    // Staff roles can only be set by you in the Firebase console.
+    match /users/{uid} {
+      allow read: if request.auth != null && (request.auth.uid == uid || isStaff());
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.role == 'student'
+        && request.resource.data.keys().hasOnly(['fullName','email','role','createdAt']);
+      allow update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.role == resource.data.role
+        && request.resource.data.keys().hasOnly(['fullName','email','role','createdAt']);
+      allow delete: if false;
+    }
+
+    // Programmes and their lessons/projects/assignments: students see only published ones.
+    match /programmes/{id} {
+      allow read: if verified() && (resource.data.published == true || isStaff());
+      allow write: if isStaff();
+    }
+    match /content/{id} {
+      allow read: if verified() && (resource.data.published == true || isStaff());
+      allow write: if isStaff();
+    }
+
+    // Student work: one submission per student per item, id = contentId_studentUid.
+    match /submissions/{sid} {
+      allow read: if verified() && (resource.data.studentUid == request.auth.uid || isStaff());
+      allow create: if verified()
+        && request.resource.data.studentUid == request.auth.uid
+        && sid == request.resource.data.contentId + '_' + request.auth.uid
+        && request.resource.data.status == 'submitted'
+        && request.resource.data.keys().hasOnly(['contentId','studentUid','studentName','answer','link','status','submittedAt']);
+      allow update: if isStaff()
+        || (verified() && resource.data.studentUid == request.auth.uid
+            && resource.data.status == 'submitted'
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['answer','link','submittedAt']));
+      allow delete: if isStaff();
+    }
+  }
+}
