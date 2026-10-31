@@ -9,3 +9,6 @@ window.SELA_FIREBASE_CONFIG = {
   appId: "1:472453341104:web:47eb71f3d768acd6f9c075",
   measurementId: "G-QQDDVMLFKC"
 };
+
+// Address of the Sela verification server (Google Apps Script web app).
+window.SELA_SERVER_URL = "https://script.google.com/macros/s/AKfycbxbEUcykU18cvtFH4gaYhSykgGv4z3z_T4YB5B6v49DGn0L2xkYsYPfyuZ0z07Ecs7sMg/exec";
