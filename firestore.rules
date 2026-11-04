@@ -9,6 +9,7 @@ service cloud.firestore {
     //  + users: 'careerPath' allowed
     //  + enrolments: new. Paid programmes are readable only by enrolled
     //    learners (content, lessons, questionBanks)
+    //  + showcase: public uploads (VacRoom), reviewed before they show
     //  + submissions: size limits on answer and link
     //  + evidence collections: allowed-field lists added
     // Everything else is unchanged.
@@ -142,6 +143,40 @@ service cloud.firestore {
     match /events/{id} {
       allow read: if verified() && (resource.data.published == true || isStaff());
       allow write: if isStaff();
+    }
+
+    // ---------- VacRoom showcase (uploads from verified members, reviewed before they show) ----------
+    // Only a signed-in learner with a VERIFIED email can upload. Each member may
+    // hold at most 3 uploads: the document id must be {uid}_1, {uid}_2 or {uid}_3.
+    // Every upload starts as 'pending'; only 'approved' items are public (queries
+    // must filter status == 'approved'). The administrator can pause uploads by
+    // setting open = false on settings/showcase, and alone can approve or delete.
+    function showcaseOpen() {
+      return !exists(/databases/$(database)/documents/settings/showcase)
+        || get(/databases/$(database)/documents/settings/showcase).data.get('open', true) == true;
+    }
+    match /showcase/{id} {
+      allow get, list: if resource.data.status == 'approved'
+        || isStaff()
+        || (verified() && resource.data.uid == request.auth.uid);
+      allow create: if verified()
+        && showcaseOpen()
+        && id.matches('^' + request.auth.uid + '_[1-3]$')
+        && request.resource.data.keys().hasOnly(['uid','name','title','category','description','kind','url','format','bytes','status','createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.name is string && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 60
+        && request.resource.data.title is string && request.resource.data.title.size() >= 1 && request.resource.data.title.size() <= 80
+        && request.resource.data.description is string && request.resource.data.description.size() <= 300
+        && request.resource.data.category in ['Dancing','Singing','Art','Other']
+        && request.resource.data.kind in ['image','video','audio','pdf']
+        && request.resource.data.url is string && request.resource.data.url.size() <= 400
+        && request.resource.data.url.matches('^https://res\\.cloudinary\\.com/[^/]+/(image|video|raw)/upload/.+')
+        && request.resource.data.format is string && request.resource.data.format.size() <= 10
+        && request.resource.data.bytes is number && request.resource.data.bytes >= 0
+        && request.resource.data.bytes <= (request.resource.data.kind in ['image','pdf'] ? 3145728 : (request.resource.data.kind == 'audio' ? 5242880 : 26214400))
+        && request.resource.data.createdAt == request.time;
+      allow update, delete: if isStaff();
     }
 
     // ---------- Certificates ----------
