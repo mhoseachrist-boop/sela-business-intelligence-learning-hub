@@ -73,9 +73,14 @@ details.lesson>summary:after{content:"⌄";font-size:26px;color:var(--blue);marg
 .chips{margin-top:6px}.chips span{display:inline-block;background:rgba(255,255,255,.15);color:#fff;border-radius:999px;padding:5px 13px;font-size:14px;margin:4px 6px 0 0}
 .matcard h3{margin-bottom:12px}.mat{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;background:#fff}
 .matrow{display:flex;gap:12px;align-items:center;padding:12px;flex-wrap:wrap}
-.mic{font-size:13px!important;font-weight:800;color:var(--navy);flex:none;width:46px;height:46px;border-radius:12px;background:#f0f4f8;display:grid;place-items:center;font-size:23px}.mic.pdf{background:#fdebe8}.mic.web{background:#eaf2fc}
+.mic{font-size:13px!important;font-weight:800;color:var(--navy);flex:none;width:46px;height:46px;border-radius:12px;background:#f0f4f8;display:grid;place-items:center;font-size:23px}.mic.pdf{background:#fdebe8}.mic.web{background:#eaf2fc}.mic.img{background:#eaf8f0}.mic.vid{background:#eaf2fc}.mic.aud{background:#f5eef8}
 .mt{flex:1;min-width:140px}.mt b{display:block;font-size:17px}.mt small{color:var(--muted)}.macts{display:flex;gap:8px;flex-wrap:wrap}
 .pdfbox iframe{width:100%;height:72vh;border:0;border-top:1px solid var(--line);background:#f5f7fa}
+.mat-img{width:100%;display:block;max-height:70vh;object-fit:contain;background:#0f1a2a;cursor:zoom-in}
+.mat-img-wrap{padding:0;border-top:1px solid var(--line);background:#0f1a2a;text-align:center}
+.mat-note{padding:14px 16px;border-top:1px solid var(--line);background:#f7f9fc;font-size:16.5px;line-height:1.7;color:var(--ink);white-space:pre-wrap}
+.mprog .quick-acts{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 4px}
+.mprog .empty-lessons{background:#f7f9fc;border:1px dashed #c5d0de;border-radius:12px;padding:14px;margin:8px 0;color:var(--muted);font-size:14.5px}
 .lrow{background:#f0f4f8!important;border-left:5px solid var(--gold)}
 @media(max-width:700px){.mhero h2,.phero h2{font-size:24px}.ltxt b{font-size:18px}}
 
@@ -1429,7 +1434,11 @@ function progStat(pid){
 }
 const barHtml = st => '<div class="bar"><i style="width:' + st.pct + '%"></i></div><small class="muted">' + st.done + ' of ' + st.total + ' verified or submitted · ' + st.pct + '%</small>';
 function statusPill(it){
-  if(isLessonLike(it)){ const s = evalLesson(it).status; return s==="not_started" ? "" : '<span class="pill ' + STATUS[s][1] + '">' + STATUS[s][0] + '</span>'; }
+  if(isLessonLike(it)){
+    if(isDone(it)) return '<span class="pill ok">Completed</span>';
+    const s = evalLesson(it).status;
+    return s==="not_started" ? "" : '<span class="pill ' + STATUS[s][1] + '">' + STATUS[s][0] + '</span>';
+  }
   const sub = S.subs[it.id];
   if(!sub) return it.dueDate ? '<span class="pill draft">Due ' + esc(it.dueDate) + '</span>' : '<span class="pill">Not submitted</span>';
   if(sub.status==="graded") return '<span class="pill ok">Marked ' + esc(sub.score) + '/' + esc(it.maxScore||100) + '</span>';
@@ -2122,16 +2131,27 @@ window.closeMenu = () => { const d = el("drawer"); if(!d) return; d.classList.re
 window.menuGo = k => { closeMenu(); show("dashboard"); if(k==="notes") goSub("notes"); else if(k==="admin") goTab("admin"); else if(k==="cert") goSub("certs"); else goSub(k); };
 document.addEventListener("keydown", e => { if(e.key==="Escape") closeMenu(); });
 window.openProg = id => { navPush(); S.prog = id; S.ptab = "overview"; S.item = null; draw(); window.scrollTo(0,0); };
-window.openItem = async id => { navPush();
-  S.item = id; draw(); window.scrollTo(0,0);
+window.openItem = async id => {
   const it = S.items.find(i => i.id===id);
-  if(!it || isLessonLike(it)) return;
-  try{ // refresh this student's own work so fresh marks appear
-    const { F, db } = await load(), r = await F.getDoc(F.doc(db,"submissions",id+"_"+S.user.uid));
-    if(r.exists() && S.item===id){ S.subs[id] = { id:r.id, ...r.data() }; draw(); }
-  }catch(e){}
+  if(!it){ note("That module could not be found."); return; }
+  if(it.published===false && !isStaff()){ note("This module is not available yet."); return; }
+  navPush();
+  S.item = id;
+  S.prog = it.programmeId || S.prog;
+  S.ptab = "curriculum";
+  draw(); window.scrollTo(0,0);
+  if(!isLessonLike(it)){
+    try{
+      const { F, db } = await load(), r = await F.getDoc(F.doc(db,"submissions",id+"_"+S.user.uid));
+      if(r.exists() && S.item===id){ S.subs[id] = { id:r.id, ...r.data() }; draw(); }
+    }catch(e){}
+  }
 };
-window.backFromItem = () => { goBack(); };
+window.backFromItem = () => {
+  const it = S.item && S.items.find(i => i.id===S.item);
+  if(it && it.programmeId){ S.item = null; S.prog = it.programmeId; S.ptab = "curriculum"; draw(); window.scrollTo(0,0); return; }
+  goBack();
+};
 window.backToProgs = () => { goBack(); };
 function lessonGroups(pid){
   const staff = isStaff(), all = S.lessons || [], real = all.filter(l => l.programmeId===pid).sort(byOrder);
@@ -2154,6 +2174,7 @@ function chipsList(it){
   if(it.video || ytParse(it.link)) c.push("Video");
   if(it.body) c.push("Notes");
   if(n("pdf")) c.push("" + pl("pdf","PDF","PDFs"));
+  if(n("image")) c.push("" + pl("image","image","images"));
   if(n("website")) c.push("" + pl("website","website","websites"));
   if(n("video")) c.push("" + pl("video","extra video","extra videos"));
   if(n("audio")) c.push("" + pl("audio","audio","audios"));
@@ -2163,7 +2184,7 @@ function chipsList(it){
   return c.length ? c : ["Module"];
 }
 const chipsHtml = it => chipsList(it).join(" · ");
-const MATICON = { pdf:"PDF", website:"WEB", video:"VID", audio:"AUD", file:"FILE" }, MATLABEL = { pdf:"PDF", website:"Website", video:"Video", audio:"Audio", file:"File" };
+const MATICON = { pdf:"PDF", website:"WEB", video:"VID", audio:"AUD", file:"FILE", image:"IMG" }, MATLABEL = { pdf:"PDF", website:"Website", video:"Video", audio:"Audio", file:"File", image:"Image" };
 function matEmbed(m){
   const u = m.url; let x;
   if((x = u.match(/drive\.google\.com\/file\/d\/([\w-]+)/))) return "https://drive.google.com/file/d/" + x[1] + "/preview";
@@ -2178,11 +2199,14 @@ function materialsHtml(it){
   m.forEach((x, i) => {
     const kind = x.kind || x.type || "file";
     const yt = kind==="video" ? ytParse(x.url) : null;
-    const k = kind==="audio" ? "audio" : kind==="video" ? (yt ? "yt" : vKind(x.url)==="file" ? "vfile" : "doc") : kind==="website" ? "web" : "doc";
-    const src = k==="vfile" || k==="audio" ? x.url : yt ? ytEmbed(yt, false) : matEmbedUrl(x.url, kind==="website" ? "website" : kind);
-    const cls = kind==="pdf" ? "pdf" : kind==="website" ? "web" : kind==="audio" ? "web" : "";
-    const lbl = kind==="video" ? "▶ Watch here" : kind==="audio" ? "▶ Play audio" : kind==="website" ? "Open here" : "Read here";
-    h += '<div class="mat"><div class="matrow"><span class="mic ' + cls + '">' + (MATICON[kind]||"FILE") + '</span><div class="mt"><b>' + esc(x.title || MATLABEL[kind] || "File") + '</b><small>' + (MATLABEL[kind]||"File") + '</small></div><div class="macts"><button class="btn primary sm" onclick="matToggle(\'mat' + i + '\', this)">' + lbl + '</button>' +
+    const isImg = kind==="image" || /\.(jpe?g|png|gif|webp|avif|svg)(\?|$)/i.test(x.url||"");
+    const k = isImg ? "image" : kind==="audio" ? "audio" : kind==="video" ? (yt ? "yt" : vKind(x.url)==="file" ? "vfile" : "doc") : kind==="website" ? "web" : "doc";
+    const src = k==="image" ? x.url : (k==="vfile" || k==="audio" ? x.url : yt ? ytEmbed(yt, false) : matEmbedUrl(x.url, kind==="website" ? "website" : kind));
+    const cls = isImg ? "img" : kind==="pdf" ? "pdf" : kind==="website" ? "web" : kind==="video" ? "vid" : kind==="audio" ? "aud" : "";
+    const lbl = isImg ? "View image" : kind==="video" ? "▶ Watch here" : kind==="audio" ? "▶ Play audio" : kind==="website" ? "Open here" : "Read here";
+    const icon = isImg ? "IMG" : (MATICON[kind]||"FILE");
+    const label = isImg ? "Image" : (MATLABEL[kind]||"File");
+    h += '<div class="mat"><div class="matrow"><span class="mic ' + cls + '">' + icon + '</span><div class="mt"><b>' + esc(x.title || label) + '</b><small>' + label + '</small></div><div class="macts"><button class="btn primary sm" onclick="matToggle(\'mat' + i + '\', this)">' + lbl + '</button>' +
       '<a class="btn outline sm" style="text-decoration:none;display:inline-flex;align-items:center" href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">New tab ↗</a></div></div>' +
       '<div class="pdfbox" id="mat' + i + '" data-k="' + k + '" data-src="' + esc(src) + '"></div></div>';
   });
@@ -2193,7 +2217,8 @@ window.matToggle = (id, btn) => {
   if(b.innerHTML){ b.innerHTML = ""; if(btn) btn.textContent = btn.dataset.lbl || "Open here"; return; }
   if(btn){ btn.dataset.lbl = btn.textContent; btn.textContent = "Close"; }
   const k = b.dataset.k, src = b.dataset.src;
-  if(k==="vfile") b.innerHTML = '<video class="vfile" controls playsinline preload="metadata" controlsList="nodownload" src="' + esc(src) + '"></video>';
+  if(k==="image") b.innerHTML = '<div class="mat-img-wrap"><img class="mat-img" src="' + esc(src) + '" alt="Learning image" loading="lazy" onclick="window.open(this.src,\'_blank\')"></div>';
+  else if(k==="vfile") b.innerHTML = '<video class="vfile" controls playsinline preload="metadata" controlsList="nodownload" src="' + esc(src) + '"></video>';
   else if(k==="audio") b.innerHTML = '<audio class="afile" controls preload="metadata" controlsList="nodownload" src="' + esc(src) + '" style="width:100%;margin:8px 0"></audio>';
   else b.innerHTML = '<iframe src="' + esc(src) + '" title="Learning material" allow="fullscreen; encrypted-media" allowfullscreen loading="lazy" referrerpolicy="no-referrer"' + (k==="web" ? ' sandbox="allow-scripts allow-same-origin allow-forms allow-popups"' : '') + '></iframe>' + (k==="web" ? '<p class="status">If this page stays blank, the website does not allow itself to be shown here. Use New tab.</p>' : '');
 };
@@ -2254,18 +2279,23 @@ function apRender(){
 }
 
 function lessonPlanHtml(groups, next){
+  const staff = isStaff();
   let h = "";
   groups.forEach((g, gi) => {
-    const pubItems = g.items.filter(i => i.published), done = pubItems.filter(isDone).length, open = next ? g.items.some(x => x.id===next.id) : gi===0;
-    h += '<details class="lesson tone' + (gi%2) + '"' + (open ? ' open' : '') + '><summary><span class="lnum">' + (gi+1) + '</span><span class="ltxt"><b>' + esc(g.title) + '</b>' + (g.description ? '<small>' + esc(g.description) + '</small>' : '') + '<small class="lmeta">' + pubItems.length + ' modules · ' + done + ' done</small></span>' + (g.real && !g.published ? '<span class="pill draft">Hidden</span>' : '') + '</summary>';
+    if(g.real && g.published===false && !staff) return;
+    const visible = g.items.filter(i => i.published || staff);
+    if(!visible.length && !staff) return;
+    const pubItems = g.items.filter(i => i.published), done = pubItems.filter(isDone).length, open = next ? g.items.some(x => x.id===next.id) : (gi===0 || done < pubItems.length);
+    h += '<details class="lesson tone' + (gi%2) + '"' + (open ? ' open' : '') + '><summary><span class="lnum">' + (gi+1) + '</span><span class="ltxt"><b>' + esc(g.title) + '</b>' + (g.description ? '<small>' + esc(g.description) + '</small>' : '') + '<small class="lmeta">' + pubItems.length + ' modules · ' + done + ' of ' + pubItems.length + ' done</small></span>' + (g.real && !g.published ? '<span class="pill draft">Hidden</span>' : '') + (done && done===pubItems.length && pubItems.length ? '<span class="pill ok">Lesson complete</span>' : '') + '</summary>';
     h += '<div class="lbar"><i style="width:' + (pubItems.length ? Math.round(100*done/pubItems.length) : 0) + '%"></i></div>';
-    if(!g.items.length) h += '<p class="status" style="padding:12px 16px;margin:0">Modules for this lesson are coming soon.</p>';
-    g.items.forEach((i, mi) => {
+    if(!visible.length) h += '<p class="status" style="padding:12px 16px;margin:0">Modules for this lesson are coming soon.</p>';
+    visible.forEach((i, mi) => {
       const isNext = !!(next && next.id===i.id), dn = isDone(i);
-      h += '<button class="mod' + (isNext ? ' next' : '') + (dn ? ' done' : '') + '" onclick="openItem(\'' + esc(i.id) + '\')"><span class="mnum">' + (dn ? '' : (gi+1) + '.' + (mi+1)) + '</span><span class="mtxt"><b>' + esc(i.title) + (isNext ? '<em class="nexttag">Next up</em>' : '') + '</b><small>' + chipsHtml(i) + '</small>' + (i.published ? '' : '<span class="pill draft">Hidden</span> ') + statusPill(i) + '</span><span class="go">›</span></button>';
+      h += '<button class="mod' + (isNext ? ' next' : '') + (dn ? ' done' : '') + '" onclick="openItem(\'' + esc(i.id) + '\')"><span class="mnum">' + (dn ? '✓' : (gi+1) + '.' + (mi+1)) + '</span><span class="mtxt"><b>' + esc(i.title) + (isNext ? '<em class="nexttag">Next up</em>' : '') + '</b><small>' + chipsHtml(i) + '</small>' + (i.published ? '' : '<span class="pill draft">Hidden</span> ') + statusPill(i) + '</span><span class="go">›</span></button>';
     });
     h += '</details>';
   });
+  if(!h) h = '<div class="notice">No lessons have been published in this course yet. Check back soon.</div>';
   return h;
 }
 window.pTab = t => { S.ptab = t; draw(); const c = el("ptabs"); if(c) c.scrollIntoView({block:"start"}); };
@@ -2278,8 +2308,10 @@ function progHtml(p){
   const img = progImg(p, 1000);
   const ctaLabel = st.done ? "Continue learning" : "Start learning";
   const cta = next
-    ? '<button class="btn gold bigbtn" style="width:100%;margin-top:8px" onclick="openItem(\'' + esc(next.id) + '\')">' + ctaLabel + ' →</button>'
-    : (st.total ? '' : '<div class="notice">Nothing has been added to this course yet.</div>');
+    ? '<button class="btn gold bigbtn" style="width:100%;margin-top:8px" onclick="openItem(\'' + esc(next.id) + '\')">' + ctaLabel + ' → ' + esc(next.title) + '</button>'
+    : (st.total
+      ? (st.done >= st.total ? '<div class="message">You have completed every published module in this course.</div>' : '')
+      : '<div class="notice">Nothing has been added to this course yet. Your instructor will publish lessons and modules here.</div>');
   let h = goldBack("goBack()", "Back") + '<nav class="crumbs"><a href="#" onclick="goBack();return false">My Courses</a><i>›</i><span>' + esc(p.title) + '</span></nav>';
   h += '<div class="pov">';
   h += img ? '<div class="pov-img">' + img + '</div>' : '<div class="pov-img pov-ph"><span>' + esc((p.title||"C").slice(0,1).toUpperCase()) + '</span></div>';
@@ -2320,10 +2352,12 @@ function itemHtml(it){
   const gs = lessonGroups(it.programmeId), gi = Math.max(0, gs.findIndex(g => g.items.some(x => x.id===it.id))), g = gs[gi] || { title:"", items:[it] }, mi = Math.max(0, g.items.findIndex(x => x.id===it.id));
   const prog = S.progs.find(p => p.id===it.programmeId) || {};
   const link = ytParse(it.link) ? "" : safeUrl(it.link), vidUrl = it.video || (ytParse(it.link) ? it.link : "");
-  let h = goldBack("goBack()", "Back");
-  h += '<div class="mhero"><div class="crumb">' + esc(prog.title||"") + ' › Lesson ' + (gi+1) + ': ' + esc(g.title) + '</div><div class="eyebrow">' + ICON[it.type] + ' ' + LABEL[it.type] + ' ' + (gi+1) + '.' + (mi+1) + ' · ' + (mi+1) + ' of ' + g.items.length + ' in this lesson</div><h2>' + esc(it.title) + '</h2>';
+  const mats = matList(it), st = progStat(it.programmeId), dn = isDone(it);
+  let h = goldBack("backFromItem()", "Back to lessons");
+  h += '<div class="mhero"><div class="crumb">' + esc(prog.title||"") + ' › Lesson ' + (gi+1) + ': ' + esc(g.title) + '</div><div class="eyebrow">' + (LABEL[it.type]||"Module") + ' ' + (gi+1) + '.' + (mi+1) + ' · ' + (mi+1) + ' of ' + g.items.length + ' in this lesson</div><h2>' + esc(it.title) + '</h2>';
   if(it.description) h += '<p>' + esc(it.description) + '</p>';
-  h += '<div class="chips">' + chipsList(it).map(x => '<span>' + x + '</span>').join("") + '</div></div>';
+  h += '<div class="chips">' + chipsList(it).map(x => '<span>' + x + '</span>').join("") + (dn ? '<span class="pill ok">Completed</span>' : '') + '</div>';
+  h += '<div style="margin-top:10px"><small style="color:#e3edf8">Course progress: <b>' + st.done + ' of ' + st.total + '</b> modules · ' + st.pct + '%</small><div class="bar" style="background:rgba(255,255,255,.25);margin-top:6px"><i style="width:' + st.pct + '%;background:var(--gold)"></i></div></div></div>';
   if(it.dueDate) h += '<div class="notice"><b>Due:</b> ' + esc(it.dueDate) + (!isLessonLike(it) ? ' · <b>Marks:</b> ' + esc(it.maxScore||100) : '') + '</div>';
   if(isLessonLike(it)){
     const c = cfg(it); let inner = "";
@@ -2331,11 +2365,14 @@ function itemHtml(it){
     if(!c.reading && it.body) inner += '<div class="body">' + esc(it.body) + '</div>';
     if(link && it.type==="lesson") inner += linkViewer(link);
     if(inner) h += '<div class="card">' + inner + '</div>';
+    const hasAny = !!(c.video || vidUrl || it.body || mats.length || link || c.bankSize);
+    if(!hasAny) h += '<div class="notice">Your instructor has not added content to this module yet. Check back soon.</div>';
     h += '<div id="lessonRoot"><div id="engage"></div>' + materialsHtml(it) + '<div id="lext"></div><div id="lchecks"></div><div id="lcp"></div><div id="lassess"></div><div id="lcomplete"></div><div id="lmsg" class="message hidden" role="status"></div></div>';
   } else {
     let inner = videoHtml(vidUrl) + (it.body ? '<div class="body">' + esc(it.body) + '</div>' : '') + (link ? linkViewer(link) : '');
     if(inner) h += '<div class="card">' + inner + '</div>';
     h += materialsHtml(it);
+    if(!inner && !mats.length) h += '<div class="notice">Instructions for this task will appear here.</div>';
     const sub = S.subs[it.id], graded = sub && sub.status==="graded";
     h += '<div class="card"><h3>Your submission</h3>';
     if(graded) h += '<div class="message"><b>Marked: ' + esc(sub.score) + ' / ' + esc(it.maxScore||100) + '</b>' + (sub.feedback ? '<br>Feedback: ' + esc(sub.feedback) : '') + '</div>';
@@ -2857,16 +2894,51 @@ window.extSubmit = async () => {
 
 function renderComplete(){
   const box = el("lcomplete"); if(!box || !L.it) return; const ev = evalLesson(L.it);
-  if(ev.comp){ box.innerHTML = '<div class="card"><div class="message">Verified complete' + (ev.comp.override ? ' (confirmed by an administrator)' : '') + '.</div></div>'; return; }
-  box.innerHTML = '<div class="card"><button class="btn ' + (ev.all ? "primary" : "outline") + '" style="width:100%" ' + (ev.all ? '' : 'disabled') + ' onclick="completeLesson()">' + (ev.all ? 'Complete lesson' : 'Complete lesson (locked)') + '</button>' + (ev.all ? '' : '<p class="status">Completing a lesson unlocks only after the content, checkpoints and assessment above are done. It cannot be marked complete by hand.</p>') + (ev.applicable ? '' : '<p class="status">No verification steps are set for this lesson.</p>') + '</div>';
+  if(ev.comp || S.done[L.it.id]){
+    const nxt = outline(L.it.programmeId).find(i => i.published && !isDone(i));
+    box.innerHTML = '<div class="card"><div class="message">Module complete. Your progress on the course board is updated.</div>' +
+      (nxt ? '<button class="btn gold" style="width:100%;margin-top:10px" onclick="openItem(\'' + esc(nxt.id) + '\')">Next module → ' + esc(nxt.title) + '</button>' : '<button class="btn gold" style="width:100%;margin-top:10px" onclick="backFromItem()">Back to lesson plan — course finished</button>') +
+      '</div>';
+    return;
+  }
+  const can = ev.all;
+  const hint = can
+    ? (ev.applicable ? 'You have met the requirements for this module.' : 'Work through the materials above, then mark this module done to update your board.')
+    : 'Finish the video, reading, checkpoints and assessment above before you can complete this module.';
+  box.innerHTML = '<div class="card"><button class="btn ' + (can ? "primary" : "outline") + '" style="width:100%" ' + (can ? '' : 'disabled') + ' onclick="completeLesson()">' + (can ? 'Mark module complete' : 'Complete module (locked)') + '</button><p class="status">' + hint + '</p></div>';
+}
+function afterModuleComplete(it){
+  renderChecks(); renderComplete();
+  const st = progStat(it.programmeId), nxt = outline(it.programmeId).find(i => i.published && !isDone(i));
+  lmsg(nxt
+    ? ("Module complete · course " + st.pct + "% (" + st.done + " of " + st.total + "). Continue to the next module.")
+    : ("Module complete · course " + st.pct + "% (" + st.done + " of " + st.total + "). All published modules are done."));
 }
 window.completeLesson = async () => {
-  const it = L.it, ev = evalLesson(it); if(!ev.all || ev.comp || L.completing) return;
+  const it = L.it, ev = evalLesson(it); if(!ev.all || ev.comp || S.done[it.id] || L.completing) return;
   L.completing = true; try{ vSave(true); rSave(true); await flushAll(); }catch(e){}
-  const r = await srv("complete", { contentId:it.id }); L.completing = false;
-  if(!r.ok){ lmsg((r.error || "Could not complete the lesson.") + (r.notes && r.notes.length ? " (" + r.notes.join("; ") + ")" : ""), true); return; }
-  S.my.comp[it.id] = r.record || { id:docKey(it), contentId:it.id, status:"verified_complete", method:"server-verified" };
-  renderChecks(); renderComplete(); lmsg("Lesson verified complete. Well done.");
+  const r = await srv("complete", { contentId:it.id });
+  if(r.ok){
+    S.my.comp[it.id] = r.record || { id:docKey(it), contentId:it.id, status:"verified_complete", method:"server-verified" };
+    L.completing = false;
+    afterModuleComplete(it);
+    return;
+  }
+  if(!ev.applicable){
+    try{
+      const { F, db } = await load(), id = it.id + "_" + S.user.uid;
+      await F.setDoc(F.doc(db,"progress", id), {
+        contentId: it.id, programmeId: it.programmeId, studentUid: S.user.uid, studentName: nm(),
+        completedAt: F.serverTimestamp(), quizScore: null, updatedAt: F.serverTimestamp()
+      }, { merge:true });
+      S.done[it.id] = { id, contentId: it.id, programmeId: it.programmeId };
+      L.completing = false;
+      afterModuleComplete(it);
+      return;
+    }catch(e){ L.completing = false; lmsg(friendly(e), true); return; }
+  }
+  L.completing = false;
+  lmsg((r.error || "Could not complete the module.") + (r.notes && r.notes.length ? " (" + r.notes.join("; ") + ")" : ""), true);
 };
 
 function adminHomeHtml(){
@@ -2875,10 +2947,10 @@ function adminHomeHtml(){
   const tile = (sec, title, desc, badge) => '<button type="button" class="hcard" onclick="aSec(\'' + sec + '\')"><span class="hic" aria-hidden="true">' +
     ({build:"▣", materials:"⬆", notes:"✎", skills:"◆", events:"📅", ann:"📢", photos:"⌂", site:"⚙", learn:"👥", cert:"★", showcase:"▶"}[sec] || "→") +
     '</span><span class="htx"><b>' + title + '</b><small>' + desc + '</small>' + (badge ? '<em>' + badge + '</em>' : '') + '</span><span class="harr">→</span></button>';
-  return '<div class="greet"><small>Administration</small><h2>Manage the Learning Hub</h2><p class="pnote">Choose what you want to add or manage. When you add materials, you will be asked which course, lesson and module they belong to.</p></div>' +
+  return '<div class="greet"><small>Administration</small><h2>Manage the Learning Hub</h2><p class="pnote">Start with <b>Courses &amp; modules</b> to add lessons and content to each course. Use the Materials library for videos, images, PDFs and links, then attach them to a module.</p></div>' +
     '<div class="hcards" style="margin-bottom:8px">' +
-      tile("build", "Courses & modules", "Add programmes, lessons and modules. Structure the learning path.", nProg ? nProg + " course" + (nProg===1?"":"s") + " · " + nMod + " module" + (nMod===1?"":"s") : "Start here") +
-      tile("materials", "Materials library", "Add videos, documents, PDFs and links in one place. Attach them to any course, lesson or module.", (nVid+nDoc) ? (nVid + " video" + (nVid===1?"":"s") + " · " + nDoc + " document" + (nDoc===1?"":"s")) : "Empty library") +
+      tile("build", "Courses & modules", "Add programmes, lessons and modules (video, notes, PDF, image). This is where real course content lives.", nProg ? nProg + " course" + (nProg===1?"":"s") + " · " + nMod + " module" + (nMod===1?"":"s") : "Start here") +
+      tile("materials", "Materials library", "Add videos, images, documents, PDFs and links. Attach them to any course, lesson or module.", (nVid+nDoc) ? (nVid + " video" + (nVid===1?"":"s") + " · " + nDoc + " document" + (nDoc===1?"":"s")) : "Empty library") +
       tile("skills", "Skills Hub", "Add skills with cover images, formatted notes, gallery images and videos.", nSkills ? nSkills + " skill" + (nSkills===1?"":"s") : "Empty — add the first skill") +
       tile("events", "Calendar & events", "Mark events on the learner calendar. Optional Google Calendar embed is under Site info.", nEv ? nEv + " event" + (nEv===1?"":"s") : "No events yet") +
       tile("notes", "Learner notes", "Write reading notes for learners. Optionally link them to a course.", nNotes ? nNotes + " note" + (nNotes===1?"":"s") : "") +
@@ -2997,7 +3069,7 @@ const fsec = (t, inner, open) => `<div class="fsec"><div class="fst">${t}</div>$
 function adminBuildHtml(){
   const sel = S.sel || (S.sel = {}), nSel = Object.keys(sel).length;
   const EP = S.editProgId ? S.progs.find(x => x.id===S.editProgId) : null, pv = k => esc(EP && EP[k]!=null ? EP[k] : "");
-  let h = '<div class="notice">Add programmes first, then lessons inside each programme, then modules inside each lesson. Videos, documents and links are added from the <button type="button" class="link" onclick="aSec(\'materials\')">Materials library</button> — you will be asked which course, lesson and module they belong to.</div>';
+  let h = '<div class="notice"><b>How to build a course:</b> 1) Add or use a programme below. 2) Add lessons inside that programme. 3) Add modules inside each lesson (video, notes, PDFs, images, links). You can also upload media in the <button type="button" class="link" onclick="aSec(\'materials\')">Materials library</button> and attach it to any module. Home page course cards (under Photos) are only marketing summaries — real lessons live here.</div>';
   h += '<div class="acard" id="progForm"' + (EP ? ' style="border:2px solid var(--gold)"' : '') + '>' + ahead(1, EP ? "Editing programme: " + esc(EP.title) : "Add a programme", "A programme is a full course. These details show on the course cards learners see.") +
     fsec("Card details", '<div class="field"><label>Title</label><input id="pTitle" placeholder="e.g. Data Literacy" value="' + pv("title") + '"></div><div class="field"><label>Short description (shown on the card)</label><textarea id="pDesc" style="min-height:70px">' + pv("description") + '</textarea></div><div class="field"><label>Price in UGX (0 means free). This is shown on the card.</label><input id="pPrice" type="number" min="0" value="' + (EP ? esc(EP.price||0) : "0") + '"></div>' +
       '<div class="field"><label>Photograph</label><div class="pcthumb big" id="pThumb">' + (EP && EP.photo ? progImg(EP, 400) : '<span>No photo</span>') + '</div>' + (upCfg() ? '<input type="file" accept="image/*" id="pFile"><button type="button" class="btn outline sm" style="margin-top:6px" onclick="progPhoto()">Upload photo</button>' : '') + '<input id="pPhoto" placeholder="Or paste a photo link (https://…)" value="' + pv("photo") + '" style="margin-top:8px"></div>') +
@@ -3008,14 +3080,16 @@ function adminBuildHtml(){
   h += '<div class="mtool"><button class="btn outline sm" onclick="secureBanks()">Secure question banks</button>' + (nSel ? '<button class="btn danger sm" onclick="delSelected()">Delete selected (' + nSel + ')</button><button class="btn outline sm" onclick="selClear()">Clear ticks</button>' : '') + '</div>';
   if(!S.progs.length) h += '<p class="status">Nothing yet.</p>';
   S.progs.forEach(p => {
-    const gs = lessonGroups(p.id), nm = gs.reduce((a,g) => a + g.items.length, 0);
-    h += '<div class="mprog"><div class="mph"><div><b>' + esc(p.title) + '</b><small>' + gs.length + ' lessons · ' + nm + ' modules</small></div><span class="pill ' + (p.published ? 'ok' : 'draft') + '">' + (p.published ? 'Visible' : 'Hidden') + '</span></div>' +
-      '<div class="acts"><button class="btn outline sm" onclick="editProg(\'' + esc(p.id) + '\')">Edit</button><button class="btn outline sm" onclick="togglePub(\'programmes\',\'' + esc(p.id) + '\')">' + (p.published ? 'Hide' : 'Show') + '</button><button class="btn outline sm" onclick="selAll(\'' + esc(p.id) + '\')">Tick everything</button><button class="btn danger sm" onclick="delProg(\'' + esc(p.id) + '\')">Delete programme</button></div>';
+    const gs = lessonGroups(p.id), nm = gs.reduce((a,g) => a + g.items.length, 0), realLessons = gs.filter(g => g.real);
+    h += '<div class="mprog"><div class="mph"><div><b>' + esc(p.title) + '</b><small>' + realLessons.length + ' lessons · ' + nm + ' modules</small></div><span class="pill ' + (p.published ? 'ok' : 'draft') + '">' + (p.published ? 'Visible' : 'Hidden') + '</span></div>' +
+      '<div class="quick-acts"><button class="btn gold sm" onclick="quickAddLesson(\'' + esc(p.id) + '\')">+ Add lesson</button><button class="btn primary sm" onclick="quickAddModule(\'' + esc(p.id) + '\')">+ Add module</button><button class="btn outline sm" onclick="editProg(\'' + esc(p.id) + '\')">Edit programme</button><button class="btn outline sm" onclick="togglePub(\'programmes\',\'' + esc(p.id) + '\')">' + (p.published ? 'Hide' : 'Show') + '</button><button class="btn outline sm" onclick="selAll(\'' + esc(p.id) + '\')">Tick all</button><button class="btn danger sm" onclick="delProg(\'' + esc(p.id) + '\')">Delete</button></div>';
+    if(!realLessons.length && !nm) h += '<div class="empty-lessons">This course has no lessons or modules yet. Tap <b>+ Add lesson</b>, then add modules (video, notes, PDF, image) inside that lesson.</div>';
     gs.forEach((g, gi) => {
       h += '<div class="mlesson"><div class="mlh">' + (g.real ? '<input type="checkbox" class="mck" ' + (sel["L:" + g.id] ? 'checked ' : '') + 'onchange="selTog(\'L\',\'' + esc(g.id) + '\')" aria-label="Select lesson">' : '<span class="mck0"></span>') + '<div class="mlt"><b>Lesson ' + (gi+1) + ': ' + esc(g.title) + '</b><small>' + g.items.length + ' modules</small></div>' + (g.real ? '<span class="pill ' + (g.published ? 'ok' : 'draft') + '">' + (g.published ? 'Visible' : 'Hidden') + '</span>' : '<span class="pill">Not a lesson yet</span>') + '</div>' +
-        (g.real ? '<div class="acts"><button class="btn outline sm" onclick="editLesson(\'' + esc(g.id) + '\')">Edit</button><button class="btn outline sm" onclick="togglePub(\'lessons\',\'' + esc(g.id) + '\')">' + (g.published ? 'Hide' : 'Show') + '</button><button class="btn danger sm" onclick="delLesson(\'' + esc(g.id) + '\')">Delete</button></div>' : '');
+        (g.real ? '<div class="acts"><button class="btn gold sm" onclick="quickAddModule(\'' + esc(p.id) + '\',\'' + esc(g.id) + '\')">+ Module</button><button class="btn outline sm" onclick="editLesson(\'' + esc(g.id) + '\')">Edit</button><button class="btn outline sm" onclick="togglePub(\'lessons\',\'' + esc(g.id) + '\')">' + (g.published ? 'Hide' : 'Show') + '</button><button class="btn danger sm" onclick="delLesson(\'' + esc(g.id) + '\')">Delete</button></div>' : '');
       g.items.forEach(i => {
-        h += '<div class="mmod"><div class="mlh"><input type="checkbox" class="mck" ' + (sel["C:" + i.id] ? 'checked ' : '') + 'onchange="selTog(\'C\',\'' + esc(i.id) + '\')" aria-label="Select module"><div class="mlt"><b>' + esc(i.title) + '</b><small>' + esc(LABEL[i.type] || "") + (i.video ? ' · video' : '') + ((i.bankSize || (i.quiz && i.quiz.length)) ? ' · assessment' : '') + (i.dueDate ? ' · due ' + esc(i.dueDate) : '') + '</small></div><span class="pill ' + (i.published ? 'ok' : 'draft') + '">' + (i.published ? 'Visible' : 'Hidden') + '</span></div><div class="acts">' + (i.type!=="lesson" ? '<button class="btn primary sm" onclick="viewSubs(\'' + esc(i.id) + '\')">Submissions</button>' : '') + '<button class="btn outline sm" onclick="editItem(\'' + esc(i.id) + '\')">Edit</button><button class="btn outline sm" onclick="togglePub(\'content\',\'' + esc(i.id) + '\')">' + (i.published ? 'Hide' : 'Show') + '</button><button class="btn danger sm" onclick="delItem(\'' + esc(i.id) + '\')">Delete</button></div></div>';
+        const mcount = matList(i).length;
+        h += '<div class="mmod"><div class="mlh"><input type="checkbox" class="mck" ' + (sel["C:" + i.id] ? 'checked ' : '') + 'onchange="selTog(\'C\',\'' + esc(i.id) + '\')" aria-label="Select module"><div class="mlt"><b>' + esc(i.title) + '</b><small>' + esc(LABEL[i.type] || "") + (i.video ? ' · video' : '') + (i.body ? ' · notes' : '') + (mcount ? ' · ' + mcount + ' material' + (mcount===1?'' : 's') : '') + ((i.bankSize || (i.quiz && i.quiz.length)) ? ' · assessment' : '') + (i.dueDate ? ' · due ' + esc(i.dueDate) : '') + '</small></div><span class="pill ' + (i.published ? 'ok' : 'draft') + '">' + (i.published ? 'Visible' : 'Hidden') + '</span></div><div class="acts">' + (i.type!=="lesson" ? '<button class="btn primary sm" onclick="viewSubs(\'' + esc(i.id) + '\')">Submissions</button>' : '') + '<button class="btn outline sm" onclick="editItem(\'' + esc(i.id) + '\')">Edit</button><button class="btn outline sm" onclick="togglePub(\'content\',\'' + esc(i.id) + '\')">' + (i.published ? 'Hide' : 'Show') + '</button><button class="btn danger sm" onclick="delItem(\'' + esc(i.id) + '\')">Delete</button></div></div>';
       });
       h += '</div>';
     });
@@ -3088,11 +3162,19 @@ window.saveLesson = async () => {
     const data = { programmeId:pid, title, description:$v("lDesc"), published:el("lPub").checked, order:Number($v("lOrder")) || 0 };
     if(S.editLesson){ const old = S.lessons.find(l => l.id===S.editLesson) || {}; await F.updateDoc(F.doc(db,"lessons",S.editLesson), { ...data, order:data.order || (old.programmeId===pid && old.order) || maxO+1 }); }
     else await F.addDoc(F.collection(db,"lessons"), { ...data, order:data.order || maxO+1, createdAt:F.serverTimestamp() });
-    const was = !!S.editLesson; S.editLesson = null; await loadAll(); note(was ? "Lesson saved." : "Lesson added. Now add modules to it below."); draw(); window.scrollTo(0,0);
+    const was = !!S.editLesson; S.editLesson = null; S.prefProg = ""; await loadAll(); note(was ? "Lesson saved." : "Lesson added. Now add modules to it below."); draw(); window.scrollTo(0,0);
   }catch(e){ showMsg(friendly(e), true, "lMsg"); }
 };
 window.editLesson = id => { S.editLesson = id; S.tab = "admin"; S.asec = "build"; draw(); const c = el("lessonForm"); if(c) c.scrollIntoView(); };
 window.cancelLessonEdit = () => { S.editLesson = null; draw(); };
+window.quickAddLesson = pid => {
+  S.editLesson = null; S.edit = null; S.prefProg = pid; S.prefLesson = ""; S.tab = "admin"; S.asec = "build"; draw();
+  const c = el("lessonForm"); if(c){ c.scrollIntoView({ behavior:"smooth", block:"start" }); const s = el("lProg"); if(s) s.value = pid; }
+};
+window.quickAddModule = (pid, lid) => {
+  S.edit = null; S.editLesson = null; S.prefProg = pid; S.prefLesson = lid || ""; S.tab = "admin"; S.asec = "build"; draw();
+  const c = el("contentForm"); if(c){ c.scrollIntoView({ behavior:"smooth", block:"start" }); const sp = el("cProg"); if(sp){ sp.value = pid; fillLessons(); } const sl = el("cLesson"); if(sl && lid) sl.value = lid; }
+};
 window.delLesson = async id => {
   if(!confirm("Delete this lesson? Its modules are kept and move to \"More modules\".")) return;
   try{
@@ -3102,11 +3184,11 @@ window.delLesson = async id => {
   }catch(e){ note(friendly(e)); draw(); }
 };
 function parseMaterials(text){
-  const out = []; const KM = { pdf:"pdf", website:"website", web:"website", site:"website", link:"website", video:"video", file:"file", doc:"file", download:"file", slides:"file", audio:"audio", sound:"audio", mp3:"audio", podcast:"audio" };
+  const out = []; const KM = { pdf:"pdf", website:"website", web:"website", site:"website", link:"website", video:"video", file:"file", doc:"file", download:"file", slides:"file", audio:"audio", sound:"audio", mp3:"audio", podcast:"audio", image:"image", img:"image", photo:"image", picture:"image" };
   for(const raw of String(text||"").split(/\r?\n/)){
     const line = raw.trim(); if(!line) continue;
     const parts = line.split("|").map(x => x.trim()), kind = KM[(parts[0]||"").toLowerCase()];
-    if(!kind || parts.length<2) return { error:'Each material needs a type and a link, for example:  pdf | Course notes | https://…   (types: pdf, website, video, audio, file)' };
+    if(!kind || parts.length<2) return { error:'Each material needs a type and a link, for example:  pdf | Course notes | https://…   (types: pdf, image, website, video, audio, file)' };
     const url = parts.length>=3 ? parts[2] : parts[1], title = parts.length>=3 ? parts[1] : "";
     if(!safeUrl(url)) return { error:'The link must start with http:// or https:// in: "' + line.slice(0,50) + '"' };
     out.push({ kind, title:title.slice(0,120), url });
@@ -3480,8 +3562,9 @@ function bankToText(qs){
 function lessonFormHtml(){
   if(!S.progs.length) return "";
   const E = S.editLesson ? (S.lessons||[]).find(l => l.id===S.editLesson) : null;
-  return '<div class="acard" id="lessonForm"' + (E ? ' style="border:2px solid var(--gold)"' : '') + '>' + ahead(2, E ? 'Editing lesson: ' + esc(E.title) : 'Add a lesson', 'A lesson groups modules, for example "Lesson 1: Understanding data".') +
-    fsec("Placement", '<div class="field"><label>Programme</label><select id="lProg">' + progOptions(E && E.programmeId) + '</select></div><div class="field"><label>Position (optional, smaller numbers come first)</label><input id="lOrder" type="number" min="1" value="' + esc(E && E.order ? E.order : "") + '"></div>') +
+  const prefPid = E ? E.programmeId : (S.prefProg || "");
+  return '<div class="acard" id="lessonForm"' + (E || S.prefProg ? ' style="border:2px solid var(--gold)"' : '') + '>' + ahead(2, E ? 'Editing lesson: ' + esc(E.title) : 'Add a lesson', 'A lesson groups modules, for example "Lesson 1: Understanding data". After you add a lesson, add modules (video, notes, PDF, image) inside it.') +
+    fsec("Placement", '<div class="field"><label>Programme</label><select id="lProg">' + progOptions(prefPid) + '</select></div><div class="field"><label>Position (optional, smaller numbers come first)</label><input id="lOrder" type="number" min="1" value="' + esc(E && E.order ? E.order : "") + '"></div>') +
     fsec("Details", '<div class="field"><label>Lesson title</label><input id="lTitle" placeholder="e.g. Lesson 1: Understanding data" value="' + esc(E ? E.title : "") + '"></div><div class="field"><label>Short description (optional)</label><input id="lDesc" value="' + esc(E ? E.description||"" : "") + '"></div>') +
     '<label class="chk"><input type="checkbox" id="lPub"' + (!E || E.published!==false ? " checked" : "") + '> Visible to students</label><div id="lMsg" class="message hidden"></div>' +
     '<button class="btn primary" style="width:100%" onclick="saveLesson()">' + (E ? 'Save lesson' : 'Add lesson') + '</button>' + (E ? '<button class="btn outline" style="width:100%;margin-top:8px" onclick="cancelLessonEdit()">Cancel</button>' : '') + '</div>';
@@ -3490,25 +3573,27 @@ function formHtml(){
   const E = S.edit ? S.items.find(i => i.id===S.edit) : null, ev = k => esc(E && E[k]!=null ? E[k] : "");
   const sel = (v,l,cur) => '<option value="' + v + '"' + (String(cur)===String(v) ? " selected" : "") + '>' + l + '</option>';
   const pracOpts = '<option value="">None (no practical required)</option>' + S.items.filter(i => i.type==="project" || i.type==="assignment").map(i => '<option value="' + esc(i.id) + '"' + (E && E.practicalId===i.id ? " selected" : "") + '>' + esc((S.progs.find(p => p.id===i.programmeId)||{}).title || "") + ': ' + esc(i.title) + '</option>').join("");
-  let h = '<div class="acard" id="contentForm"' + (E ? ' style="border:2px solid var(--gold)"' : '') + '>' + ahead(3, E ? 'Editing: ' + esc(E.title) : 'Add a module', 'A module, project, assignment or external course inside a lesson.');
+  const prefPid = E ? E.programmeId : (S.prefProg || (S.progs[0]||{}).id || "");
+  const prefLid = E ? E.lessonId : (S.prefLesson || "");
+  let h = '<div class="acard" id="contentForm"' + (E || S.prefProg ? ' style="border:2px solid var(--gold)"' : '') + '>' + ahead(3, E ? 'Editing: ' + esc(E.title) : 'Add a module', 'A module can include a main video, reading notes, PDFs, images, audio and links. Attach materials below or from the Materials library.');
   if(!S.progs.length) return h + '<p class="status">Add a programme first.</p></div>';
-  const vids = (S.lib||[]).filter(x => x.kind==="video"), docs = (S.lib||[]).filter(x => x.kind==="doc");
+  const vids = (S.lib||[]).filter(x => x.kind==="video"), docs = (S.lib||[]).filter(x => x.kind==="doc" || x.kind==="image");
   h += fsec("Placement",
-    '<div class="field"><label>Programme</label><select id="cProg" onchange="fillLessons()">' + progOptions(E && E.programmeId) + '</select></div>' +
-    '<div class="field"><label>Lesson this module belongs to</label><select id="cLesson">' + lessonOpts(E ? E.programmeId : (S.progs[0]||{}).id, E && E.lessonId) + '</select></div>' +
-    '<div class="field"><label>Type</label><select id="cType">' + sel("lesson","Module (video, notes, PDFs, links)",E&&E.type) + sel("project","Project",E&&E.type) + sel("assignment","Assignment",E&&E.type) + sel("external","External course (another provider)",E&&E.type) + '</select></div>' +
+    '<div class="field"><label>Programme</label><select id="cProg" onchange="fillLessons()">' + progOptions(prefPid) + '</select></div>' +
+    '<div class="field"><label>Lesson this module belongs to</label><select id="cLesson">' + lessonOpts(prefPid, prefLid) + '</select></div>' +
+    '<div class="field"><label>Type</label><select id="cType">' + sel("lesson","Module (video, notes, PDFs, images, links)",E&&E.type) + sel("project","Project",E&&E.type) + sel("assignment","Assignment",E&&E.type) + sel("external","External course (another provider)",E&&E.type) + '</select></div>' +
     '<div class="field"><label>Position in the lesson (optional)</label><input id="cOrder" type="number" min="1" value="' + (E && E.order ? esc(E.order) : "") + '"></div>');
   h += fsec("Details",
     '<div class="field"><label>Title</label><input id="cTitle" value="' + ev("title") + '"></div>' +
     '<div class="field"><label>Short description</label><input id="cDesc" value="' + ev("description") + '"></div>' +
-    '<div class="field"><label>Notes / instructions (shown word by word to the learner)</label><textarea id="cBody">' + ev("body") + '</textarea></div>');
+    '<div class="field"><label>Notes / instructions (shown word by word to the learner)</label><textarea id="cBody" placeholder="Write the reading notes or instructions for this module…">' + ev("body") + '</textarea></div>');
   h += fsec("Video",
     '<div class="field"><label>Choose from your Videos section</label><select id="cVidPick" onchange="pickVideo()"><option value="">(none selected)</option>' + vids.map(v => '<option value="' + esc(v.url) + '"' + (E && E.video===v.url ? " selected" : "") + '>' + esc(v.title) + '</option>').join("") + '</select></div>' +
     '<div class="field"><label>Or paste a video link (YouTube, Google Drive or a direct video file)</label><input id="cVideo" placeholder="https://…" value="' + ev("video") + '"><small class="muted">YouTube videos are tracked. Other videos play inside the lesson, and the learner proves understanding through the checks and assessment.</small></div>' +
     '<div class="field"><label>Other link (external course address, if this is an external course)</label><input id="cLink" placeholder="https://…" value="' + ev("link") + '"></div>');
   h += fsec("Documents and links",
     '<div class="field"><label>Add from your Documents section</label><div class="inl"><select id="cDocPick"><option value="">(choose a document)</option>' + docs.map(d => '<option value="' + esc(d.dtype + " | " + d.title + " | " + d.url) + '">' + esc(d.title) + '</option>').join("") + '</select><button type="button" class="btn outline sm" onclick="addDocLine()">Add</button></div></div>' +
-    '<div class="field"><label>Materials (one per line: type | title | link)</label><textarea id="cMat" style="min-height:100px" placeholder="pdf | Course notes | https://…\naudio | Lesson podcast | https://…\nwebsite | Data basics guide | https://example.com\nvideo | Extra video | https://youtu.be/…">' + esc(materialsToText(E && E.materials)) + '</textarea><small class="muted">Types: pdf, website, video, audio, file. Add as many as you need. Everything opens inside Sela.</small></div>');
+    '<div class="field"><label>Materials (one per line: type | title | link)</label><textarea id="cMat" style="min-height:100px" placeholder="pdf | Course notes | https://…\nimage | Diagram of the process | https://…\naudio | Lesson podcast | https://…\nwebsite | Data basics guide | https://example.com\nvideo | Extra video | https://youtu.be/…">' + esc(materialsToText(E && E.materials)) + '</textarea><small class="muted">Types: pdf, image, website, video, audio, file. Add as many as you need. Everything opens inside Sela.</small></div>');
   h += fsec("Assessment",
     '<div class="field"><label>Question bank (used for checkpoints and the assessment)</label><textarea id="cQuiz" style="min-height:170px" placeholder="Q: What does BI stand for?\nlevel: 1\nexplain: BI means Business Intelligence.\n*Business Intelligence\nBasic Internet\nBig Index\n\nQ: Name the capital of Uganda\nanswer: Kampala | Kampala city">' + esc(S.edit ? S.editBank : "") + '</textarea><small class="muted">One question per block. Q: starts a question. Put * before the correct option, or use answer: for a typed answer (separate accepted answers with |). Optional lines: level: 1, 2 or 3; explain:; scenario:; type: tf, scenario or practical. Add at least 10 questions so each attempt differs.</small></div>' +
     '<div class="fgrid"><div class="field"><label>Questions per attempt</label><input id="cAssN" type="number" min="1" max="60" value="' + esc(E && E.assessN ? E.assessN : 10) + '"></div><div class="field"><label>Pass mark (%)</label><input id="cPass" type="number" min="1" max="100" value="' + esc(E && E.passMark ? E.passMark : 80) + '"></div></div>');
@@ -3555,8 +3640,9 @@ window.onMatKind = () => {
   if(typeField) typeField.style.display = (k==="doc" || k==="link") ? "" : "none";
   if(accept){
     if(k==="video") accept.setAttribute("accept", "video/*");
+    else if(k==="image") accept.setAttribute("accept", "image/*,.jpg,.jpeg,.png,.gif,.webp");
     else if(k==="audio") accept.setAttribute("accept", "audio/*,.mp3,.m4a,.wav,.ogg,.aac");
-    else accept.setAttribute("accept", ".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx");
+    else accept.setAttribute("accept", ".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,image/*");
   }
 };
 function materialsAdminHtml(){
@@ -3572,28 +3658,29 @@ function materialsAdminHtml(){
     fsec("What are you adding?",
       '<div class="field"><label>Type</label><select id="lbKind" onchange="onMatKind()">' +
         '<option value="video"' + (kind==="video"?" selected":"") + '>Video (YouTube, Drive or file)</option>' +
+        '<option value="image"' + (kind==="image"?" selected":"") + '>Image (photo, diagram, screenshot)</option>' +
         '<option value="audio"' + (kind==="audio"?" selected":"") + '>Audio (MP3, podcast or sound file)</option>' +
         '<option value="doc"' + (kind==="doc"?" selected":"") + '>Document (PDF, Word, PowerPoint, Excel)</option>' +
         '<option value="link"' + (kind==="link"?" selected":"") + '>Website or external link</option>' +
       '</select></div>' +
       '<div class="field"><label>Title</label><input id="lbTitle" placeholder="e.g. Lesson 1 introduction video"></div>' +
-      '<div class="field" id="lbTypeWrap" style="display:' + (kind==="video"||kind==="audio"?"none":"") + '"><label>Document / link type</label><select id="lbType"><option value="pdf">PDF</option><option value="file">Document (Word, PowerPoint, Excel)</option><option value="website">Website or web page</option></select></div>') +
+      '<div class="field" id="lbTypeWrap" style="display:' + (kind==="video"||kind==="audio"||kind==="image"?"none":"") + '"><label>Document / link type</label><select id="lbType"><option value="pdf">PDF</option><option value="file">Document (Word, PowerPoint, Excel)</option><option value="website">Website or web page</option></select></div>') +
     fsec("Source",
       '<div class="field"><label>Paste a link</label><input id="lbUrl" placeholder="https://…"></div>' +
       '<div class="orline"><span>or upload from your device</span></div>' +
-      (up ? '<div class="field"><input type="file" id="lbFile" accept="video/*"></div><button class="btn outline" style="width:100%" onclick="libUpload(\'auto\')">Upload file</button><div class="upbar hidden" id="lbBar"><i></i></div>' :
+      (up ? '<div class="field"><input type="file" id="lbFile" accept="video/*,image/*,.pdf"></div><button class="btn outline" style="width:100%" onclick="libUpload(\'auto\')">Upload file</button><div class="upbar hidden" id="lbBar"><i></i></div>' :
         '<div class="notice">Direct upload is not switched on yet. Add Cloudinary details to firebase-config.js, or paste a link above. YouTube, Google Drive and Drive PDFs already work.</div>')) +
     '<div id="lbMsg" class="message hidden"></div><button class="btn primary" style="width:100%" onclick="addLib(\'auto\')">Add material</button></div>';
   h += '<div class="acard">' + ahead("", "Your materials library", list.length + " item" + (list.length===1?"":"s") + " — delete anything you no longer need") +
     (list.length ? "" : '<p class="status">Nothing in the library yet. Add a video, audio, document or link above.</p>');
   list.forEach(x => {
-    const id = "lb" + x.id, vid = x.kind==="video", aud = x.kind==="audio" || x.dtype==="audio", vk = vid ? vKind(x.url) : "";
-    const k = aud ? "audio" : vid ? (vk==="yt" ? "yt" : vk==="file" ? "vfile" : "doc") : (x.dtype==="website" ? "web" : "doc");
-    const label = aud ? "Audio" : vid ? (vk==="yt" ? "YouTube" : vk==="drive" ? "Google Drive" : "Video file") : (x.dtype==="pdf" ? "PDF" : x.dtype==="website" ? "Website" : "Document");
+    const id = "lb" + x.id, vid = x.kind==="video", aud = x.kind==="audio" || x.dtype==="audio", img = x.kind==="image" || x.dtype==="image", vk = vid ? vKind(x.url) : "";
+    const k = img ? "image" : aud ? "audio" : vid ? (vk==="yt" ? "yt" : vk==="file" ? "vfile" : "doc") : (x.dtype==="website" ? "web" : "doc");
+    const label = img ? "Image" : aud ? "Audio" : vid ? (vk==="yt" ? "YouTube" : vk==="drive" ? "Google Drive" : "Video file") : (x.dtype==="pdf" ? "PDF" : x.dtype==="website" ? "Website" : "Document");
     const place = [x.programmeTitle, x.lessonTitle, x.moduleTitle].filter(Boolean).join(" · ");
     h += '<div class="mmod"><div class="mlh"><div class="mlt"><b>' + esc(x.title) + '</b><small>' + esc(label) + (place ? " · " + esc(place) : "") + '</small></div></div>' +
       '<div class="acts"><button class="btn primary sm" onclick="matToggle(\'' + id + '\',this)">Preview</button><a class="btn outline sm" style="text-decoration:none;display:inline-flex;align-items:center" href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">Open ↗</a><button class="btn danger sm" onclick="delLib(\'' + esc(x.id) + '\')">Delete</button></div>' +
-      '<div class="pdfbox" id="' + id + '" data-k="' + k + '" data-src="' + esc(k==="vfile" || k==="audio" ? x.url : k==="yt" ? ytEmbed(ytParse(x.url), false) : matEmbedUrl(x.url, x.dtype)) + '"></div></div>';
+      '<div class="pdfbox" id="' + id + '" data-k="' + k + '" data-src="' + esc(k==="image" || k==="vfile" || k==="audio" ? x.url : k==="yt" ? ytEmbed(ytParse(x.url), false) : matEmbedUrl(x.url, x.dtype)) + '"></div></div>';
   });
   h += '</div>';
   setTimeout(() => { fillMatLessons(); onMatKind(); }, 0);
@@ -3604,7 +3691,7 @@ window.addLib = async kind => {
   const title = $v("lbTitle"), url = $v("lbUrl");
   let matKind = kind === "auto" ? ($v("lbKind") || "video") : kind;
   if(matKind === "link") matKind = "doc";
-  const vid = matKind === "video", aud = matKind === "audio";
+  const vid = matKind === "video", aud = matKind === "audio", img = matKind === "image";
   if(!title){ showMsg("Enter a title.", true, "lbMsg"); return; }
   if(!safeUrl(url)){ showMsg("Add a link that starts with http:// or https://, or upload a file first.", true, "lbMsg"); return; }
   const pid = $v("lbProg"), lid = $v("lbLesson"), mid = $v("lbModule");
@@ -3613,9 +3700,9 @@ window.addLib = async kind => {
   const mod = S.items.find(i => i.id===mid);
   try{
     const { F, db } = await load();
-    const dtype = vid ? "video" : aud ? "audio" : ($v("lbType") || ($v("lbKind")==="link" ? "website" : "pdf"));
-    const libKind = vid ? "video" : aud ? "audio" : "doc";
-    const matKindOut = vid ? "video" : aud ? "audio" : (dtype==="website" ? "website" : dtype==="pdf" ? "pdf" : "file");
+    const dtype = vid ? "video" : aud ? "audio" : img ? "image" : ($v("lbType") || ($v("lbKind")==="link" ? "website" : "pdf"));
+    const libKind = vid ? "video" : aud ? "audio" : img ? "image" : "doc";
+    const matKindOut = vid ? "video" : aud ? "audio" : img ? "image" : (dtype==="website" ? "website" : dtype==="pdf" ? "pdf" : "file");
     const data = {
       kind: libKind, title, url, dtype,
       programmeId: pid || "", programmeTitle: prog ? prog.title : "",
@@ -3657,7 +3744,9 @@ window.libUpload = kind => {
     if(xhr.status>=200 && xhr.status<300 && r.secure_url){
       el("lbUrl").value = r.secure_url; if(!$v("lbTitle")) el("lbTitle").value = f.name.replace(/\.[^.]+$/, "");
       const mk = $v("lbKind") || kind;
-      if(mk!=="video" && el("lbType")) el("lbType").value = /\.pdf$/i.test(f.name) ? "pdf" : "file";
+      const isImg = (f.type||"").startsWith("image/") || /\.(jpe?g|png|gif|webp|avif)$/i.test(f.name||"");
+      if(isImg && el("lbKind")){ el("lbKind").value = "image"; onMatKind(); }
+      else if(mk!=="video" && mk!=="image" && el("lbType")) el("lbType").value = /\.pdf$/i.test(f.name) ? "pdf" : "file";
       showMsg("Uploaded. Now tap Add material.", false, "lbMsg");
     } else showMsg("Upload was refused" + (r.error && r.error.message ? ": " + r.error.message : "") + ".", true, "lbMsg");
   };
@@ -3721,7 +3810,7 @@ window.addContent = async () => {
       await F.setDoc(F.doc(db,"answerKeys",id), { contentId:id, programmeId:pid, questions:split.keys, updatedAt:F.serverTimestamp() });
       await F.setDoc(F.doc(db,"questionBanks",id), { contentId:id, programmeId:pid, questions:split.pub, updatedAt:F.serverTimestamp() });
     } else if(wasEdit){ try{ await F.deleteDoc(F.doc(db,"questionBanks",id)); await F.deleteDoc(F.doc(db,"answerKeys",id)); }catch(e){} }
-    S.edit = null; S.editBank = ""; S.editCodes = ""; await loadAll(); note(wasEdit ? "Changes saved." : LABEL[type] + " added."); draw(); window.scrollTo(0,0);
+    S.edit = null; S.editBank = ""; S.editCodes = ""; S.prefProg = ""; S.prefLesson = ""; await loadAll(); note(wasEdit ? "Changes saved." : LABEL[type] + " added."); draw(); window.scrollTo(0,0);
   }catch(e){ showMsg(friendly(e), true, "cMsg"); }
 };
 window.editItem = async id => {
