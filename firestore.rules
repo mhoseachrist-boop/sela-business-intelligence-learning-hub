@@ -2,60 +2,273 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // ---------------------------------------------------------------
+    // CHANGES FROM YOUR PREVIOUS RULES
+    //  + skills, events: new (were missing, so denied)
+    //  + announcements: published ones are now public (landing page)
+    //  + users: 'careerPath' allowed
+    //  + enrolments: new. Paid programmes are readable only by enrolled
+    //    learners (content, lessons, questionBanks)
+    //  + submissions: size limits on answer and link
+    //  + evidence collections: allowed-field lists added
+    // Everything else is unchanged.
+    // ---------------------------------------------------------------
+
     function verified() {
       return request.auth != null && request.auth.token.email_verified == true;
     }
-    // Only this verified email is an administrator. To add more later, add emails to the list.
+
+    // Only this verified email is an administrator.
     function isStaff() {
-      return verified()
-        && request.auth.token.email in ['kehosea7@gmail.com'];
+      return verified() && request.auth.token.email in ['kehosea7@gmail.com'];
     }
 
-    // Profiles: each person reads and creates only their own, always as 'student'.
+    // The learner who owns the document being written (id = contentId_studentUid).
+    function writesOwn(pid) {
+      return verified()
+        && request.resource.data.studentUid == request.auth.uid
+        && pid == request.resource.data.contentId + '_' + request.auth.uid;
+    }
+
+    function readsOwnOrStaff() {
+      return verified() && (resource.data.studentUid == request.auth.uid || isStaff());
+    }
+
+    // ---------- Enrolment gating ----------
+    // A programme is free when its price is 0 (or missing).
+    // A paid programme opens only for a learner with an ACTIVE enrolment
+    // document at enrolments/{programmeId}_{studentUid}, written by the admin.
+    function programmePrice(pid) {
+      return get(/databases/$(database)/documents/programmes/$(pid)).data.get('price', 0);
+    }
+    function isEnrolled(pid) {
+      return verified()
+        && exists(/databases/$(database)/documents/enrolments/$(pid + '_' + request.auth.uid))
+        && get(/databases/$(database)/documents/enrolments/$(pid + '_' + request.auth.uid)).data.status == 'active';
+    }
+    function canAccess(pid) {
+      return isStaff() || programmePrice(pid) == 0 || isEnrolled(pid);
+    }
+
+    // ---------- Profiles ----------
     match /users/{uid} {
       allow read: if request.auth != null && (request.auth.uid == uid || isStaff());
       allow create: if request.auth != null && request.auth.uid == uid
         && request.resource.data.role == 'student'
-        && request.resource.data.keys().hasOnly(['fullName','email','role','createdAt']);
+        && request.resource.data.keys().hasOnly(['fullName','email','role','createdAt','careerPath']);
       allow update: if request.auth != null && request.auth.uid == uid
         && request.resource.data.role == resource.data.role
-        && request.resource.data.keys().hasOnly(['fullName','email','role','createdAt']);
+        && request.resource.data.keys().hasOnly(['fullName','email','role','createdAt','careerPath']);
       allow delete: if false;
     }
 
-    // Programmes and their lessons/projects/assignments: students see only published ones.
+    // ---------- Enrolments (written by the administrator only) ----------
+    // Document id: {programmeId}_{studentUid}
+    // Fields: programmeId, studentUid, studentName, status ('active' or 'revoked'),
+    //         reference, grantedBy, grantedAt
+    match /enrolments/{eid} {
+      allow read: if readsOwnOrStaff();
+      allow write: if isStaff();
+    }
+
+    // ---------- Course content ----------
+    // Programmes stay visible to every verified learner (so the card, price and
+    // description can be shown). Lessons and content are gated.
+    // NOTE: learners must query content and lessons one programme at a time,
+    // with where("programmeId","==",id) and where("published","==",true).
     match /programmes/{id} {
       allow read: if verified() && (resource.data.published == true || isStaff());
       allow write: if isStaff();
     }
+    match /lessons/{id} {
+      allow read: if verified()
+        && (isStaff() || (resource.data.published == true && canAccess(resource.data.programmeId)));
+      allow write: if isStaff();
+    }
     match /content/{id} {
+      allow read: if verified()
+        && (isStaff() || (resource.data.published == true && canAccess(resource.data.programmeId)));
+      allow write: if isStaff();
+    }
+
+    // Questions WITHOUT answers. A learner can fetch one bank by id, only if
+    // they have access to its programme. Only the admin can list or write.
+    match /questionBanks/{id} {
+      allow get: if verified() && canAccess(resource.data.programmeId);
+      allow list: if isStaff();
+      allow write: if isStaff();
+    }
+
+    // Answer keys: staff only. The verification server reads them.
+    match /answerKeys/{id} {
+      allow read, write: if isStaff();
+    }
+
+    // Server-only records. No browser access at all.
+    match /serverMeta/{id} { allow read, write: if false; }
+    match /assessmentPapers/{id} { allow read, write: if false; }
+    match /_health/{id} { allow read, write: if false; }
+
+    // ---------- Video, audio and document library (administrator only) ----------
+    match /library/{id} { allow read, write: if isStaff(); }
+
+    // ---------- Instructor notes ----------
+    match /notes/{id} {
       allow read: if verified() && (resource.data.published == true || isStaff());
       allow write: if isStaff();
     }
 
-    // Student work: one submission per student per item, id = contentId_studentUid.
-    match /submissions/{sid} {
-      allow read: if verified() && (resource.data.studentUid == request.auth.uid || isStaff());
-      allow create: if verified()
-        && request.resource.data.studentUid == request.auth.uid
-        && sid == request.resource.data.contentId + '_' + request.auth.uid
-        && request.resource.data.status == 'submitted'
-        && request.resource.data.keys().hasOnly(['contentId','studentUid','studentName','answer','link','status','submittedAt']);
-      allow update: if isStaff()
-        || (verified() && resource.data.studentUid == request.auth.uid
-            && resource.data.status == 'submitted'
-            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['answer','link','submittedAt']));
+    // A learner's own reading record for a note (id = noteId_studentUid).
+    match /noteReads/{pid} {
+      allow read: if readsOwnOrStaff();
+      allow create, update: if writesOwn(pid)
+        && request.resource.data.keys().hasOnly([
+          'contentId','noteId','studentUid','studentName','words','wpm','maxIdx',
+          'activeSeconds','checksTotal','checksPassed','misses','awayCount',
+          'attempts','soundOn','done','completedAt','updatedAt']);
       allow delete: if isStaff();
     }
 
-    // Lesson completion: each student writes only their own progress record (id = contentId_studentUid).
-    match /progress/{pid} {
-      allow read: if verified() && (resource.data.studentUid == request.auth.uid || isStaff());
+    // ---------- Public landing page content ----------
+    // Readable without signing in, but only when published.
+    match /announcements/{id} {
+      allow read: if resource.data.published == true || isStaff();
+      allow write: if isStaff();
+    }
+    match /skills/{id} {
+      allow read: if resource.data.published == true || isStaff();
+      allow write: if isStaff();
+    }
+    match /events/{id} {
+      allow read: if verified() && (resource.data.published == true || isStaff());
+      allow write: if isStaff();
+    }
+
+    // ---------- Certificates ----------
+    // A certificate can be opened by anyone who has its (unguessable) code,
+    // so it can be verified.
+    match /certificates/{id} {
+      allow get: if true;
+      allow list: if isStaff() || (verified() && resource.data.studentUid == request.auth.uid);
+      allow create, update, delete: if isStaff();
+    }
+
+    // Site settings: catalogue, contact details, certificate design.
+    match /settings/{id} {
+      allow get: if true;
+      allow write: if isStaff();
+    }
+
+    match /certRequests/{pid} {
+      allow read: if readsOwnOrStaff();
       allow create, update: if verified()
         && request.resource.data.studentUid == request.auth.uid
-        && pid == request.resource.data.contentId + '_' + request.auth.uid
-        && request.resource.data.keys().hasOnly(['contentId','programmeId','studentUid','studentName','completedAt','quizScore']);
+        && pid == request.resource.data.programmeId + '_' + request.auth.uid
+        && request.resource.data.keys().hasOnly(['programmeId','studentUid','studentName','requestedAt']);
+      allow delete: if isStaff();
+    }
+
+    // ---------- Assignments and projects ----------
+    match /submissions/{sid} {
+      allow read: if readsOwnOrStaff();
+      allow create: if writesOwn(sid)
+        && request.resource.data.status == 'submitted'
+        && request.resource.data.keys().hasOnly(['contentId','studentUid','studentName','answer','link','status','submittedAt'])
+        && request.resource.data.answer is string && request.resource.data.answer.size() <= 10000
+        && request.resource.data.link is string && request.resource.data.link.size() <= 500;
+      allow update: if isStaff()
+        || (verified() && resource.data.studentUid == request.auth.uid
+            && resource.data.status == 'submitted'
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['answer','link','submittedAt'])
+            && request.resource.data.answer is string && request.resource.data.answer.size() <= 10000
+            && request.resource.data.link is string && request.resource.data.link.size() <= 500);
+      allow delete: if isStaff();
+    }
+
+    // ---------- Legacy lesson ticks ----------
+    match /progress/{pid} {
+      allow read: if readsOwnOrStaff();
+      allow create, update: if writesOwn(pid)
+        && request.resource.data.keys().hasOnly(['contentId','programmeId','studentUid','studentName','completedAt','quizScore','updatedAt']);
       allow delete: if verified() && (resource.data.studentUid == request.auth.uid || isStaff());
+    }
+
+    // ---------- Learning evidence (each learner writes their own) ----------
+    // These are reported by the learner's browser, so the verification server
+    // must treat them as evidence to be checked, never as proof.
+    match /videoProgress/{pid} {
+      allow read: if readsOwnOrStaff();
+      allow create, update: if writesOwn(pid)
+        && request.resource.data.keys().hasOnly([
+          'contentId','programmeId','studentUid','studentName','intervals','duration',
+          'coverage','lastPos','maxRate','seeks','seekFwd','pauses','activeSeconds',
+          'sessions','trackingUnavailable','updatedAt'])
+        && request.resource.data.get('intervals', []).size() <= 400;
+      allow delete: if isStaff();
+    }
+    match /readingProgress/{pid} {
+      allow read: if readsOwnOrStaff();
+      allow create, update: if writesOwn(pid)
+        && request.resource.data.keys().hasOnly([
+          'contentId','programmeId','studentUid','studentName','wordIdx','maxIdx','total',
+          'activeSeconds','minSeconds','pauses','sessions','restarts','aways','speed',
+          'textSize','manual','accessible','done','updatedAt']);
+      allow delete: if isStaff();
+    }
+    match /checkpoints/{pid} {
+      allow read: if readsOwnOrStaff();
+      allow create, update: if false;      // written only by the verification server
+      allow delete: if isStaff();
+    }
+    match /learningAnalytics/{pid} {
+      allow read: if readsOwnOrStaff();
+      allow create, update: if writesOwn(pid)
+        && request.resource.data.keys().hasOnly([
+          'contentId','programmeId','studentUid','studentName','lastAccess','firstAccess',
+          'sessionCount','failsSinceReview','reviewSecs','updatedAt']);
+      allow delete: if isStaff();
+    }
+    match /learningSessions/{sid} {
+      allow read: if readsOwnOrStaff();
+      allow create: if verified() && request.resource.data.studentUid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // Assessment attempts are marked and written by the verification server.
+    match /assessmentAttempts/{aid} {
+      allow read: if readsOwnOrStaff();
+      allow create: if false;
+      allow update: if false;
+      allow delete: if isStaff();
+    }
+
+    // Verified completion is issued only by the verification server
+    // (or an administrator override).
+    match /completionRecords/{pid} {
+      allow read: if readsOwnOrStaff();
+      allow create: if isStaff();
+      allow update, delete: if isStaff();
+    }
+
+    // External course evidence: only the administrator can accept or reject it.
+    match /externalCourseEvidence/{pid} {
+      allow read: if readsOwnOrStaff();
+      allow create: if writesOwn(pid)
+        && request.resource.data.status in ['accessed','unverified']
+        && request.resource.data.keys().hasOnly(['contentId','programmeId','studentUid','studentName','status','accessedAt','url','note','submittedAt','updatedAt']);
+      allow update: if isStaff()
+        || (verified() && resource.data.studentUid == request.auth.uid
+            && resource.data.status != 'accepted'
+            && request.resource.data.status in ['accessed','unverified']
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['studentName','status','accessedAt','url','note','submittedAt','updatedAt']));
+      allow delete: if isStaff();
+    }
+
+    // Administrator actions are recorded and can never be edited or deleted.
+    match /auditLogs/{id} {
+      allow read: if isStaff();
+      allow create: if isStaff() && request.resource.data.by == request.auth.token.email;
+      allow update, delete: if false;
     }
   }
 }
