@@ -1002,7 +1002,8 @@ details.lesson[open]>summary{border-bottom:1px solid #eef1f4}
 .pdfbox[data-k="vfile"] video{display:block;border-radius:0 0 14px 14px;background:#000}
 .card>.video:only-child{margin:0}.video .status{margin:8px 2px 0;font-size:13px}
 </style>
-<style id="nrPaceCss">.nrpace{display:inline-flex;align-items:center;gap:8px;font:700 13px Manrope,Inter,sans-serif;color:#123B68}.nrpace select{border:1px solid #d9e2ec;border-radius:99px;background:#fff;color:#123B68;font:800 13px Manrope,Inter,sans-serif;padding:8px 12px;min-height:38px}</style>
+<style id="nrPaceCss">.nrpace{display:inline-flex;align-items:center;gap:8px;font:700 13px Manrope,Inter,sans-serif;color:#123B68}.nrpace select{border:1px solid #d9e2ec;border-radius:99px;background:#fff;color:#123B68;font:800 13px Manrope,Inter,sans-serif;padding:8px 12px;min-height:38px}#globalBack{width:42px;height:42px;min-height:42px;padding:0;border:1px solid #d8e1ec;border-radius:12px;background:#fff;color:#123b68;font-size:28px;line-height:1;display:inline-grid;place-items:center;flex:none;box-shadow:0 2px 8px rgba(18,59,104,.08)}
+#globalBack:hover{background:#eaf2fc;color:#123b68}</style>
 <style id="quickCss">
 .qlist{display:grid;gap:10px;margin:6px 0 12px}.qimg{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px;background:#fff}.qimg img{width:72px;height:56px;object-fit:cover;border-radius:8px;flex:none;background:#f5f7fa}.qimg input{flex:1;min-width:0}.qimg .btn{flex:none}
 .ccard h3{margin:0 0 12px}
@@ -1023,13 +1024,14 @@ body .study .rich ul,body .study .rich ol{padding-left:24px;margin:0 0 16px}
 /* In the notes page a knowledge check sits right under the reading, where the learner is looking */
 .study.vw-notes #lessonRoot{display:flex;flex-direction:column}
 .study.vw-notes #engage{order:1}.study.vw-notes #lcp{order:2}.study.vw-notes #lessonRoot .ccard{order:3}.study.vw-notes #lmsg{order:4}
-</style>
+#globalBack{width:42px;height:42px;min-height:42px;padding:0;border:1px solid #d8e1ec;border-radius:12px;background:#fff;color:#123b68;font-size:28px;line-height:1;display:inline-grid;place-items:center;flex:none;box-shadow:0 2px 8px rgba(18,59,104,.08)}
+#globalBack:hover{background:#eaf2fc;color:#123b68}.cpreview-box{width:min(94vw,940px);max-width:940px;max-height:92vh;overflow:auto}.cpv-kick{font-size:11px;font-weight:850;letter-spacing:.12em;color:#2476c9;margin:0 0 6px}.cpv-note{font-size:14px;color:#66758a;margin:0 0 16px}.cpreview-actions{margin:10px 0 12px}.vrview{position:relative}.vr-view-back{position:absolute;left:12px;top:12px;z-index:3;border:1px solid #d8e1ec;border-radius:10px;background:rgba(255,255,255,.96);color:#123b68;padding:8px 12px;font-weight:800;cursor:pointer}.vr-view-back:hover{background:#eaf2fc}.vr-social{border-top:1px solid #e5ebf2;margin-top:18px;padding-top:16px}.vr-social-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.vr-social-head h3{font-size:18px;margin:0;color:#173b64}.vr-like-btn{border:1px solid #d7e1ed;border-radius:999px;background:#fff;color:#21486f;padding:8px 13px;font-weight:800;cursor:pointer}.vr-like-btn.on{color:#b42348;background:#fff2f4}.vr-like-btn:disabled,.vr-comment-form button:disabled{opacity:.55;cursor:wait}.vr-comments{display:grid;gap:10px;margin:12px 0}.vr-comment{border:1px solid #e5ebf2;border-radius:12px;padding:11px 13px;background:#fbfcfe}.vr-comment-top{display:flex;justify-content:space-between;gap:10px;color:#173b64}.vr-comment-top small{color:#738094}.vr-comment p{margin:7px 0 0;white-space:normal;overflow-wrap:anywhere}.vr-no-comments{color:#697789;margin:8px 0}.vr-comment-form{display:grid;gap:7px}.vr-comment-form label{font-weight:750;color:#34445a;margin-top:5px}.vr-comment-form input:not(.vr-honeypot),.vr-comment-form textarea{width:100%;box-sizing:border-box;border:1px solid #d8e1ec;border-radius:10px;padding:11px;font:inherit;background:#fff;color:#172638}.vr-comment-form textarea{resize:vertical}.vr-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0}</style>
 </head>
 <body id="top">
 <header class="top">
  <a class="brand" href="#top" aria-label="Sela Learning Hub home"><div class="mark">S</div><div><strong>SELA LEARNING HUB</strong><small>An initiative of Sela Business Intelligence</small></div></a>
  <nav class="main-nav" aria-label="Main navigation"><a href="#top" onclick="hideAuth()">Home</a><a href="#courses" onclick="showCourses();return false">Courses</a><a href="#skills" onclick="showTrendingSkills();return false">Skills</a><a href="#about" onclick="goAboutPage();return false">About</a><a href="#how-it-works" onclick="hideAuth()">How it works</a></nav>
- <div class="top-actions"><button id="headerLogin" class="btn gold" onclick="showAuth()">Student portal</button><button id="menuBtn" class="burger hidden" aria-label="Open menu" onclick="openMenu()"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
+ <div class="top-actions"><button id="globalBack" class="global-back hidden" type="button" aria-label="Go back to the previous page" title="Back" onclick="appBack()">←</button><button id="headerLogin" class="btn gold" onclick="showAuth()">Student portal</button><button id="menuBtn" class="burger hidden" aria-label="Open menu" onclick="openMenu()"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
 </header>
 <div id="drawerBg" class="drawerbg hidden" onclick="closeMenu()"></div>
 <aside id="drawer" class="drawer" aria-hidden="true" aria-label="Menu"></aside>
@@ -1247,7 +1249,40 @@ function cooldown(btnId, label){
   b.textContent = "Available again in 60s";
   timers[btnId] = setInterval(() => { n--; if(n<=0){ clearInterval(timers[btnId]); b.disabled=false; b.textContent=label; } else b.textContent="Available again in "+n+"s"; }, 1000);
 }
-function show(id){ for(const s of ["welcome","authPanel","verifyPanel","dashboard","certPanel","coursePanel","coursesPanel","skillsPanel","publicPage"]) el(s).classList.toggle("hidden", s!==id); const copy = el("siteCopy"); if(copy) copy.classList.add("hidden"); window.scrollTo(0,0); }
+const APP_PANELS = ["welcome","authPanel","verifyPanel","dashboard","certPanel","coursePanel","coursesPanel","skillsPanel","publicPage"];
+const APP_PANEL_BACK = [], APP_SUB_BACK = [];
+function appActivePanel(){ return APP_PANELS.find(s => el(s) && !el(s).classList.contains("hidden")) || "welcome"; }
+function updateGlobalBack(){
+  const b=el("globalBack"), panel=appActivePanel(), S0=window.S;
+  if(!b) return;
+  const hasSub=APP_SUB_BACK.length && APP_SUB_BACK[APP_SUB_BACK.length-1].panel===panel;
+  const hasLearnerBack=panel==="dashboard" && S0 && Array.isArray(S0.nav) && S0.nav.length>0;
+  b.classList.toggle("hidden", panel==="welcome" || !(hasSub || hasLearnerBack || APP_PANEL_BACK.length));
+}
+function pushAppSubSnapshot(panel,target){
+  if(appActivePanel()!==panel) return;
+  const node=el(target); if(!node) return;
+  APP_SUB_BACK.push({ panel, target, html:node.innerHTML, scroll:window.scrollY||0 });
+  if(APP_SUB_BACK.length>40) APP_SUB_BACK.shift();
+}
+function restoreAppSubSnapshot(panel){
+  const x=APP_SUB_BACK[APP_SUB_BACK.length-1]; if(!x || x.panel!==panel) return false;
+  APP_SUB_BACK.pop(); const node=el(x.target); if(node) node.innerHTML=x.html;
+  window.scrollTo(0,x.scroll||0); updateGlobalBack(); return true;
+}
+window.appBack = () => {
+  const panel=appActivePanel(), S0=window.S;
+  if(restoreAppSubSnapshot(panel)) return;
+  if(panel==="dashboard" && S0 && Array.isArray(S0.nav) && S0.nav.length){ goBack(); return; }
+  if(APP_PANEL_BACK.length){ const prev=APP_PANEL_BACK.pop(); show(prev,{fromBack:true}); return; }
+  if(panel!=="welcome") show("welcome",{fromBack:true});
+};
+function show(id, options={}){
+  const current=appActivePanel();
+  if(id!==current && !options.fromBack){ if(APP_PANEL_BACK[APP_PANEL_BACK.length-1]===id) APP_PANEL_BACK.pop(); else APP_PANEL_BACK.push(current); if(APP_PANEL_BACK.length>40) APP_PANEL_BACK.shift(); }
+  for(const s of APP_PANELS) el(s).classList.toggle("hidden", s!==id);
+  const copy = el("siteCopy"); if(copy) copy.classList.add("hidden"); window.scrollTo(0,0); updateGlobalBack();
+}
 
 async function load(){
   if(fb) return fb;
@@ -1586,7 +1621,7 @@ function navPush(){
   const cur = navSnap(), last = S.nav[S.nav.length - 1];
   if(last && navSame(last, cur)) return;
   S.nav.push(cur);
-  if(S.nav.length > 50) S.nav.shift();
+  if(S.nav.length > 50) S.nav.shift(); updateGlobalBack();
 }
 function navApply(prev){
   S._navSkip = true;
@@ -1615,7 +1650,7 @@ window.goBack = () => {
     draw(); window.scrollTo(0,0);
     return;
   }
-  navApply(prev);
+  navApply(prev); updateGlobalBack();
 };
 window.goSub = s2 => {
   if(NR.on){ nrTimers(); clearInterval(NR.iv); nrSave(false); NR.on = false; }
@@ -3402,26 +3437,47 @@ window.extSubmit = async () => {
 };
 
 function renderComplete(){
-  const box = el("lcomplete"); if(!box || !L.it) return; const ev = evalLesson(L.it);
-  if(ev.comp || S.done[L.it.id]){
-    const nxt = outline(L.it.programmeId).find(i => i.published && !isDone(i));
-    box.innerHTML = '<div class="card"><div class="message">Lesson complete. Your progress on the course board is updated.</div>' +
-      (nxt ? '<button class="btn gold" style="width:100%;margin-top:10px" onclick="openItem(\'' + esc(nxt.id) + '\')">Next lesson → ' + esc(nxt.title) + '</button>' : '<button class="btn gold" style="width:100%;margin-top:10px" onclick="backFromItem()">Back to modules — course finished</button>') +
-      '</div>';
+  const box=el("lcomplete"); if(!box || !L.it) return;
+  const ev=evalLesson(L.it), done=!!(ev.comp || S.done[L.it.id]);
+  box.style.display=done ? "block" : "";
+  if(done){
+    const groups=lessonGroups(L.it.programmeId), gi=groups.findIndex(g=>g.items.some(i=>i.id===L.it.id)), g=groups[gi];
+    const pubItems=g ? g.items.filter(i=>i.published) : [], moduleDone=pubItems.length>0 && pubItems.every(isDone);
+    const sameRemaining=g ? g.items.slice(Math.max(0,g.items.findIndex(i=>i.id===L.it.id)+1)).find(i=>i.published && !isDone(i)) : null;
+    const anyRemaining=outline(L.it.programmeId).find(i=>i.published && !isDone(i));
+    const nextGroup=moduleDone ? groups.slice(gi+1).find(x=>x.published!==false && x.items.some(i=>i.published && !isDone(i))) : null;
+    let action="";
+    if(nextGroup){
+      const shown=groups.filter(x=>x.real ? (x.published || isStaff()) : x.items.length), pos=shown.findIndex(x=>x.id===nextGroup.id)+1;
+      action='<button type="button" class="btn gold" style="width:100%;margin-top:10px" onclick="openMod(\''+esc(nextGroup.id)+'\')">Continue to Module '+(pos||gi+2)+': '+esc(nextGroup.title)+' →</button>';
+    }else if(sameRemaining){
+      action='<button type="button" class="btn gold" style="width:100%;margin-top:10px" onclick="openItem(\''+esc(sameRemaining.id)+'\')">Continue to '+(isLessonLike(sameRemaining)?'next lesson':'next activity')+' → '+esc(sameRemaining.title)+'</button>';
+    }else if(anyRemaining){
+      action='<button type="button" class="btn gold" style="width:100%;margin-top:10px" onclick="openItem(\''+esc(anyRemaining.id)+'\')">Continue learning → '+esc(anyRemaining.title)+'</button>';
+    }else{
+      action='<button type="button" class="btn gold" style="width:100%;margin-top:10px" onclick="backFromItem()">Back to modules — course finished</button>';
+    }
+    box.innerHTML='<div class="card"><div class="message"><b>Lesson complete.</b> '+(moduleDone?'You have completed this module.':'Your progress on the course board is updated.')+'</div>'+action+'</div>';
     return;
   }
-  const can = ev.all;
-  const hint = can
-    ? (ev.applicable ? 'You have met the requirements for this lesson.' : 'Work through the materials above, then mark this lesson done to update your board.')
-    : 'Finish the video, reading, checkpoints and assessment above before you can complete this lesson.';
-  box.innerHTML = '<div class="card"><button class="btn ' + (can ? "primary" : "outline") + '" style="width:100%" ' + (can ? '' : 'disabled') + ' onclick="completeLesson()">' + (can ? 'Mark lesson complete' : 'Complete lesson (locked)') + '</button><p class="status">' + hint + '</p></div>';
+  const can=ev.all;
+  const hint=can ? (ev.applicable ? 'You have met the requirements for this lesson.' : 'Work through the materials above, then mark this lesson done to update your board.') : 'Finish the video, reading, checkpoints and assessment above before you can complete this lesson.';
+  box.innerHTML='<div class="card"><button class="btn '+(can?'primary':'outline')+'" style="width:100%" '+(can?'':'disabled')+' onclick="completeLesson()">'+(can?'Mark lesson complete':'Complete lesson (locked)')+'</button><p class="status">'+hint+'</p></div>';
 }
 function afterModuleComplete(it){
   renderChecks(); renderComplete();
-  const st = progStat(it.programmeId), nxt = outline(it.programmeId).find(i => i.published && !isDone(i));
-  lmsg(nxt
-    ? ("Lesson complete · course " + st.pct + "% (" + st.done + " of " + st.total + "). Continue to the next lesson.")
-    : ("Lesson complete · course " + st.pct + "% (" + st.done + " of " + st.total + "). All published lessons are done."));
+  const st=progStat(it.programmeId), groups=lessonGroups(it.programmeId), gi=groups.findIndex(g=>g.items.some(i=>i.id===it.id)), g=groups[gi];
+  const pub=g ? g.items.filter(i=>i.published) : [], moduleDone=pub.length>0 && pub.every(isDone);
+  const nextGroup=moduleDone ? groups.slice(gi+1).find(x=>x.published!==false && x.items.some(i=>i.published && !isDone(i))) : null;
+  const nxt=outline(it.programmeId).find(i=>i.published && !isDone(i));
+  if(nextGroup){
+    const shown=groups.filter(x=>x.real ? (x.published || isStaff()) : x.items.length), pos=shown.findIndex(x=>x.id===nextGroup.id)+1;
+    lmsg("Module complete · course " + st.pct + "% (" + st.done + " of " + st.total + "). Continue to Module " + (pos||gi+2) + ": " + nextGroup.title + ".");
+  }else if(nxt){
+    lmsg("Lesson complete · course " + st.pct + "% (" + st.done + " of " + st.total + "). Continue to the next " + (isLessonLike(nxt)?"lesson":"activity") + ".");
+  }else{
+    lmsg("Lesson complete · course " + st.pct + "% (" + st.done + " of " + st.total + "). All published lessons are done.");
+  }
 }
 window.completeLesson = async () => {
   const it = L.it, ev = evalLesson(it); if(!ev.all || ev.comp || S.done[it.id] || L.completing) return;
@@ -3534,7 +3590,7 @@ function skillsAdminHtml(){
   let h = '<div class="card" id="skillForm"><h3>' + (ed ? 'Edit skill' : 'Add a skill') + '</h3><p class="status">Skills appear in the learner Skills Hub. Add a cover image, formatted notes, extra images and videos.</p>' +
     '<div class="field"><label>Skill title</label><input id="skTitle" placeholder="e.g. Data storytelling" value="' + esc(ed ? ed.title : "") + '"></div>' +
     '<div class="field"><label>Short summary</label><textarea id="skSummary" style="min-height:60px" placeholder="One or two sentences for the skill card">' + esc(ed ? (ed.summary||"") : "") + '</textarea></div>' +
-    '<div class="field"><label>Price in UGX (0 means free)</label><input id="skPrice" type="number" min="0" value="' + esc(ed ? (ed.price||0) : 0) + '"></div>' +
+    '<div class="field"><label>Price when locked in UGX</label><input id="skPrice" type="number" min="0" value="' + esc(ed ? (ed.price||0) : 0) + '"></div>' +
     '<div class="field"><label>Cover image link (https://…)</label><input id="skImage" placeholder="https://…" value="' + esc(ed ? (ed.image||"") : "") + '"><small class="muted">Upload to your media host or Cloudinary, then paste the link.</small></div>' +
     (upCfg() ? '<div class="field"><label>Or upload a cover photo</label><input type="file" id="skFileCover" accept="image/*"><div class="skup-bar hidden" id="skBarCover"><i></i></div></div>' : '') +
     '<div class="field"><label>Notes</label><div class="ntools" onpointerdown="event.preventDefault()">' +
@@ -5128,7 +5184,7 @@ const PDEFAULT = [
    mods:[["Module 1: Frontend development",["HTML and CSS","JavaScript fundamentals","Responsive, user-friendly interfaces"]],["Module 2: Backend and server-side programming",["How servers and requests work","Server-side programming","Authentication and security basics"]],["Module 3: Databases",["Database design","Storing and retrieving data","Connecting an application to a database"]],["Module 4: APIs and application integration",["Designing and building APIs","Using third-party APIs","Joining frontend and backend"]],["Module 5: Deployment and projects",["Testing and debugging","Deploying a web application","Final practical web development project"]]],
    prac:["Build a responsive website","Create an API-driven application with a database","Deploy a complete web application online"] }
 ];
-let PCOURSES = PDEFAULT.map(c => ({ ...c }));
+let PCOURSES = PDEFAULT.map(c => ({ ...c, published:false, publicApproved:false }));
 const pugx = n => n ? "UGX " + n.toLocaleString("en-US") : "FREE";
 let PPHOTOS = {};
 function pubArt(k){
@@ -5163,7 +5219,7 @@ function renderCatalog(){
   root.innerHTML = `<div class="pcgrid">${visCourses().map(pubCard).join("")}</div>`;
 }
 window.courseOpen = id => { S.from = (el("coursesPanel") && !el("coursesPanel").classList.contains("hidden")) ? "courses" : (S.from || ""); 
-  const c = PCOURSES.find(x => x.id===id && x.published!==false); if(!c) return; const free = !c.price, box = el("coursePage"); if(!box) return;
+  const c = PCOURSES.find(x => x.id===id && x.publicApproved===true); if(!c) return; const free = !c.price, box = el("coursePage"); if(!box) return;
   const prog = findProgForCourse(c);
   const hasReal = !!(prog && lessonGroups(prog.id).some(g => (g.published!==false) && g.items.some(i => i.published)));
   const curriculum = hasReal
@@ -5187,7 +5243,7 @@ window.courseOpen = id => { S.from = (el("coursesPanel") && !el("coursesPanel").
   try{ const sec = el("cpCurriculum"); if(sec) sec.scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){}
 };
 window.courseReveal = id => {
-  const c = PCOURSES.find(x => x.id===id); if(!c) return;
+  const c = PCOURSES.find(x => x.id===id && x.publicApproved===true); if(!c) return;
   const prog = findProgForCourse(c);
   // Always expand curriculum section so modules/lessons are visible
   try{
@@ -5201,7 +5257,7 @@ window.courseReveal = id => {
   courseEnrol(id);
 };
 window.showCourses = () => { show("coursesPanel"); try{ history.replaceState(null, "", "#courses"); }catch(e){} renderCatalog(); };
-window.showTrendingSkills = () => { show("skillsPanel"); try{ history.replaceState(null, "", "#skills"); }catch(e){} renderPublicSkills(); };
+window.showTrendingSkills = () => { if(restoreAppSubSnapshot("skillsPanel")) return; show("skillsPanel"); try{ history.replaceState(null, "", "#skills"); }catch(e){} renderPublicSkills(); };
 function renderPublicSkills(){
   const body = el("publicSkillsBody"); if(!body) return;
   const list = (S.skills || []).filter(s => s.published !== false);
@@ -5211,6 +5267,7 @@ function renderPublicSkills(){
 window.openPublicSkill = id => {
   const s = (S.skills || []).find(x => x.id===id); if(!s) return;
   const body = el("publicSkillsBody"); if(!body) return;
+  pushAppSubSnapshot("skillsPanel","publicSkillsBody");
   clearInterval(_skCarTimer);
   let h = goldBack("showTrendingSkills()", "Skills Hub");
   if(s.image && /^https:\/\//.test(s.image)) h += '<div class="skill-hero"><img src="' + esc(s.image) + '" alt="' + esc(s.title) + '"></div>';
@@ -5222,6 +5279,7 @@ window.openPublicSkill = id => {
 };
 window.goPagePublic = k => {
   if(k==="about") return goAboutPage();
+  pushAppSubSnapshot("publicPage","publicPageBody");
   if(k==="partners" || SITE_PAGES[k]){ try{ const box0 = el("publicPageBody"); if(box0){ box0.innerHTML = infoPageHtml(k); show("publicPage"); return; } }catch(e){ console.error(e); } }
   const p = SITE_PAGES[k] ? sitePage(k) : null; if(!p) return;
   const body = p.b.split(/\n\s*\n/).map(x => '<p>' + esc(x).replace(/\n/g, "<br>") + '</p>').join("");
@@ -5283,6 +5341,7 @@ function infoPageHtml(k){
 }
 window.goAboutPage = () => {
   const box = el("publicPageBody"); if(!box) return;
+  pushAppSubSnapshot("publicPage","publicPageBody");
   const paras = t => String(t||"").split(/\n\s*\n/).filter(Boolean).map(x => '<p>' + esc(x).replace(/\n/g, "<br>") + '</p>').join("");
   const ic = d => '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
   const about = sitePage("about"), mission = sitePage("mission"), story = sitePage("story");
@@ -5364,7 +5423,69 @@ const VR_LIMITS = { image:3, pdf:3, audio:5, video:25 };   // megabytes, after p
 const VR_SECS = { video:60, audio:180 };                     // seconds
 const VR_MAX = 3;                                            // uploads per member
 const VR_KIND = { image:"Photo", video:"Video", audio:"Audio", pdf:"PDF" };
-const VR = { items:[], loaded:false, failed:false, cat:"All", shown:12, busy:false };
+const VR = { items:[], loaded:false, failed:false, cat:"All", shown:12, busy:false, social:{} };
+const vrSocialState = id => VR.social[id] || (VR.social[id]={ likes:0, liked:false, comments:[], loaded:false, busy:false, error:"" });
+function vrVoterId(){
+  const key="sela_vacroom_voter_id"; let id="";
+  try{ id=localStorage.getItem(key)||""; if(!id){ id=(window.crypto && window.crypto.randomUUID) ? window.crypto.randomUUID().replace(/-/g,"") : "v"+Date.now().toString(36)+Math.random().toString(36).slice(2); localStorage.setItem(key,id); } }catch(e){ id="v"+Date.now().toString(36)+Math.random().toString(36).slice(2); }
+  return String(id).replace(/[^a-z0-9_-]/gi,"").slice(0,64) || "guest";
+}
+function vrCommentHtml(c, postId){
+  return '<article class="vr-comment"><div class="vr-comment-top"><b>'+esc(c.name||"Guest")+'</b><small>'+esc(vrWhen(c.createdAt)||"Just now")+'</small></div><p>'+esc(c.message||"").replace(/\n/g,"<br>")+'</p>'+(isStaff()?'<button type="button" class="link vr-comment-del" onclick="vrDeleteComment(\''+esc(postId)+'\',\''+esc(c.id)+'\')">Delete</button>':'')+'</article>';
+}
+function vrSocialHtml(it){
+  const id=esc(it.id), s=vrSocialState(it.id), who=(S.profile&&S.profile.fullName)||"";
+  return '<section class="vr-social"><div class="vr-social-head"><h3>Join the conversation</h3><button type="button" id="vrLikeBtn" class="vr-like-btn'+(s.liked?' on':'')+'" aria-pressed="'+!!s.liked+'" '+(!s.loaded||s.busy?'disabled':'')+' onclick="vrToggleLike(\''+id+'\')"><span aria-hidden="true">'+(s.liked?'♥':'♡')+'</span> Like <b id="vrLikeCount">'+(s.likes>=500?'500+':s.likes)+'</b></button></div><div id="vrSocialMsg" class="status" role="status">'+(s.error?esc(s.error):s.loaded?'Comments are public. Please be kind and do not share private information.':'Loading comments and likes…')+'</div><div class="vr-comments" id="vrComments">'+(s.comments.length?s.comments.map(c=>vrCommentHtml(c,it.id)).join(''):'<p class="vr-no-comments">No comments yet. Start the conversation.</p>')+'</div><div class="vr-comment-form"><label for="vrCommentName">Name (optional)</label><input id="vrCommentName" maxlength="50" value="'+esc(who)+'" placeholder="Guest"><label for="vrCommentText">Your comment</label><textarea id="vrCommentText" maxlength="500" rows="3" placeholder="Write a comment (up to 500 characters)"></textarea><input id="vrCommentSite" tabindex="-1" autocomplete="off" aria-hidden="true" class="vr-honeypot"><button type="button" id="vrCommentSend" class="btn primary" '+(!s.loaded||s.busy?'disabled':'')+' onclick="vrPostComment(\''+id+'\')">Post comment</button></div></section>';
+}
+function vrRenderSocial(id){
+  const box=el("vrSocial"); if(!box) return;
+  const name=el("vrCommentName")&&el("vrCommentName").value, message=el("vrCommentText")&&el("vrCommentText").value, it=VR.items.find(x=>x.id===id)||(S.vrAdmin||[]).find(x=>x.id===id); if(!it) return;
+  box.innerHTML=vrSocialHtml(it);
+  if(name && el("vrCommentName")) el("vrCommentName").value=name;
+  if(message && el("vrCommentText")) el("vrCommentText").value=message;
+}
+async function vrLoadSocial(id){
+  const s=vrSocialState(id); if(s.busy) return; s.busy=true;
+  try{
+    const {F,db}=await load(), voter=vrVoterId(), comments=F.collection(db,"showcase",id,"comments"), likes=F.collection(db,"showcase",id,"likes");
+    const [cs,ls,mine]=await Promise.all([F.getDocs(F.query(comments,F.where("status","==","approved"),F.limit(100))),F.getDocs(F.query(likes,F.limit(500))),F.getDoc(F.doc(db,"showcase",id,"likes",voter))]);
+    s.comments=cs.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>tms(a.createdAt)-tms(b.createdAt));
+    s.likes=ls.size; s.liked=mine.exists(); s.loaded=true; s.error="";
+  }catch(e){ s.loaded=false; s.error=(e&&e.code==="permission-denied")?"Comments and likes need Firestore access rules to be enabled.":friendly(e); }
+  s.busy=false; vrRenderSocial(id);
+}
+window.vrToggleLike = async id => {
+  const s=vrSocialState(id), btn=el("vrLikeBtn"), msg=el("vrSocialMsg"); if(!s.loaded||s.busy) return;
+  s.busy=true; if(btn) btn.disabled=true; if(msg) msg.textContent="Saving your like…";
+  try{
+    const {F,db}=await load(), voter=vrVoterId(), ref=F.doc(db,"showcase",id,"likes",voter), mine=await F.getDoc(ref);
+    if(mine.exists()){ await F.deleteDoc(ref); s.liked=false; s.likes=Math.max(0,s.likes-1); }
+    else { await F.setDoc(ref,{voterId:voter,createdAt:F.serverTimestamp()}); s.liked=true; s.likes++; }
+    if(btn){ btn.classList.toggle("on",s.liked); btn.setAttribute("aria-pressed",String(s.liked)); btn.innerHTML='<span aria-hidden="true">'+(s.liked?'♥':'♡')+'</span> Like <b id="vrLikeCount">'+(s.likes>=500?'500+':s.likes)+'</b>'; }
+    if(msg) msg.textContent="Thanks for supporting this upload.";
+  }catch(e){ if(msg) msg.textContent=(e&&e.code==="permission-denied")?"Likes are not enabled in Firestore rules yet.":friendly(e); }
+  s.busy=false; if(btn) btn.disabled=false;
+};
+window.vrPostComment = async id => {
+  const s=vrSocialState(id), name=(el("vrCommentName")&&el("vrCommentName").value||"").trim().slice(0,50)||"Guest", message=(el("vrCommentText")&&el("vrCommentText").value||"").trim(), trap=el("vrCommentSite"), out=el("vrSocialMsg"), btn=el("vrCommentSend");
+  if(!s.loaded||s.busy) return;
+  if(trap && trap.value) return;
+  if(message.length<2){ if(out) out.textContent="Write a comment of at least 2 characters."; return; }
+  const rateKey="sela_vr_comment_last_"+id; let last=0; try{last=Number(localStorage.getItem(rateKey))||0;}catch(e){}
+  if(Date.now()-last<15000){ if(out) out.textContent="Please wait a few seconds before posting another comment."; return; }
+  s.busy=true; if(btn) btn.disabled=true; if(out) out.textContent="Posting your comment…";
+  try{
+    const {F,db}=await load(), voter=vrVoterId(), ref=await F.addDoc(F.collection(db,"showcase",id,"comments"),{voterId:voter,name,message:message.slice(0,500),status:"approved",createdAt:F.serverTimestamp()});
+    try{localStorage.setItem(rateKey,String(Date.now()));}catch(e){}
+    s.comments.push({id:ref.id,voterId:voter,name,message:message.slice(0,500),status:"approved",createdAt:Date.now()});
+    if(el("vrCommentText")) el("vrCommentText").value=""; s.busy=false; vrRenderSocial(id); if(el("vrSocialMsg")) el("vrSocialMsg").textContent="Your comment has been posted.";
+  }catch(e){ s.busy=false; if(btn) btn.disabled=false; if(out) out.textContent=(e&&e.code==="permission-denied")?"Comments are not enabled in Firestore rules yet.":friendly(e); }
+};
+window.vrDeleteComment = async (postId, commentId) => {
+  if(!isStaff() || !confirm("Delete this public comment?")) return;
+  try{const {F,db}=await load(); await F.deleteDoc(F.doc(db,"showcase",postId,"comments",commentId)); const s=vrSocialState(postId); s.comments=s.comments.filter(c=>c.id!==commentId); vrRenderSocial(postId); if(el("vrSocialMsg")) el("vrSocialMsg").textContent="Comment deleted.";}
+  catch(e){if(el("vrSocialMsg")) el("vrSocialMsg").textContent=friendly(e);}
+};
 const vrOkUrl = u => typeof u==="string" && /^https:\/\/res\.cloudinary\.com\/[^\/]+\/(image|video|raw)\/upload\/.+/.test(u);
 const VR_IC = {
   play:'<svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
@@ -5419,14 +5540,14 @@ async function vrLoad(){
 window.vrCat = c => { VR.cat = c; VR.shown = 12; vrRender(); vrRenderAll(); };
 function vrAllHtml(){
   const list = vrFiltered();
-  return '<article class="vr-page"><header class="pg-hero"><div class="ab-kick">VacRoom Showcase</div><h1>All uploads</h1><p>Watch and enjoy what the community has shared. Want to be featured? Upload your own work.</p><div class="ab-cta"><button class="btn gold" onclick="vrOpenUpload()">Upload your work</button></div></header>' +
+  return '<article class="vr-page">' + goldBack("appBack()", "Back") + '<header class="pg-hero"><div class="ab-kick">VacRoom Showcase</div><h1>All uploads</h1><p>Watch and enjoy what the community has shared. Want to be featured? Upload your own work.</p><div class="ab-cta"><button class="btn gold" onclick="vrOpenUpload()">Upload your work</button></div></header>' +
     '<div class="vr-chips vr-chips-page" role="tablist" aria-label="Filter by category">' + vrChipsHtml() + '</div>' +
     '<div class="vr-grid" id="vrAllGrid">' + (VR.failed ? '<div class="vr-empty"><h3>Uploads are coming soon</h3><p>Check back shortly.</p></div>' : (list.length ? list.slice(0, VR.shown).map(vrCard).join("") : vrEmptyHtml())) + '</div>' +
     (list.length > VR.shown ? '<div class="vr-foot"><button type="button" class="vr-more" onclick="vrShowMore()">Show more <span>›</span></button></div>' : "") + '</article>';
 }
 function vrRenderAll(){ if(el("vrAllGrid")){ const b = el("publicPageBody"); if(b) b.innerHTML = vrAllHtml(); } }
 window.vrShowMore = () => { VR.shown += 12; vrRenderAll(); };
-window.vrOpenAll = () => { const b = el("publicPageBody"); if(!b) return; VR.shown = 12; b.innerHTML = vrAllHtml(); show("publicPage"); };
+window.vrOpenAll = () => { const b = el("publicPageBody"); if(!b) return; pushAppSubSnapshot("publicPage","publicPageBody"); VR.shown = 12; b.innerHTML = vrAllHtml(); show("publicPage"); };
 
 // viewer
 function vrModal(id, html, label){
@@ -5453,7 +5574,8 @@ window.vrOpen = id => {
       '<button type="button" class="btn outline sm" onclick="vrCopyLink(\'' + esc(shareUrl).replace(/'/g, "\\'") + '\')">Copy media link</button>' +
       '<button type="button" class="btn outline sm" onclick="vrCopyLink(\'' + esc(pageLink).replace(/'/g, "\\'") + '\')">Copy page link</button>' +
     '</div><p class="status" style="margin:0">Share on WhatsApp so friends can open the video, audio or PDF. The media link works in the chat; the page link opens it on the website.</p>';
-  vrModal("vrViewer", '<div class="paybox vrview"><button type="button" class="pay-x" aria-label="Close" onclick="vrClose(\'vrViewer\')">×</button><div class="vr-media">' + media + '</div><div class="vr-meta"><span class="vr-cat">' + esc(it.category || "Other") + '</span><h2>' + esc(it.title) + '</h2><div class="vr-by">By ' + esc(it.name || "Anonymous") + (vrWhen(it.createdAt) ? ' · ' + esc(vrWhen(it.createdAt)) : '') + '</div>' + (it.description ? '<p>' + esc(it.description).replace(/\n/g, "<br>") + '</p>' : '') + shareBtns + '<button type="button" class="btn outline" style="margin-top:10px" onclick="vrClose(\'vrViewer\');vrOpenUpload()">Upload your own work</button></div></div>', it.title);
+  vrModal("vrViewer", '<div class="paybox vrview"><button type="button" class="vr-view-back" aria-label="Back to the showcase" onclick="vrClose(\'vrViewer\')">← Back to showcase</button><button type="button" class="pay-x" aria-label="Close" onclick="vrClose(\'vrViewer\')">×</button><div class="vr-media">' + media + '</div><div class="vr-meta"><span class="vr-cat">' + esc(it.category || "Other") + '</span><h2>' + esc(it.title) + '</h2><div class="vr-by">By ' + esc(it.name || "Anonymous") + (vrWhen(it.createdAt) ? ' · ' + esc(vrWhen(it.createdAt)) : '') + '</div>' + (it.description ? '<p>' + esc(it.description).replace(/\n/g, "<br>") + '</p>' : '') + shareBtns + '<div id="vrSocial">' + vrSocialHtml(it) + '</div><button type="button" class="btn outline" style="margin-top:10px" onclick="vrClose(\'vrViewer\');vrOpenUpload()">Upload your own work</button></div></div>', it.title);
+  setTimeout(() => vrLoadSocial(id), 0);
 };
 window.vrCopyLink = (url) => {
   const done = () => note("Link copied. You can paste it in WhatsApp.");
@@ -5638,6 +5760,7 @@ async function loadPublicLanding(){
   vrLoad();
 }
 window.courseBack = () => {
+  if(APP_PANEL_BACK.length){ const prev=APP_PANEL_BACK.pop(); show(prev,{fromBack:true}); if(prev==="coursesPanel") renderCatalog(); return; }
   if(!S.user && S.from==="courses"){ showCourses(); return; }
   if(S.user){ show("dashboard"); S.tab = "learn"; S.sub = "home"; S.prog = null; S.item = null; S.skillId = null; draw(); window.scrollTo(0,0); return; }
   show("welcome");
@@ -5679,12 +5802,12 @@ window.closePay = () => { const m = document.getElementById("payModal"); if(m) m
 window.payContinue = id => { closePay(); enrolProceed(id); };
 document.addEventListener("keydown", e => { if(e.key==="Escape" && document.getElementById("payModal")) closePay(); });
 window.courseEnrol = id => {
-  const c = PCOURSES.find(x => x.id===id); if(!c) return;
+  const c = PCOURSES.find(x => x.id===id && x.publicApproved===true); if(!c) return;
   if(c.price){ openPay(c); return; }
   enrolProceed(id);
 };
 window.enrolProceed = id => {
-  const c = PCOURSES.find(x => x.id===id); if(!c) return; S.intent = id;
+  const c = PCOURSES.find(x => x.id===id && x.publicApproved===true); if(!c) return; S.intent = id;
   if(!S.user){ showAuth(); const t = el("authTitle"); if(t) t.textContent = (c.price ? "Create your account to enrol in " : "Create your account to start ") + c.t; return; }
   courseIntent();
 };
@@ -5722,7 +5845,7 @@ function realCurriculumHtml(pid){
   return h;
 }
 function courseIntent(){
-  const c = PCOURSES.find(x => x.id===S.intent); if(!c) return;
+  const c = PCOURSES.find(x => x.id===S.intent && x.publicApproved===true); if(!c) return;
   const p = findProgForCourse(c);
   S.intent = null; S.tab = "learn"; S.item = null; show("dashboard");
   if(c.price){ S.prog = null; S.sub = "mine"; note(c.t + " costs " + pugx(c.price) + ". To pay, use Stanbic Bank " + PAY_METHODS[0].num + " or Airtel Money " + PAY_METHODS[1].num + ", then send Sela your transaction ID. Paid lessons stay locked until Sela confirms your payment."); draw(); window.scrollTo(0,0); return; }
@@ -5735,7 +5858,7 @@ async function loadPhotos(){
     if(d.exists()){
       const x = d.data(); PPHOTOS = x.photos || {};
       if(Array.isArray(x.courses) && x.courses.length){
-        PCOURSES = x.courses.filter(c => c && c.id && c.t).map(c => ({ art:"generic", photo:"", brief:"", purpose:"", out:[], mods:[], prac:[], published:true, price:0, ...c, price:Math.max(0, Number(c.price)||0), out:Array.isArray(c.out)?c.out:[], mods:Array.isArray(c.mods)?c.mods.map(m => (m && !Array.isArray(m)) ? [String(m.t||""), Array.isArray(m.l) ? m.l : []] : m):[], prac:Array.isArray(c.prac)?c.prac:[] }));
+        PCOURSES = x.courses.filter(c => c && c.id && c.t).map(c => ({ art:"generic", photo:"", brief:"", purpose:"", out:[], mods:[], prac:[], published:false, publicApproved:false, price:0, ...c, price:Math.max(0, Number(c.price)||0), out:Array.isArray(c.out)?c.out:[], mods:Array.isArray(c.mods)?c.mods.map(m => (m && !Array.isArray(m)) ? [String(m.t||""), Array.isArray(m.l) ? m.l : []] : m):[], prac:Array.isArray(c.prac)?c.prac:[] }));
       }
       PHOTOS_READY = true;
       renderCatalog();
@@ -5743,7 +5866,7 @@ async function loadPhotos(){
     }
   }catch(e){}
 }
-const visCourses = () => PCOURSES.filter(c => c.published!==false);
+const visCourses = () => PCOURSES.filter(c => c.publicApproved===true);
 // A public course card and its learner programme are the same course (matched by title).
 // Keep one photo for both so an upload in either place shows to everyone.
 let PHOTOS_READY = false;
@@ -5795,31 +5918,31 @@ function photosAdminHtml(){
   if(!PCOURSES.length) h += '<p class="status">No courses yet. Tap Add a course.</p>';
   PCOURSES.forEach((c, i) => {
     const cur = PPHOTOS[c.id];
-    h += '<div class="mmod"><div class="mlh"><div class="pcthumb">' + (cur ? '<img src="' + esc(cur.replace("/upload/", "/upload/c_fill,w_200,h_125,q_auto,f_auto/")) + '" alt="">' : '<span>No photo</span>') + '</div><div class="mlt"><b>' + esc(c.t) + '</b><small>' + esc(pugx(c.price)) + '</small></div><span class="pill ' + (c.published!==false ? 'ok' : 'draft') + '">' + (c.published!==false ? 'Visible' : 'Hidden') + '</span></div>' +
-      '<div class="acts"><button class="btn primary sm" onclick="setupCourse(\'' + esc(c.id) + '\')">Lessons &amp; content</button><button class="btn gold sm" onclick="cEdit(\'' + esc(c.id) + '\')">Edit</button><button class="btn outline sm" onclick="cToggle(\'' + esc(c.id) + '\')">' + (c.published!==false ? 'Hide' : 'Show') + '</button><button class="btn outline sm" ' + (i===0 ? 'disabled' : '') + ' onclick="cMove(' + i + ',-1)">Up</button><button class="btn outline sm" ' + (i===PCOURSES.length-1 ? 'disabled' : '') + ' onclick="cMove(' + i + ',1)">Down</button><button class="btn danger sm" onclick="cDel(\'' + esc(c.id) + '\')">Delete</button></div></div>';
+    h += '<div class="mmod"><div class="mlh"><div class="pcthumb">' + (cur ? '<img src="' + esc(cur.replace("/upload/", "/upload/c_fill,w_200,h_125,q_auto,f_auto/")) + '" alt="">' : '<span>No photo</span>') + '</div><div class="mlt"><b>' + esc(c.t) + '</b><small>' + (c.price ? 'Locked · ' + esc(pugx(c.price)) : 'Public · Free') + '</small></div><span class="pill ' + (c.publicApproved===true ? 'ok' : 'draft') + '">' + (c.publicApproved===true ? 'Public' : 'Hidden') + '</span></div>' +
+      '<div class="acts"><button class="btn primary sm" onclick="setupCourse(\'' + esc(c.id) + '\')">Lessons &amp; content</button><button class="btn gold sm" onclick="cEdit(\'' + esc(c.id) + '\')">Edit</button><button class="btn outline sm" onclick="cToggle(\'' + esc(c.id) + '\')">' + (c.publicApproved===true ? 'Hide from catalogue' : 'Show in catalogue') + '</button><button class="btn outline sm" ' + (i===0 ? 'disabled' : '') + ' onclick="cMove(' + i + ',-1)">Up</button><button class="btn outline sm" ' + (i===PCOURSES.length-1 ? 'disabled' : '') + ' onclick="cMove(' + i + ',1)">Down</button><button class="btn danger sm" onclick="cDel(\'' + esc(c.id) + '\')">Delete</button></div></div>';
   });
   h += '</div>';
   if(form){
     const v = k => esc(E && E[k]!=null ? E[k] : ""), cur = (S.cphoto!==undefined ? S.cphoto : (E ? PPHOTOS[E.id] : "")) || "";
     h += '<div class="acard" id="cForm" style="border:2px solid var(--gold)">' + ahead("", E ? "Editing: " + esc(E.t) : "Add a course", "Everything here is shown on the public course page. The card on the home page shows only the photo, title, short description and price.") +
-      fsec("Card", '<div class="field"><label>Course title</label><input id="cfT" value="' + v("t") + '"></div><div class="field"><label>Price in UGX (0 means free)</label><input id="cfP" type="number" min="0" value="' + (E ? esc(E.price) : "") + '"></div><div class="field"><label>Short description (one or two sentences on what the learner gains)</label><textarea id="cfB">' + v("brief") + '</textarea></div>' +
+      fsec("Access", '<div class="field"><label>Course access</label><select id="cfAccess"><option value="public"' + (!E || Number(E.price||0)===0 ? " selected" : "") + '>Public / free for learners</option><option value="locked"' + (E && Number(E.price||0)>0 ? " selected" : "") + '>Locked until payment is verified</option></select><small class="muted">Public courses are free after sign-in. Locked courses use the fee below and the existing payment verification.</small></div>') +fsec("Card", '<div class="field"><label>Course title</label><input id="cfT" value="' + v("t") + '"></div><div class="field"><label>Price when locked in UGX</label><input id="cfP" type="number" min="0" value="' + (E ? esc(E.price) : "") + '"></div><div class="field"><label>Short description (one or two sentences on what the learner gains)</label><textarea id="cfB">' + v("brief") + '</textarea></div>' +
         '<div class="field"><label>Photograph</label><div class="pcthumb big" id="cfThumb">' + (cur ? '<img src="' + esc(cur.replace("/upload/", "/upload/c_fill,w_400,h_250,q_auto,f_auto/")) + '" alt="">' : '<span>No photo</span>') + '</div>' +
         (up ? '<input type="file" accept="image/*" id="cfFile"><button type="button" class="btn outline sm" style="margin-top:6px" onclick="cPhoto()">Upload photo</button>' : '<div class="notice">Uploads need your Cloudinary details in firebase-config.js. You can paste a link instead.</div>') +
         '<input id="cfUrl" placeholder="Or paste a photo link (https://…)" value="' + esc(cur) + '" style="margin-top:8px"><small class="muted">Use a real photograph of people doing something that matches the course.</small></div>') +
       fsec("Course page", '<div class="field"><label>Course purpose</label><textarea id="cfPur">' + v("purpose") + '</textarea></div><div class="field"><label>Learning outcomes (one per line)</label><textarea id="cfOut" style="min-height:110px">' + esc(E ? (E.out||[]).join("\n") : "") + '</textarea></div>' +
         '<div class="field"><label>Lessons and modules</label><textarea id="cfMods" style="min-height:200px" placeholder="Module 1: Understanding data&#10;- What data is&#10;- Types of data&#10;&#10;Module 2: Collecting data&#10;- Surveys">' + esc(E ? modsToText(E.mods) : "") + '</textarea><small class="muted">Write each module on its own line, then its lessons below it, each starting with a dash.</small></div>' +
         '<div class="field"><label>Practical activities and projects (one per line)</label><textarea id="cfPrac" style="min-height:90px">' + esc(E ? (E.prac||[]).join("\n") : "") + '</textarea></div>') +
-      '<label class="chk"><input type="checkbox" id="cfPub"' + (!E || E.published!==false ? " checked" : "") + '> Visible on the home page</label><div id="courseFormMsg" class="message hidden"></div><button class="btn primary" style="width:100%" onclick="cSave()">' + (E ? "Save course" : "Add course") + '</button><button class="btn outline" style="width:100%;margin-top:8px" onclick="cCancel()">Cancel</button></div>';
+      '<div class="acts cpreview-actions"><button type="button" class="btn outline sm" onclick="coursePreview(\'card\')">Preview public card</button><button type="button" class="btn outline sm" onclick="coursePreview(\'page\')">Preview course page</button></div>' +      '<label class="chk"><input type="checkbox" id="cfPub"' + (E && E.publicApproved===true ? " checked" : "") + '> Listed in public course catalogue</label><small class="muted">This controls whether the course card is shown; access is set separately above.</small><div id="courseFormMsg" class="message hidden"></div><button class="btn primary" style="width:100%" onclick="cSave()">' + (E ? "Save course" : "Add course") + '</button><button class="btn outline" style="width:100%;margin-top:8px" onclick="cCancel()">Cancel</button></div>';
   }
   return h;
 }
 window.cNew = () => { S.cedit = "new"; S.cphoto = ""; draw(); const f = el("cForm"); if(f) f.scrollIntoView(); };
 window.cEdit = id => { S.cedit = id; S.cphoto = undefined; draw(); const f = el("cForm"); if(f) f.scrollIntoView(); };
 window.cCancel = () => { S.cedit = null; S.cphoto = undefined; draw(); };
-window.cToggle = async id => { const c = PCOURSES.find(x => x.id===id); if(!c) return; c.published = c.published===false; try{ await saveCatalogue(); }catch(e){ c.published = !c.published; note("Could not save: " + friendly(e)); } draw(); };
+window.cToggle = async id => { const c = PCOURSES.find(x => x.id===id); if(!c) return; const was=c.publicApproved===true; c.publicApproved=!was; c.published=c.publicApproved; try{ await saveCatalogue(); }catch(e){ c.publicApproved=was; c.published=was; note("Could not save: " + friendly(e)); } draw(); };
 window.cMove = async (i, d) => { const j = i + d; if(j<0 || j>=PCOURSES.length) return; const old = PCOURSES.slice(); [PCOURSES[i], PCOURSES[j]] = [PCOURSES[j], PCOURSES[i]]; try{ await saveCatalogue(); }catch(e){ PCOURSES = old; note("Could not save: " + friendly(e)); } draw(); };
 window.cDel = async id => { const c = PCOURSES.find(x => x.id===id); if(!c || !confirm("Delete " + c.t + " from the home page? This does not delete any learner records or lessons.")) return; const old = PCOURSES.slice(); PCOURSES = PCOURSES.filter(x => x.id!==id); try{ await saveCatalogue(); note("Course removed from the home page."); }catch(e){ PCOURSES = old; note("Could not save: " + friendly(e)); } draw(); };
-window.cRestore = async () => { if(!confirm("Replace the home page courses with the nine standard courses? Your own edits and added courses will be removed. Photos are kept.")) return; const old = PCOURSES; PCOURSES = PDEFAULT.map(c => ({ ...c })); try{ await saveCatalogue(); note("Standard courses restored."); }catch(e){ PCOURSES = old; note("Could not save: " + friendly(e)); } draw(); };
+window.cRestore = async () => { if(!confirm("Replace the home page courses with the nine standard courses? Your own edits and added courses will be removed. Photos are kept.")) return; const old = PCOURSES; PCOURSES = PDEFAULT.map(c => ({ ...c, published:false, publicApproved:false })); try{ await saveCatalogue(); note("Standard courses restored."); }catch(e){ PCOURSES = old; note("Could not save: " + friendly(e)); } draw(); };
 window.cPhoto = () => {
   const up = upCfg(), f = el("cfFile") && el("cfFile").files[0]; if(!up || !f){ showMsg("Choose a photo first.", true, "courseFormMsg"); return; }
   if(f.size > 10*1024*1024){ showMsg("That photo is over 10 MB. Choose a smaller one.", true, "courseFormMsg"); return; }
@@ -5830,15 +5953,30 @@ window.cPhoto = () => {
   xhr.onload = () => { let r = {}; try{ r = JSON.parse(xhr.responseText); }catch(e){} if(r.secure_url){ el("cfUrl").value = r.secure_url; S.cphoto = r.secure_url; const t = el("cfThumb"); if(t) t.innerHTML = '<img src="' + esc(r.secure_url.replace("/upload/", "/upload/c_fill,w_400,h_250,q_auto,f_auto/")) + '" alt="">'; showMsg("Photo uploaded. Now tap Save course.", false, "courseFormMsg"); } else showMsg("Upload was refused" + (r.error && r.error.message ? ": " + r.error.message : "") + ".", true, "courseFormMsg"); };
   xhr.send(fd);
 };
-window.cSave = async () => {
-  const t = $v("cfT"), brief = $v("cfB"), url = $v("cfUrl"), price = $v("cfP");
+window.closeCoursePreview = () => { const m=el("coursePreviewModal"); if(m) m.remove(); if(!el("payModal") && !el("vrViewer") && !el("vrUpload")) document.body.classList.remove("pay-open"); };
+window.coursePreview = mode => {
+  const E=S.cedit && S.cedit!=="new" ? PCOURSES.find(x => x.id===S.cedit) : null;
+  const title=$v("cfT").trim() || "Course title", access=$v("cfAccess"), fee=access==="locked" ? Math.max(0,Math.round(Number($v("cfP"))||0)) : 0;
+  const c={...(E||{}), id:E ? E.id : "course-preview", t:title, price:fee, brief:$v("cfB").trim(), photo:$v("cfUrl").trim() || (E ? E.photo||PPHOTOS[E.id]||"" : ""), purpose:$v("cfPur").trim(), out:lines($v("cfOut")), mods:textToMods($v("cfMods")), prac:lines($v("cfPrac"))};
+  const free=!c.price;
+  const card='<div class="pcgrid" style="grid-template-columns:minmax(0,360px)"><article class="pcourse"><div class="pcimg">'+pubImg(c,640)+'</div><div class="pcbody"><h3>'+esc(c.t)+'</h3><p>'+esc(c.brief||"Course description will appear here.")+'</p><div class="pcfoot"><div class="pcprice'+(free?' free':'')+'">'+pugx(c.price)+'</div><button type="button" class="btn gold" disabled>Enrol Now</button></div></div></article></div>';
+  const modules=c.mods.length ? c.mods.map((m,i)=>'<details class="cpMod"'+(i===0?' open':'')+'><summary><b>Module '+(i+1)+': '+esc(m[0])+'</b></summary>'+(m[1]&&m[1].length?'<ol>'+m[1].map(t=>'<li>'+esc(t)+'</li>').join('')+'</ol>':'<p class="status">Lessons will be listed here.</p>')+'</details>').join('') : '<p class="status">Course modules and lessons will appear here.</p>';
+  const image=pubImg(c,1000);
+  const page='<div class="cpHero"><div class="cpimg">'+image+'</div><div class="cpHead"><span class="pbadge '+(free?'free':'paid')+'">'+(free?'FREE COURSE':'PAID COURSE')+'</span><h1>'+esc(c.t)+'</h1><div class="cpPrice">'+pugx(c.price)+'</div><button type="button" class="btn gold" disabled>Preview only</button></div></div><div class="cpGrid"><div class="cpMain"><section class="cpSec"><h2>About this course</h2><p>'+esc(c.brief||'Course description will appear here.')+'</p>'+(c.purpose?'<h3>Course purpose</h3><p>'+esc(c.purpose)+'</p>':'')+'</section>'+(c.out.length?'<section class="cpSec"><h2>What you will be able to do</h2><ul>'+c.out.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></section>':'')+'<section class="cpSec"><h2>Modules and lessons</h2>'+modules+'</section>'+(c.prac.length?'<section class="cpSec"><h2>Practical activities and projects</h2><ul>'+c.prac.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></section>':'')+'<section class="cpSec"><h2>Certificate</h2><p>Earn a Sela certificate of completion with a unique code that anyone can verify online.</p></section></div><aside class="cpSide"><div class="card"><h3>Start this course</h3><div class="cpPrice">'+pugx(c.price)+'</div><p>'+(free?'Sign in or create a free learner account to start.':'Payment must be verified before lessons unlock.')+'</p><button type="button" class="btn gold" style="width:100%" disabled>Preview only</button></div></aside></div>';
+  const body=mode==="card" ? card : page;
+  const bg=document.createElement("div"); bg.id="coursePreviewModal"; bg.className="paybg"; bg.setAttribute("role","dialog"); bg.setAttribute("aria-modal","true"); bg.setAttribute("aria-label",mode==="card" ? "Public course card preview" : "Public course page preview");
+  bg.innerHTML='<div class="paybox cpreview-box"><button type="button" class="pay-x" aria-label="Close preview" onclick="closeCoursePreview()">×</button><div class="cpv-kick">ADMIN PREVIEW · NOT PUBLIC</div><h2>'+esc(c.t)+'</h2><p class="cpv-note">This preview uses the current form values. Save the course and list it in the public catalogue when it is ready.</p>'+body+'</div>';
+  bg.addEventListener("click",e=>{if(e.target===bg) closeCoursePreview();});
+  closeCoursePreview(); document.body.appendChild(bg); document.body.classList.add("pay-open");
+};window.cSave = async () => {
+  const t = $v("cfT"), brief = $v("cfB"), url = $v("cfUrl"), price = $v("cfP"), access = $v("cfAccess");
   if(!t){ showMsg("Enter the course title.", true, "courseFormMsg"); return; }
-  if(price==="" || isNaN(Number(price)) || Number(price)<0){ showMsg("Enter the price in UGX (0 if free).", true, "courseFormMsg"); return; }
+  if(access==="locked" && (price==="" || isNaN(Number(price)) || Number(price)<=0)){ showMsg("Enter a price above zero to lock this course.", true, "courseFormMsg"); return; }
   if(!brief){ showMsg("Add a short description for the card.", true, "courseFormMsg"); return; }
   if(url && !/^https:\/\//.test(url)){ showMsg("The photo link must start with https://", true, "courseFormMsg"); return; }
   const mods = textToMods($v("cfMods")); if(!mods.length){ showMsg("Add at least one module (a title line, then its lessons starting with a dash).", true, "courseFormMsg"); return; }
   const E = S.cedit!=="new" ? PCOURSES.find(c => c.id===S.cedit) : null, id = E ? E.id : "c" + Date.now().toString(36);
-  const c = { ...(E || { art:"generic", photo:"" }), id, t, price:Math.round(Number(price)), brief, purpose:$v("cfPur"), out:lines($v("cfOut")), mods, prac:lines($v("cfPrac")), published:el("cfPub").checked };
+  const c = { ...(E || { art:"generic", photo:"" }), id, t, price:access==="locked" ? Math.round(Number(price)) : 0, brief, purpose:$v("cfPur"), out:lines($v("cfOut")), mods, prac:lines($v("cfPrac")), published:el("cfPub").checked, publicApproved:el("cfPub").checked };
   const oldC = PCOURSES.slice(), oldP = { ...PPHOTOS };
   if(E) PCOURSES = PCOURSES.map(x => x.id===id ? c : x); else PCOURSES = PCOURSES.concat([c]);
   if(url) PPHOTOS[id] = url; else delete PPHOTOS[id];
