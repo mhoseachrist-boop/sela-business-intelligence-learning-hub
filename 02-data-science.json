@@ -1,0 +1,155 @@
+{
+  "format": "sela-course-pack-1",
+  "course": {
+    "title": "Data Science & Predictive Analytics",
+    "description": "Progress from solid statistics and Python/SQL foundations to visualisation and introductory machine learning. Designed for learners who already have basic data literacy and want professional analytical skills.",
+    "sequential": true
+  },
+  "modules": [
+    {
+      "title": "Module 1: Statistics for analysis",
+      "description": "Averages, spread, probability, correlation and sampling.",
+      "lessons": [
+        {
+          "title": "Lesson 1.1: Averages, spread and distributions",
+          "description": "Mean, median, variance and shape of data.",
+          "notesHtml": "<h3>Aim</h3><p>Calculate and interpret mean, median, standard deviation and recognise basic distribution shapes.</p><h3>Key ideas</h3><p>Central tendency (mean, median, mode) and spread (range, variance, standard deviation) together describe a dataset. Distributions can be symmetric, skewed or multi-modal; the shape guides which statistics and visuals are appropriate.</p><h3>Practice</h3><p>For a small real dataset compute mean, median and a measure of spread. Sketch the shape and comment on skewness.</p>"
+        },
+        {
+          "title": "Lesson 1.2: Probability, correlation and sampling",
+          "description": "Chance, relationships and how samples represent populations.",
+          "notesHtml": "<h3>Aim</h3><p>Explain basic probability, interpret a correlation coefficient, and describe simple random sampling.</p><h3>Key ideas</h3><p>Probability quantifies uncertainty. Correlation measures linear association (not causation). A well-designed sample allows inference about a larger population; biased samples produce misleading results.</p><h3>Practice</h3><p>Find one claimed relationship in a news story and discuss whether correlation or causation is being implied.</p>"
+        },
+        {
+          "title": "Lesson 1.3: Interpreting statistical results",
+          "description": "Read results critically and avoid common mistakes.",
+          "notesHtml": "<h3>Aim</h3><p>Interpret statistical output with appropriate caution and spot common misuses.</p><h3>Key ideas</h3><p>Statistical significance is not the same as practical importance. Multiple testing, selection bias and poor visualisation can mislead. Always ask about sample size, data quality and alternative explanations.</p>"
+        },
+        {
+          "title": "Module 1 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 1 review and assessment</h3><p>10 questions. Pass mark 70 %. Review the lessons if you need to retake.</p>",
+          "quiz": "Q: The median is preferred over the mean when:\nData are perfectly symmetric\n*Extreme values would distort the mean\nSample size is one\nData are only categories\nexplain: Median is robust to outliers.\nlevel: 1\n\nQ: Correlation measures:\nCausation always\n*Strength of linear association\nOnly the mean\nSample size\nexplain: Correlation ≠ causation.\nlevel: 1\n\nQ: A biased sample tends to:\nRepresent the population well\n*Produce systematically misleading estimates\nIncrease the median automatically\nEliminate the need for charts\nexplain: Bias undermines inference.\nlevel: 2\n\nQ: Standard deviation measures:\nThe middle value\n*Typical spread around the mean\nOnly the maximum\nThe mode\nexplain: SD quantifies dispersion.\nlevel: 1\n\nQ: Statistical significance means:\nThe result is important in real life\n*The observed result is unlikely under a stated null model (given assumptions)\nThe sample is biased\nThe chart is colourful\nexplain: Significance is about evidence against a null, not automatic importance.\nlevel: 2\n\nQ: Skewed data often make the mean:\nIdentical to the median\n*Pulled toward the long tail\nUndefined\nEqual to the range\nexplain: Skew pulls the mean.\nlevel: 2\n\nQ: A good sample should:\nOnly include convenient people\n*Be selected so that it fairly represents the population of interest\nBe as small as possible always\nIgnore response rates\nexplain: Representativeness is key.\nlevel: 1\n\nQ: “Correlation implies causation” is:\nAlways true\n*A common error\nRequired by statistics\nOnly true for large samples\nexplain: Causation needs stronger design/evidence.\nlevel: 1\n\nQ: Practical importance of a result depends on:\nOnly the p-value\n*Context, effect size and consequences of decisions\nOnly the sample mean\nChart colours\nexplain: Context and size of effect matter.\nlevel: 2\n\nQ: Variance is:\nThe square of the standard deviation (population definition)\n*A measure of spread; SD is its square root\nThe same as the median\nOnly used for categories\nexplain: Variance and SD are linked spread measures.\nlevel: 2",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 2: Python for data",
+      "description": "Core Python and data handling with pandas.",
+      "lessons": [
+        {
+          "title": "Lesson 2.1: Python fundamentals",
+          "description": "Variables, types, control flow and functions.",
+          "notesHtml": "<h3>Aim</h3><p>Write and run simple Python scripts that use variables, lists, loops and functions.</p><h3>Key ideas</h3><p>Python is readable and widely used for data work. Master the basics of assignment, data types, if/else, for loops and defining small functions before moving to libraries.</p>"
+        },
+        {
+          "title": "Lesson 2.2: Working with data in Python",
+          "description": "Load tables and inspect them with pandas.",
+          "notesHtml": "<h3>Aim</h3><p>Load a CSV into a pandas DataFrame, inspect shape, columns and basic summaries.</p><h3>Key ideas</h3><p>pandas provides DataFrame objects that feel like super-powered spreadsheets. Start with read_csv, head, info, describe and value_counts.</p>"
+        },
+        {
+          "title": "Lesson 2.3: Cleaning and exploring datasets",
+          "description": "Handle missing values, filter rows and create simple derived columns.",
+          "notesHtml": "<h3>Aim</h3><p>Clean common data problems and compute basic group summaries in pandas.</p><h3>Key ideas</h3><p>Missing values, wrong types and inconsistent categories are routine. Learn dropna/fillna, astype, query/filter and groupby + agg.</p>"
+        },
+        {
+          "title": "Module 2 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 2 review and assessment</h3><p>10 questions. Pass mark 70 %. Review the lessons if you need to retake.</p>",
+          "quiz": "Q: A pandas DataFrame is best described as:\nA single number\n*A table of data with labelled columns and rows\nOnly a chart\nA password\nexplain: DataFrames are tabular.\nlevel: 1\n\nQ: read_csv is used to:\nTrain a neural network\n*Load a comma-separated file into a DataFrame\nDelete columns\nPlot maps\nexplain: read_csv imports tabular text data.\nlevel: 1\n\nQ: groupby in pandas is typically followed by:\nOnly print\n*An aggregation such as mean, sum or count\nDeleting the index forever\nConverting to a string only\nexplain: Group-then-aggregate is the classic pattern.\nlevel: 2\n\nQ: Handling missing values may involve:\nIgnoring the problem always\n*Dropping rows/columns or filling with a reasoned value\nMultiplying by zero\nOnly changing chart colours\nexplain: Explicit strategies are required.\nlevel: 1\n\nQ: A Python function is useful because:\nIt slows the computer\n*It packages reusable logic under a clear name\nIt replaces all variables\nIt is required for every line\nexplain: Functions organise and reuse code.\nlevel: 1\n\nQ: value_counts is helpful for:\nFitting deep learning models\n*Seeing frequency of categories in a column\nOnly numerical correlation\nDeleting duplicates only\nexplain: value_counts summarises categorical frequency.\nlevel: 2\n\nQ: Before heavy cleaning you should:\nOverwrite the only raw file\n*Keep a copy of the original data\nShare all personal data publicly\nSkip inspection\nexplain: Preserve the source.\nlevel: 1\n\nQ: Filtering rows in pandas can be done with:\nOnly Excel macros\n*Boolean conditions or query\nOnly SQL forever\nDeleting the Python installation\nexplain: Boolean masks and query are standard.\nlevel: 2\n\nQ: describe() on a DataFrame typically shows:\nOnly column names\n*Summary statistics for numeric columns\nThe full raw file\nNetwork latency\nexplain: describe gives count/mean/std/quartiles etc.\nlevel: 1\n\nQ: Consistent data types in columns help because:\nThey make files larger always\n*Many operations and models expect uniform types\nThey eliminate all missing values\nThey replace documentation\nexplain: Type consistency enables reliable computation.\nlevel: 2",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 3: SQL and databases",
+      "description": "Query, filter, join and summarise data in tables.",
+      "lessons": [
+        {
+          "title": "Lesson 3.1: Querying data with SQL",
+          "description": "SELECT, FROM, WHERE and ORDER BY.",
+          "notesHtml": "<h3>Aim</h3><p>Write SELECT queries that retrieve and filter rows from a single table.</p><h3>Key ideas</h3><p>SQL is the standard language for relational databases. Start with SELECT columns FROM table WHERE condition ORDER BY column.</p>"
+        },
+        {
+          "title": "Lesson 3.2: Filtering, joining and summarising",
+          "description": "JOIN, GROUP BY and aggregate functions.",
+          "notesHtml": "<h3>Aim</h3><p>Combine tables with JOIN and produce summaries with GROUP BY and aggregates.</p><h3>Key ideas</h3><p>Most useful data lives in multiple related tables. INNER JOIN and LEFT JOIN are the workhorses. GROUP BY + COUNT/SUM/AVG answers many business questions.</p>"
+        },
+        {
+          "title": "Lesson 3.3: Working with real tables",
+          "description": "Practical patterns and common pitfalls.",
+          "notesHtml": "<h3>Aim</h3><p>Apply SQL patterns to realistic schemas and avoid common mistakes (wrong join type, missing GROUP BY columns, accidental Cartesian products).</p>"
+        },
+        {
+          "title": "Module 3 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 3 review and assessment</h3><p>10 questions. Pass mark 70 %. Review the lessons if you need to retake.</p>",
+          "quiz": "Q: SELECT is used to:\nDelete a database\n*Retrieve columns from tables\nCreate a user only\nShutdown the server\nexplain: SELECT reads data.\nlevel: 1\n\nQ: WHERE filters:\nColumns after aggregation only\n*Rows before grouping (in the basic pattern)\nOnly table names\nChart colours\nexplain: WHERE restricts which rows enter the result.\nlevel: 1\n\nQ: GROUP BY is typically used with:\nOnly SELECT *\n*Aggregate functions such as COUNT or SUM\nDROP TABLE\nPassword changes\nexplain: Grouping + aggregation produces summaries.\nlevel: 1\n\nQ: An INNER JOIN returns:\nAll rows from both tables regardless of match\n*Only rows that match on the join condition\nOnly the first table\nNo rows ever\nexplain: Inner join keeps matches.\nlevel: 2\n\nQ: A LEFT JOIN keeps:\nOnly right-table matches\n*All left-table rows and matching right-table data (or nulls)\nOnly aggregated totals\nNothing\nexplain: Left join preserves the left table.\nlevel: 2\n\nQ: Forgetting a non-aggregated column in GROUP BY usually:\nIs always fine\n*Causes an error or unpredictable results depending on the engine\nIncreases speed only\nDeletes data\nexplain: GROUP BY rules must be respected.\nlevel: 2\n\nQ: ORDER BY controls:\nWhich database you connect to\n*The sequence of rows in the result\nUser permissions\nBackup frequency\nexplain: ORDER BY sorts the output.\nlevel: 1\n\nQ: COUNT(*) counts:\nOnly distinct values always\n*The number of rows in the group (or result)\nOnly nulls\nOnly numeric columns\nexplain: COUNT(*) tallies rows.\nlevel: 1\n\nQ: A Cartesian product often results from:\nA correct INNER JOIN\n*A join missing its ON condition (or a cross join)\nUsing WHERE\nSelecting fewer columns\nexplain: Missing join conditions multiply rows.\nlevel: 2\n\nQ: SQL is especially valuable because:\nIt only works offline\n*Most organisational data sits in relational databases\nIt replaces all spreadsheets forever\nIt cannot filter rows\nexplain: Databases are central to real data work.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 4: Visualisation and reporting",
+      "description": "Design clear visuals and tell a decision-ready story.",
+      "lessons": [
+        {
+          "title": "Lesson 4.1: Principles of clear visuals",
+          "description": "Choose the right chart and avoid misleading designs.",
+          "notesHtml": "<h3>Aim</h3><p>Select chart types that match the data and the question, and avoid common distortions.</p>"
+        },
+        {
+          "title": "Lesson 4.2: Power BI dashboards",
+          "description": "Build interactive views for non-technical stakeholders.",
+          "notesHtml": "<h3>Aim</h3><p>Create a simple interactive dashboard that answers a business question in under a minute of viewing.</p>"
+        },
+        {
+          "title": "Lesson 4.3: Telling a story with data",
+          "description": "Structure findings for decision makers.",
+          "notesHtml": "<h3>Aim</h3><p>Write a short narrative that links question → evidence → recommendation → next check.</p>"
+        },
+        {
+          "title": "Module 4 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 4 review and assessment</h3><p>10 questions. Pass mark 70 %. Review the lessons if you need to retake.</p>",
+          "quiz": "Q: A line chart is usually best for:\nUnrelated categories\n*Change over time\nParts of a whole only\nPasswords\nexplain: Lines emphasise trends.\nlevel: 1\n\nQ: Truncating the y-axis can:\nNever affect interpretation\n*Exaggerate differences\nImprove data quality\nReplace titles\nexplain: Scale choices influence perception.\nlevel: 2\n\nQ: A good dashboard prioritises:\nEvery possible chart\n*The main question and the most important metrics\nOnly raw tables\nHidden filters only\nexplain: Focus serves decision makers.\nlevel: 1\n\nQ: Annotations on charts help:\nHide the data\n*Explain peaks, changes or caveats\nIncrease file size only\nReplace the need for data\nexplain: Context reduces misreading.\nlevel: 2\n\nQ: Pie charts become poor when:\nThere are two slices\n*There are many small categories\nData are time series without aggregation\nBoth many categories and unsuitable data can be problems\nexplain: Too many slices hurt readability.\nlevel: 2\n\nQ: A decision-ready data story should include:\nOnly the chart\n*Question, key finding, limitation, recommendation\nEvery SQL query\nPersonal attacks\nexplain: Transparent structure builds trust.\nlevel: 1\n\nQ: Interactive filters in Power BI allow:\nDeleting the dataset permanently\n*Users to explore segments without new reports each time\nOnly printing\nHiding all numbers\nexplain: Interactivity supports self-service exploration.\nlevel: 2\n\nQ: Colour should be used:\nRandomly for decoration\n*With purpose (categories, emphasis, accessibility)\nOnly in black and white always\nTo encode more than five independent variables at once without legend\nexplain: Purposeful colour aids understanding.\nlevel: 2\n\nQ: The source and date of data on a dashboard:\nShould be hidden\n*Should be visible\nAre optional always\nReplace the need for titles\nexplain: Provenance supports trust.\nlevel: 1\n\nQ: The main goal of a business visualisation is:\nArtistic expression only\n*Faster, clearer understanding that supports action\nMaximum number of chart types\nHiding uncertainty always\nexplain: Clarity for decisions is the point.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 5: Predictive analytics and machine learning",
+      "description": "Introductory prediction, model testing and responsible use.",
+      "lessons": [
+        {
+          "title": "Lesson 5.1: Prediction and forecasting basics",
+          "description": "What prediction can and cannot do.",
+          "notesHtml": "<h3>Aim</h3><p>Explain the difference between describing the past and predicting the future, and list conditions that make prediction more reliable.</p>"
+        },
+        {
+          "title": "Lesson 5.2: Machine learning models",
+          "description": "Supervised learning intuition and common model families.",
+          "notesHtml": "<h3>Aim</h3><p>Describe supervised learning at a high level and name common model types (regression, tree-based, etc.).</p>"
+        },
+        {
+          "title": "Lesson 5.3: Testing and improving a model",
+          "description": "Train/test splits, simple metrics and overfitting awareness.",
+          "notesHtml": "<h3>Aim</h3><p>Evaluate a model on held-out data and recognise basic signs of overfitting.</p>"
+        },
+        {
+          "title": "Module 5 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 5 review and assessment</h3><p>10 questions. Pass mark 70 %. Review the lessons if you need to retake.</p>",
+          "quiz": "Q: Predictive analytics mainly answers:\nWhat happened?\n*What is likely to happen?\nWhat is the password?\nWho to fire randomly\nexplain: Prediction looks forward.\nlevel: 1\n\nQ: A train/test split helps:\nUse all data for training only\n*Estimate how the model will perform on new data\nDelete half the data permanently\nAvoid all metrics\nexplain: Held-out data tests generalisation.\nlevel: 1\n\nQ: Overfitting means:\nThe model is too simple\n*The model fits training data very well but performs poorly on new data\nThe model has no features\nThe data has no rows\nexplain: Overfit models memorise rather than generalise.\nlevel: 2\n\nQ: Supervised learning uses:\nOnly unlabelled data\n*Input features paired with known target values\nOnly images\nNo evaluation\nexplain: Labels supervise the learning.\nlevel: 1\n\nQ: A simple useful metric for classification is:\nOnly the mean of features\n*Accuracy, precision, recall or similar (chosen for the problem)\nFile size\nChart colour\nexplain: Metrics quantify performance.\nlevel: 2\n\nQ: More complex models are:\nAlways better\n*Not automatically better; they can overfit and be harder to explain\nNever useful\nRequired by law\nexplain: Complexity has costs.\nlevel: 2\n\nQ: Prediction quality depends heavily on:\nOnly the programming language\n*Data quality, relevance of features and stability of the process being modelled\nOnly the number of charts\nRandom fonts\nexplain: Garbage in, garbage out still applies.\nlevel: 1\n\nQ: Using a model in production requires:\nNever monitoring it again\n*Ongoing monitoring because data and processes drift\nDeleting all training data immediately\nHiding all errors\nexplain: Real-world data changes.\nlevel: 2\n\nQ: Ethical use of predictive models includes:\nIgnoring fairness and privacy\n*Considering impact on people, bias and transparency where appropriate\nMaximising complexity only\nAvoiding all documentation\nexplain: Responsibility matters.\nlevel: 2\n\nQ: The best first predictive project is often:\nThe most complex deep model possible\n*A clear business question with measurable outcomes and clean enough data\nA project with no data\nA project that cannot be evaluated\nexplain: Clarity and evaluability beat complexity.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    }
+  ]
+}

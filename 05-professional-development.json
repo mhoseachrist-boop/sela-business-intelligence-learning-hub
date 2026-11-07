@@ -1,0 +1,155 @@
+{
+  "format": "sela-course-pack-1",
+  "course": {
+    "title": "Professional Development",
+    "description": "Build the workplace behaviours, communication, teamwork, productivity and career skills that turn technical knowledge into sustained professional success. Beginner to confident professional.",
+    "sequential": true
+  },
+  "modules": [
+    {
+      "title": "Module 1: Professional ethics and workplace behaviour",
+      "description": "Integrity, accountability and conduct.",
+      "lessons": [
+        {
+          "title": "Lesson 1.1: Integrity and accountability",
+          "description": "Do what you say; own outcomes.",
+          "notesHtml": "<h3>Aim</h3><p>Explain integrity and accountability with workplace examples and apply them to a realistic scenario.</p>"
+        },
+        {
+          "title": "Lesson 1.2: Professional conduct and etiquette",
+          "description": "Respect, reliability and appropriate communication.",
+          "notesHtml": "<h3>Aim</h3><p>List practical behaviours that signal professionalism in meetings, messages and shared spaces.</p>"
+        },
+        {
+          "title": "Lesson 1.3: Handling workplace challenges",
+          "description": "Conflict, pressure and ethical grey areas.",
+          "notesHtml": "<h3>Aim</h3><p>Use a simple framework to respond to conflict or ethical pressure without escalating harm.</p>"
+        },
+        {
+          "title": "Module 1 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 1 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Accountability means:\nBlaming others\n*Owning your commitments and the results of your actions\nAvoiding all responsibility\nOnly following orders blindly\nexplain: Ownership of outcomes.\nlevel: 1\n\nQ: Integrity at work is best shown by:\nHiding mistakes\n*Aligning words and actions, even when inconvenient\nOnly when observed\nCompeting unfairly\nexplain: Consistency of character.\nlevel: 1\n\nQ: Professional etiquette includes:\nInterrupting constantly\n*Punctuality, respectful language and appropriate channels\nSharing private messages publicly\nIgnoring deadlines\nexplain: Respect and reliability.\nlevel: 1\n\nQ: When you make a mistake the professional response is:\nCover it up\n*Acknowledge, correct, and prevent recurrence\nBlame the nearest colleague\nLeave the job immediately\nexplain: Own and fix.\nlevel: 1\n\nQ: Ethical grey areas should be handled by:\nIgnoring them\n*Seeking guidance, applying organisational values, and documenting decisions when needed\nAlways choosing the easiest path\nPublicly shaming others first\nexplain: Values + advice + transparency.\nlevel: 2\n\nQ: Reliability is demonstrated by:\nPromising everything\n*Delivering on commitments or communicating early when at risk\nOnly working when motivated\nAvoiding hard tasks\nexplain: Follow-through.\nlevel: 1\n\nQ: Respectful disagreement means:\nNever disagreeing\n*Challenging ideas without attacking people\nRaising your voice\nUsing sarcasm\nexplain: Ideas vs persons.\nlevel: 2\n\nQ: Confidential information should be:\nShared widely for transparency\n*Protected according to policy and need-to-know\nPosted on social media\nIgnored\nexplain: Confidentiality is a duty.\nlevel: 1\n\nQ: A simple conflict approach is:\nWin at all costs\n*Listen, state impact, propose options, agree next steps\nAvoid all discussion\nEscalate immediately every time\nexplain: Structured resolution.\nlevel: 2\n\nQ: Professional behaviour ultimately supports:\nOnly personal branding\n*Trust, teamwork and organisational effectiveness\nAvoiding all growth\nCompetition only\nexplain: Trust enables results.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 2: Communication skills",
+      "description": "Clear writing, speaking and listening.",
+      "lessons": [
+        {
+          "title": "Lesson 2.1: Clear written communication",
+          "description": "Emails, messages and short reports.",
+          "notesHtml": "<h3>Aim</h3><p>Write short workplace messages with a clear purpose, needed context and requested action.</p>"
+        },
+        {
+          "title": "Lesson 2.2: Speaking and presenting",
+          "description": "Structure and delivery for small audiences.",
+          "notesHtml": "<h3>Aim</h3><p>Structure a short verbal update: purpose, key points, ask.</p>"
+        },
+        {
+          "title": "Lesson 2.3: Active listening and feedback",
+          "description": "Understand before responding; give useful feedback.",
+          "notesHtml": "<h3>Aim</h3><p>Practise listening to understand and giving specific, constructive feedback.</p>"
+        },
+        {
+          "title": "Module 2 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 2 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: A clear workplace message should state:\nOnly jokes\n*Purpose, needed context and the requested action\nEvery possible detail first\nNothing about next steps\nexplain: Purpose + context + ask.\nlevel: 1\n\nQ: Active listening prioritises:\nPlanning your reply while the other person talks\n*Understanding the speaker before responding\nInterrupting to correct\nChecking your phone\nexplain: Understand first.\nlevel: 1\n\nQ: Constructive feedback is:\nVague and personal\n*Specific, about behaviour or work product, and aimed at improvement\nOnly negative\nPublic shaming\nexplain: Specific + improvable.\nlevel: 1\n\nQ: A short verbal update works well with:\nNo structure\n*Purpose, 2–4 key points, and a clear ask or conclusion\nReading a long document aloud\nOnly slides with tiny text\nexplain: Structure aids retention.\nlevel: 2\n\nQ: Subject lines in email should:\nBe empty\n*Summarise the topic or action needed\nContain only emojis\nBe as long as the body\nexplain: Scannable subject lines help.\nlevel: 1\n\nQ: When receiving feedback you should:\nDefend immediately always\n*Listen fully, clarify, and decide what to apply\nIgnore it\nArgue about tone only\nexplain: Learning posture.\nlevel: 2\n\nQ: Adapting communication to the audience means:\nUsing the same jargon for everyone\n*Adjusting detail and language to what the listener needs\nAvoiding all technical terms forever\nOnly writing\nexplain: Audience fit.\nlevel: 1\n\nQ: A request is clearer when it includes:\nNo deadline\n*What is needed, by when, and any constraints\nOnly “ASAP”\nMultiple unrelated asks buried in paragraphs\nexplain: Clarity enables action.\nlevel: 1\n\nQ: Summarising what you heard before responding:\nWastes time\n*Confirms understanding and reduces miscommunication\nIs only for therapy\nShows weakness\nexplain: Confirmation prevents errors.\nlevel: 2\n\nQ: The goal of professional communication is:\nImpressing with complexity\n*Shared understanding and effective action\nWinning arguments only\nAvoiding all writing\nexplain: Understanding + action.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 3: Teamwork and collaboration",
+      "description": "Contribute, coordinate and resolve friction.",
+      "lessons": [
+        {
+          "title": "Lesson 3.1: Effective teamwork",
+          "description": "Roles, norms and contribution.",
+          "notesHtml": "<h3>Aim</h3><p>Describe behaviours that make teams more effective and apply them in a small-group scenario.</p>"
+        },
+        {
+          "title": "Lesson 3.2: Decision-making and responsibility",
+          "description": "How groups decide and who owns outcomes.",
+          "notesHtml": "<h3>Aim</h3><p>Distinguish consultation from decision rights and clarify ownership of follow-through.</p>"
+        },
+        {
+          "title": "Lesson 3.3: Working across differences",
+          "description": "Diverse perspectives as an asset.",
+          "notesHtml": "<h3>Aim</h3><p>Use practical habits that turn diverse viewpoints into better solutions rather than conflict.</p>"
+        },
+        {
+          "title": "Module 3 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 3 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Effective teams usually have:\nNo shared goals\n*Clear goals, roles and norms for how they work together\nOnly one person doing everything\nConstant unexplained changes\nexplain: Clarity enables coordination.\nlevel: 1\n\nQ: Decision rights should be:\nAmbiguous so everyone is equal\n*Clear so people know who decides after input\nAlways unanimous\nHidden\nexplain: Clarity prevents deadlock.\nlevel: 1\n\nQ: Diverse perspectives help when:\nThey are ignored\n*They are actively sought and integrated into better solutions\nOnly one view is allowed\nConflict is maximised for its own sake\nexplain: Inclusion improves outcomes.\nlevel: 1\n\nQ: Following through on team commitments builds:\nDistrust\n*Reliability and trust\nOnly individual glory\nAvoidance of work\nexplain: Follow-through is social capital.\nlevel: 1\n\nQ: When roles are unclear teams often experience:\nPerfect efficiency\n*Duplication, gaps and friction\nAutomatic success\nNo need for communication\nexplain: Ambiguity costs.\nlevel: 2\n\nQ: Consultation means:\nEveryone decides equally always\n*Gathering input before a decision is made by the accountable person or process\nIgnoring experts\nVoting on every detail\nexplain: Input ≠ final decision right.\nlevel: 2\n\nQ: A practical inclusion habit is:\nInterrupting quieter members\n*Inviting contributions from quieter members and building on ideas\nOnly listening to seniority\nAvoiding all disagreement\nexplain: Structured inclusion.\nlevel: 1\n\nQ: Shared norms might cover:\nNothing practical\n*How the team communicates, meets, and handles deadlines\nOnly social events\nOnly individual goals\nexplain: Working agreements.\nlevel: 2\n\nQ: Owning a workstream means:\nDoing nothing\n*Being accountable for progress and raising risks early\nHiding problems\nBlaming the team\nexplain: Ownership + transparency.\nlevel: 1\n\nQ: The point of collaboration is:\nMeetings for their own sake\n*Better results than individuals would achieve alone\nAvoiding all individual work\nMaximising email volume\nexplain: Results over process theatre.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 4: Productivity",
+      "description": "Plan, prioritise and protect focus.",
+      "lessons": [
+        {
+          "title": "Lesson 4.1: Planning and prioritising",
+          "description": "Distinguish urgent from important.",
+          "notesHtml": "<h3>Aim</h3><p>Use a simple prioritisation method to plan a week of work.</p>"
+        },
+        {
+          "title": "Lesson 4.2: Managing time and focus",
+          "description": "Deep work and interruption control.",
+          "notesHtml": "<h3>Aim</h3><p>Design a daily routine that protects blocks of focused time.</p>"
+        },
+        {
+          "title": "Lesson 4.3: Working effectively with tools",
+          "description": "Calendars, task lists and communication hygiene.",
+          "notesHtml": "<h3>Aim</h3><p>Set up a lightweight personal system for tasks and calendar that you will actually use.</p>"
+        },
+        {
+          "title": "Module 4 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 4 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Urgent tasks are:\nAlways the most important\n*Time-sensitive; they may or may not be important\nNever important\nThe same as goals\nexplain: Urgency ≠ importance.\nlevel: 1\n\nQ: Protecting focus time means:\nBeing available for every interruption\n*Scheduling and defending blocks for deep work\nOnly working at night\nAvoiding all meetings forever\nexplain: Intentional focus blocks.\nlevel: 1\n\nQ: A usable task system is:\nPerfectly complex\n*Simple enough that you maintain it daily\nOnly in your head\nShared with everyone automatically\nexplain: Simplicity aids consistency.\nlevel: 1\n\nQ: Prioritisation should consider:\nOnly who shouts loudest\n*Impact, deadlines, dependencies and goals\nOnly ease\nOnly novelty\nexplain: Multiple factors.\nlevel: 2\n\nQ: Communication hygiene includes:\nCC’ing everyone on everything\n*Using the right channel and reducing unnecessary noise\nNever responding\nOnly using phone calls\nexplain: Right channel, less noise.\nlevel: 2\n\nQ: Batching similar tasks can:\nIncrease context switching\n*Reduce context switching and improve efficiency\nEliminate all planning\nOnly work for email\nexplain: Batching reduces switching costs.\nlevel: 2\n\nQ: A weekly planning habit helps:\nOnly large corporations\n*Align daily work with longer-term priorities\nAvoid all flexibility\nReplace all tools\nexplain: Weekly horizon connects to goals.\nlevel: 1\n\nQ: Saying no (or not now) to low-value requests:\nIs unprofessional always\n*Protects capacity for high-value work when done respectfully\nMeans you are lazy\nShould be avoided forever\nexplain: Capacity is finite.\nlevel: 2\n\nQ: Calendar blocks for deep work should be:\nSecret and frequently cancelled\n*Treated as real commitments\nOnly aspirational\nFilled with meetings\nexplain: Treat focus as a commitment.\nlevel: 1\n\nQ: Productivity systems fail most often when:\nThey are too simple\n*They are too complex to maintain or disconnected from real priorities\nThey include a calendar\nThey include a task list\nexplain: Sustainability and relevance matter.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 5: Career development",
+      "description": "Goals, applications, interviews and continuous learning.",
+      "lessons": [
+        {
+          "title": "Lesson 5.1: Setting career goals",
+          "description": "Direction and next skills.",
+          "notesHtml": "<h3>Aim</h3><p>Write a 12-month career goal and the three skills that would most advance it.</p>"
+        },
+        {
+          "title": "Lesson 5.2: CVs, applications and interviews",
+          "description": "Present evidence of impact.",
+          "notesHtml": "<h3>Aim</h3><p>Rewrite one experience bullet to emphasise impact and prepare for a common interview question.</p>"
+        },
+        {
+          "title": "Lesson 5.3: Networking and lifelong learning",
+          "description": "Relationships and continuous skill growth.",
+          "notesHtml": "<h3>Aim</h3><p>Identify two practical ways to learn in the next quarter and one relationship to strengthen professionally.</p>"
+        },
+        {
+          "title": "Module 5 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 5 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: A useful career goal is:\nVague and distant\n*Specific enough to guide near-term skill and experience choices\nOnly about salary\nSecret from mentors\nexplain: Specificity guides action.\nlevel: 1\n\nQ: Strong CV bullets emphasise:\nOnly duties\n*Actions and measurable or observable impact\nOnly job titles\nPersonal hobbies only\nexplain: Impact over duty lists.\nlevel: 1\n\nQ: Interview answers are stronger when they:\nStay abstract\n*Use concrete examples (situation, action, result)\nAvoid all numbers\nCriticise former colleagues\nexplain: STAR-style evidence.\nlevel: 1\n\nQ: Networking is best approached as:\nTransactional asking only\n*Building genuine professional relationships over time\nCollecting business cards only\nAvoiding all events\nexplain: Relationships compound.\nlevel: 2\n\nQ: Lifelong learning in a fast-changing field is:\nOptional\n*Essential for sustained relevance\nOnly for juniors\nReplaced by AI completely\nexplain: Skills decay without practice.\nlevel: 1\n\nQ: Choosing which skills to build next should consider:\nOnly what is trendy on social media\n*Your goals, market demand and comparative advantage\nOnly what is easiest\nOnly what your friends choose\nexplain: Goal + market + fit.\nlevel: 2\n\nQ: A portfolio or work samples help when:\nYou have nothing to show\n*They provide concrete evidence of capability\nThey replace all conversation\nThey are password-free sensitive data\nexplain: Evidence beats claims.\nlevel: 2\n\nQ: Asking for informational advice from practitioners:\nIs always an imposition\n*Can be valuable when respectful, specific and grateful\nRequires payment always\nShould only be done once ever\nexplain: Thoughtful asks work.\nlevel: 2\n\nQ: Reflecting on projects after completion helps:\nOnly dwell on failure\n*Extract lessons that improve future performance\nAvoid all documentation\nReplace planning\nexplain: Reflection fuels growth.\nlevel: 1\n\nQ: Career development is ultimately:\nA one-time decision at age 20\n*An ongoing process of goals, skills, relationships and contribution\nOnly the employer’s job\nAvoidable if you work hard once\nexplain: Continuous process.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "format": "sela-course-pack-1",
+  "course": {
+    "title": "Applied Artificial Intelligence",
+    "description": "Apply AI to real business processes: map opportunities, measure benefits, manage risk and implement responsibly. Builds on conceptual AI knowledge toward practical organisational use.",
+    "sequential": true
+  },
+  "modules": [
+    {
+      "title": "Module 1: AI in business operations",
+      "description": "Find where AI creates real value.",
+      "lessons": [
+        {
+          "title": "Lesson 1.1: Mapping business processes",
+          "description": "See work as steps that can be measured and improved.",
+          "notesHtml": "<h3>Aim</h3><p>Map a simple process into steps, inputs, outputs and pain points.</p>"
+        },
+        {
+          "title": "Lesson 1.2: Where AI helps and where it does not",
+          "description": "Match AI strengths to process needs.",
+          "notesHtml": "<h3>Aim</h3><p>Identify process steps that are good AI candidates and steps that should stay human.</p>"
+        },
+        {
+          "title": "Lesson 1.3: Measuring benefits",
+          "description": "Define success metrics before building.",
+          "notesHtml": "<h3>Aim</h3><p>Write measurable benefit hypotheses (time saved, error reduced, revenue impact) and baseline them.</p>"
+        },
+        {
+          "title": "Module 1 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 1 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Mapping a process helps because:\nIt wastes time\n*It reveals steps, handoffs and pain points where AI might help\nIt replaces all metrics\nIt hides problems\nexplain: Visibility enables improvement.\nlevel: 1\n\nQ: AI is often a good fit for:\nIrreversible high-stakes judgements with no data\n*Repetitive, pattern-rich tasks with feedback data\nTasks with zero historical examples\nReplacing all strategy\nexplain: Patterns + data favour AI.\nlevel: 1\n\nQ: Before implementing AI you should:\nSkip measurement\n*Define success metrics and capture a baseline\nOnly buy the most expensive tool\nIgnore users\nexplain: Baseline + metrics prove value.\nlevel: 1\n\nQ: A pain point in a process is:\nAlways best left unchanged\n*A step that is slow, error-prone, costly or frustrating\nOnly the last step\nA type of database\nexplain: Pain points are improvement targets.\nlevel: 1\n\nQ: Human judgement remains essential when:\nTasks are purely repetitive\n*Stakes are high, context is novel, or accountability cannot be automated\nData is perfect and abundant\nThe model is large\nexplain: Humans own high-stakes and novel cases.\nlevel: 2\n\nQ: Time saved is a useful benefit metric when:\nIt is never measured\n*It is measured against a real baseline and translates into capacity or cost impact\nIt ignores quality\nIt is only estimated once after launch\nexplain: Credible measurement matters.\nlevel: 2\n\nQ: Not every process step should be automated because:\nAI is free\n*Some steps need empathy, accountability or rare expertise\nHumans never make errors\nAutomation is illegal\nexplain: Fit-for-purpose design.\nlevel: 1\n\nQ: A benefit hypothesis should be:\nVague and unmeasurable\n*Specific, measurable and tied to a process outcome\nHidden from stakeholders\nOnly about model accuracy\nexplain: Specificity enables evaluation.\nlevel: 1\n\nQ: Process mapping usually includes:\nOnly the CEO’s opinion\n*Steps, actors, inputs, outputs and pain points\nOnly the software vendor’s slides\nNo documentation\nexplain: Structured mapping is practical.\nlevel: 2\n\nQ: The main goal of applied AI in operations is:\nUsing AI for its own sake\n*Improving outcomes that matter to the organisation and its customers\nMaximising model size\nAvoiding all measurement\nexplain: Outcomes over technology.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 2: Designing AI-enabled workflows",
+      "description": "Human + AI handoffs that work in practice.",
+      "lessons": [
+        {
+          "title": "Lesson 2.1: Human-in-the-loop design",
+          "description": "Keep people where they add most value.",
+          "notesHtml": "<h3>Aim</h3><p>Design workflows where AI drafts or ranks and humans approve, correct or handle exceptions.</p>"
+        },
+        {
+          "title": "Lesson 2.2: Data readiness for applied AI",
+          "description": "What data quality and access are required.",
+          "notesHtml": "<h3>Aim</h3><p>Assess whether available data is sufficient, accessible and sufficiently clean for the intended use.</p>"
+        },
+        {
+          "title": "Lesson 2.3: Pilot design and evaluation",
+          "description": "Start small, learn fast, decide deliberately.",
+          "notesHtml": "<h3>Aim</h3><p>Design a limited pilot with clear success criteria and a go/no-go decision point.</p>"
+        },
+        {
+          "title": "Module 2 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 2 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Human-in-the-loop means:\nRemoving all humans\n*Keeping humans in critical review, exception handling or approval steps\nOnly using paper\nIgnoring AI outputs\nexplain: Humans remain accountable for key steps.\nlevel: 1\n\nQ: Data readiness includes:\nOnly having a logo\n*Access, quality, volume, representativeness and update frequency\nOnly model size\nIgnoring privacy\nexplain: Multiple dimensions matter.\nlevel: 1\n\nQ: A good pilot is:\nA full nationwide rollout on day one\n*Limited in scope, measured carefully, and used to decide next steps\nNever evaluated\nHidden from users\nexplain: Pilots reduce risk.\nlevel: 1\n\nQ: Exception handling is important because:\nAI never fails\n*Real data includes unusual cases the model may mishandle\nUsers prefer pure automation always\nIt slows learning\nexplain: Exceptions are inevitable.\nlevel: 2\n\nQ: Go/no-go criteria should be defined:\nAfter the pilot ends randomly\n*Before the pilot starts\nOnly by the vendor\nNever\nexplain: Pre-defined criteria prevent bias.\nlevel: 1\n\nQ: Poor data quality in a pilot often leads to:\nPerfect results\n*Misleading performance estimates\nFaster training only\nNo effect\nexplain: Quality limits insight.\nlevel: 2\n\nQ: Involving end users in pilot design helps:\nSlow everything uselessly\n*Surface practical constraints and improve adoption\nGuarantee perfect accuracy\nReplace metrics\nexplain: Users know the real work.\nlevel: 1\n\nQ: Ranking or drafting by AI with human approval is a common pattern because:\nIt removes all work\n*It speeds routine work while preserving human judgement on the final output\nIt is illegal\nIt requires no data\nexplain: Speed + oversight.\nlevel: 2\n\nQ: Access to data must also respect:\nOnly convenience\n*Privacy, security and policy constraints\nOnly speed\nNo rules\nexplain: Compliance is non-negotiable.\nlevel: 1\n\nQ: The purpose of a pilot is primarily to:\nImpress investors with slides\n*Learn whether the approach works well enough to scale\nUse as much budget as possible\nAvoid measurement\nexplain: Learning drives the decision.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 3: Risk, governance and change",
+      "description": "Manage downside and help people adopt new ways of working.",
+      "lessons": [
+        {
+          "title": "Lesson 3.1: Risks of applied AI",
+          "description": "Errors, bias, privacy, over-reliance.",
+          "notesHtml": "<h3>Aim</h3><p>List major risk categories and one mitigation for each in a concrete scenario.</p>"
+        },
+        {
+          "title": "Lesson 3.2: Lightweight governance",
+          "description": "Roles, logging and review without heavy bureaucracy.",
+          "notesHtml": "<h3>Aim</h3><p>Define simple ownership, logging and review practices appropriate to the risk level.</p>"
+        },
+        {
+          "title": "Lesson 3.3: Supporting people through change",
+          "description": "Training, incentives and feedback loops.",
+          "notesHtml": "<h3>Aim</h3><p>Plan communication and training so staff understand what changes and why.</p>"
+        },
+        {
+          "title": "Module 3 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 3 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Over-reliance on AI outputs can cause:\nNo problems\n*Missed errors and reduced human skill over time\nOnly faster work with zero downside\nPerfect compliance\nexplain: Critical thinking must remain.\nlevel: 1\n\nQ: Bias risk is best addressed by:\nIgnoring it\n*Checking performance across relevant groups and improving data/process\nUsing only one data source forever\nHiding metrics\nexplain: Measurement and improvement.\nlevel: 2\n\nQ: Lightweight governance should match:\nThe heaviest possible bureaucracy always\n*The risk level of the use case\nOnly the vendor’s preference\nNo documentation\nexplain: Proportionality matters.\nlevel: 1\n\nQ: Logging AI-assisted decisions helps:\nOnly increase storage costs\n*Audit, learning and accountability\nHide all errors\nReplace humans\nexplain: Logs support review.\nlevel: 2\n\nQ: Change support should include:\nOnly a single email\n*Clear explanation of what changes, training, and channels for feedback\nNo training\nPunishment for questions\nexplain: People need support to adopt.\nlevel: 1\n\nQ: Privacy risk rises when:\nNo personal data is used\n*Personal or sensitive data is processed without adequate controls\nOnly public aggregate data is used\nModels are small\nexplain: Sensitive data needs controls.\nlevel: 1\n\nQ: Assigning clear ownership for an AI workflow means:\nNobody is responsible\n*Someone is accountable for performance, incidents and improvement\nOnly the model is accountable\nOwnership rotates daily randomly\nexplain: Accountability is essential.\nlevel: 1\n\nQ: A mitigation for model error is:\nNever checking outputs\n*Human review for high-impact cases and monitoring error rates\nDeleting all logs\nAssuming perfection\nexplain: Review + monitoring.\nlevel: 2\n\nQ: Staff resistance often decreases when:\nChanges are forced with no explanation\n*People understand the purpose, receive training, and can give feedback\nAll jobs are threatened without alternatives\nMetrics are hidden\nexplain: Purpose + support + voice.\nlevel: 2\n\nQ: Governance is not only paperwork; it is:\nOptional decoration\n*The set of practices that keep AI use safe, effective and aligned with goals\nOnly for large banks\nA replacement for ethics\nexplain: Practices enable responsible use.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 4: Implementation and continuous improvement",
+      "description": "From pilot to sustained value.",
+      "lessons": [
+        {
+          "title": "Lesson 4.1: Implementation checklist",
+          "description": "Technical, process and people readiness.",
+          "notesHtml": "<h3>Aim</h3><p>Use a practical checklist covering data, tooling, process redesign, training and support.</p>"
+        },
+        {
+          "title": "Lesson 4.2: Monitoring and feedback",
+          "description": "Detect drift and user issues early.",
+          "notesHtml": "<h3>Aim</h3><p>Define a small set of health metrics and a feedback channel for users.</p>"
+        },
+        {
+          "title": "Lesson 4.3: Scaling what works",
+          "description": "Expand carefully after evidence of value.",
+          "notesHtml": "<h3>Aim</h3><p>Plan staged expansion only after the pilot meets its criteria.</p>"
+        },
+        {
+          "title": "Module 4 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 4 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Implementation readiness includes:\nOnly buying software\n*Data, process, people and technical readiness\nOnly marketing\nIgnoring users\nexplain: Multiple dimensions.\nlevel: 1\n\nQ: Monitoring after launch is needed because:\nNothing ever changes\n*Data, behaviour and performance drift over time\nModels improve automatically forever\nUsers never find issues\nexplain: Drift is real.\nlevel: 1\n\nQ: Scaling should happen:\nImmediately for all cases\n*After evidence that the pilot meets success criteria\nIn secret\nWithout metrics\nexplain: Evidence before scale.\nlevel: 1\n\nQ: A user feedback channel helps:\nOnly increase complaints\n*Surface problems and improvement ideas quickly\nReplace all metrics\nHide failures\nexplain: Feedback improves the system.\nlevel: 2\n\nQ: A simple health metric set might include:\nOnly the CEO’s mood\n*Error rate, volume processed, user satisfaction, and critical incident count\nOnly model size\nNothing quantitative\nexplain: A balanced few metrics.\nlevel: 2\n\nQ: Process redesign is often required because:\nAI drops into any process unchanged\n*Work steps, roles and handoffs usually need adjustment\nPeople never change how they work\nOnly IT needs to change\nexplain: Process and AI must fit.\nlevel: 1\n\nQ: Training should cover:\nOnly the technical API\n*How the new workflow works, when to trust or escalate, and how to report issues\nNothing practical\nOnly history of AI\nexplain: Practical competence.\nlevel: 1\n\nQ: Expanding to a new department without adaptation risks:\nGuaranteed success\n*Poor fit and rejection\nZero effort\nAutomatic improvement\nexplain: Context differs.\nlevel: 2\n\nQ: Continuous improvement means:\nFreezing the system forever after launch\n*Regularly reviewing metrics and feedback and making targeted updates\nChanging everything weekly randomly\nIgnoring all data\nexplain: Steady refinement.\nlevel: 1\n\nQ: The ultimate measure of applied AI success is:\nModel parameter count\n*Sustained improvement in the outcomes the organisation cares about\nNumber of tools purchased\nSlide deck length\nexplain: Outcomes win.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    }
+  ]
+}
