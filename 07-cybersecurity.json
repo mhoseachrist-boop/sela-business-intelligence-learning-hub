@@ -1,0 +1,155 @@
+{
+  "format": "sela-course-pack-1",
+  "course": {
+    "title": "Cybersecurity & Digital Safety",
+    "description": "Practical digital safety for everyday users and small organisations: devices, privacy, accounts, phishing, mobile money and incident response. Beginner to competent defender of your own digital life and workplace.",
+    "sequential": true
+  },
+  "modules": [
+    {
+      "title": "Module 1: Digital security basics",
+      "description": "Threats, devices and daily habits.",
+      "lessons": [
+        {
+          "title": "Lesson 1.1: How digital systems are attacked",
+          "description": "Common goals and methods of attackers.",
+          "notesHtml": "<h3>Aim</h3><p>Explain common attacker goals (money, data, disruption) and high-level methods.</p>"
+        },
+        {
+          "title": "Lesson 1.2: Devices, networks and updates",
+          "description": "Keep systems patched and networks safer.",
+          "notesHtml": "<h3>Aim</h3><p>Apply update discipline and basic network hygiene on phones and computers.</p>"
+        },
+        {
+          "title": "Lesson 1.3: Staying secure day to day",
+          "description": "Habits that reduce risk continuously.",
+          "notesHtml": "<h3>Aim</h3><p>Adopt a short daily/weekly security checklist.</p>"
+        },
+        {
+          "title": "Module 1 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 1 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Common attacker goals include:\nHelping users only\n*Money, data theft, disruption or access for further attacks\nImproving software quality\nOnly testing systems legally\nexplain: Adversarial goals.\nlevel: 1\n\nQ: Software updates matter because:\nThey only change colours\n*They often fix known security vulnerabilities\nThey always slow devices\nThey are optional for security\nexplain: Patches close holes.\nlevel: 1\n\nQ: Using untrusted public Wi-Fi for sensitive tasks without protection is:\nAlways safe\n*Risky because traffic may be intercepted\nRequired\nOnly a problem for images\nexplain: Network interception risk.\nlevel: 1\n\nQ: A daily security habit might include:\nSharing passwords\n*Checking for unexpected login alerts and keeping devices locked\nDisabling all updates\nClicking every link\nexplain: Awareness + lock screens.\nlevel: 1\n\nQ: Malware is:\nAlways visible\n*Software designed to harm, spy or exploit systems\nOnly a Windows problem\nHarmless by definition\nexplain: Malicious software.\nlevel: 1\n\nQ: Reducing the number of apps with broad permissions:\nIncreases risk\n*Reduces the damage if one app is compromised\nHas no effect\nIs impossible on phones\nexplain: Least privilege.\nlevel: 2\n\nQ: Backups help security by:\nPreventing all attacks\n*Enabling recovery after ransomware or device loss\nReplacing passwords\nStopping phishing\nexplain: Recovery capability.\nlevel: 2\n\nQ: Physical security of devices matters because:\nThieves never want phones\n*Lost or stolen devices can expose accounts and data\nOnly servers need physical security\nLocks are cosmetic\nexplain: Physical access is powerful.\nlevel: 1\n\nQ: Attackers often prefer:\nHard targets only\n*Easy targets with valuable data or money\nOnly government systems\nSystems with perfect security\nexplain: Opportunistic targeting.\nlevel: 2\n\nQ: The foundation of personal cyber safety is:\nBuying every product advertised\n*Good habits: updates, strong authentication, careful clicking, backups\nNever using the internet\nOnly antivirus with no other habits\nexplain: Habits compound.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 2: Online privacy",
+      "description": "Footprint, settings and social media.",
+      "lessons": [
+        {
+          "title": "Lesson 2.1: Your digital footprint",
+          "description": "What you leave behind and who can see it.",
+          "notesHtml": "<h3>Aim</h3><p>Audit your own public footprint and reduce unnecessary exposure.</p>"
+        },
+        {
+          "title": "Lesson 2.2: Privacy settings and sharing",
+          "description": "Control what apps and platforms collect.",
+          "notesHtml": "<h3>Aim</h3><p>Adjust key privacy settings on phone and major accounts.</p>"
+        },
+        {
+          "title": "Lesson 2.3: Safe use of social media",
+          "description": "Posting, tagging and scam patterns.",
+          "notesHtml": "<h3>Aim</h3><p>Apply practical rules for what not to post and how to handle suspicious contacts.</p>"
+        },
+        {
+          "title": "Module 2 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 2 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Digital footprint includes:\nOnly your private notes\n*Public posts, photos, comments, and data shared with services\nOnly your password\nNothing permanent\nexplain: Persistent traces.\nlevel: 1\n\nQ: Oversharing location and routines can:\nImprove privacy\n*Help criminals plan theft or scams\nOnly help friends\nHave no risk\nexplain: Predictability aids attackers.\nlevel: 1\n\nQ: Reviewing app permissions helps:\nGrant every permission always\n*Limit data access to what is necessary\nSlow the phone only\nDelete the app store\nexplain: Least privilege for apps.\nlevel: 1\n\nQ: Privacy settings should be reviewed:\nNever after signup\n*Periodically and after major app updates\nOnly once in a lifetime\nOnly by the platform\nexplain: Defaults and changes drift.\nlevel: 2\n\nQ: Tagging strangers in photos can:\nAlways be safe\n*Expose people’s identities and locations without consent\nImprove security\nDelete metadata\nexplain: Consent and exposure.\nlevel: 2\n\nQ: A practical privacy habit is:\nUsing the same personal details everywhere unnecessarily\n*Minimising what you share and with whom\nPosting ID documents for verification on social media\nIgnoring all settings\nexplain: Minimisation.\nlevel: 1\n\nQ: Scammers use public information to:\nHelp you\n*Craft believable phishing and social-engineering attacks\nImprove your credit score\nUpdate your software\nexplain: OSINT for scams.\nlevel: 1\n\nQ: Separating work and personal accounts can:\nIncrease confusion only\n*Limit blast radius if one account is compromised\nHave no security benefit\nBe impossible\nexplain: Containment.\nlevel: 2\n\nQ: Accepting unknown friend requests from attractive profiles is:\nAlways wise\n*A common social-engineering vector\nRequired for networking\nRisk-free\nexplain: Fake profiles are common.\nlevel: 1\n\nQ: The goal of privacy practice is:\nHiding from all friends\n*Controlling who can access your information and reducing unnecessary risk\nAvoiding all technology\nMaking accounts unusable\nexplain: Control + risk reduction.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 3: Account protection",
+      "description": "Passwords, MFA and recovery.",
+      "lessons": [
+        {
+          "title": "Lesson 3.1: Strong passwords and password managers",
+          "description": "Unique, strong secrets.",
+          "notesHtml": "<h3>Aim</h3><p>Adopt a password manager and unique strong passwords for important accounts.</p>"
+        },
+        {
+          "title": "Lesson 3.2: Two-step verification",
+          "description": "MFA that stops many takeovers.",
+          "notesHtml": "<h3>Aim</h3><p>Enable multi-factor authentication on critical accounts and understand backup codes.</p>"
+        },
+        {
+          "title": "Lesson 3.3: Recovering a compromised account",
+          "description": "Steps when something goes wrong.",
+          "notesHtml": "<h3>Aim</h3><p>Follow a practical response checklist if an account is taken over.</p>"
+        },
+        {
+          "title": "Module 3 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 3 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Reusing the same password across sites is:\nBest practice\n*Dangerous because one breach unlocks many accounts\nRequired by banks\nOnly a problem for email\nexplain: Credential stuffing risk.\nlevel: 1\n\nQ: A password manager helps by:\nSharing all passwords publicly\n*Storing unique strong passwords and filling them safely\nReplacing MFA\nMaking passwords shorter\nexplain: Unique secrets at scale.\nlevel: 1\n\nQ: Multi-factor authentication (MFA) adds:\nOnly inconvenience\n*A second proof of identity beyond the password\nA way to avoid passwords forever without risk\nNothing useful\nexplain: Second factor.\nlevel: 1\n\nQ: Backup codes for MFA should be:\nPosted on social media\n*Stored securely offline or in a safe place\nShared with colleagues casually\nIgnored\nexplain: Recovery when the second factor is lost.\nlevel: 2\n\nQ: If you suspect account compromise you should:\nDo nothing\n*Change password, review sessions/devices, enable MFA, and check recovery settings\nOnly post about it\nShare the password to get help from strangers\nexplain: Contain and harden.\nlevel: 1\n\nQ: SMS-based codes are:\nPerfectly secure always\n*Better than passwords alone but weaker than app-based or hardware factors against some attacks\nUseless\nThe only form of MFA\nexplain: Better than nothing; not the strongest.\nlevel: 2\n\nQ: Password length and uniqueness matter more than:\nUsing the same short password everywhere\n*Complex rules on a short reused password\nNever changing breached passwords\nWriting passwords on the monitor\nexplain: Length + uniqueness win.\nlevel: 2\n\nQ: Reviewing active sessions helps you:\nIncrease open sessions\n*Spot and revoke unknown logins\nShare access widely\nDisable MFA\nexplain: Session hygiene.\nlevel: 1\n\nQ: Recovery email and phone numbers should be:\nOutdated\n*Current and themselves well protected\nPublic\nThe same as the account password\nexplain: Recovery path security.\nlevel: 1\n\nQ: The combination that stops most account takeovers is:\nA short shared password only\n*Unique strong password + MFA + careful recovery settings\nNo password\nOnly security questions from public data\nexplain: Layered account defence.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 4: Phishing and cyber threats",
+      "description": "Spot scams, malware and mobile-money fraud.",
+      "lessons": [
+        {
+          "title": "Lesson 4.1: Spotting phishing and scams",
+          "description": "Cues and verification habits.",
+          "notesHtml": "<h3>Aim</h3><p>Identify common phishing cues and verify unexpected requests out-of-band.</p>"
+        },
+        {
+          "title": "Lesson 4.2: Malware, ransomware and fraud",
+          "description": "What they are and how to reduce exposure.",
+          "notesHtml": "<h3>Aim</h3><p>Explain ransomware and practical defences including backups and careful downloads.</p>"
+        },
+        {
+          "title": "Lesson 4.3: Mobile money and online safety",
+          "description": "Uganda-relevant payment scams.",
+          "notesHtml": "<h3>Aim</h3><p>Apply mobile-money safety rules and recognise common local scam patterns.</p>"
+        },
+        {
+          "title": "Module 4 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 4 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Phishing aims to:\nImprove your security\n*Trick you into revealing secrets or installing malware\nUpdate your software safely\nOnly send newsletters\nexplain: Deceptive credential or malware delivery.\nlevel: 1\n\nQ: Unexpected urgent requests for money or codes should be:\nObeyed immediately\n*Verified through a separate trusted channel\nForwarded to all contacts\nIgnored forever without checking\nexplain: Out-of-band verification.\nlevel: 1\n\nQ: Ransomware typically:\nImproves file organisation\n*Encrypts files and demands payment for recovery\nOnly affects paper documents\nIs harmless\nexplain: Extortion via encryption.\nlevel: 1\n\nQ: Offline or versioned backups help against ransomware by:\nPreventing all infections\n*Allowing restoration without paying the attacker\nSharing files publicly\nReplacing antivirus\nexplain: Recovery option.\nlevel: 1\n\nQ: Mobile-money PIN should be:\nShared with helpful callers\n*Kept private; never typed when someone is “guiding” you\nThe same as your birthday\nWritten on the phone case\nexplain: PIN secrecy.\nlevel: 1\n\nQ: A common scam pattern is:\nOfficial support that never asks for secrets\n*Impersonation of support, banks or relatives plus urgency\nSlow careful verification\nWritten contracts only\nexplain: Impersonation + urgency.\nlevel: 1\n\nQ: Clicking links in unexpected messages is:\nAlways safe if the logo looks right\n*Risky; prefer navigating to sites directly via known bookmarks\nRequired for updates\nOnly dangerous on computers\nexplain: Direct navigation is safer.\nlevel: 2\n\nQ: If you sent money to a scammer you should:\nSend more to recover it\n*Stop further contact, document everything, and report to the provider and relevant authorities\nOnly wait\nShare your ID to get a refund from the scammer\nexplain: Contain and report.\nlevel: 2\n\nQ: Attachment risk is higher when:\nThe sender is expected and the file type matches the context\n*The message is unexpected and urges you to open a document or enable macros\nYou scanned the file\nThe file is a plain text note from a known colleague\nexplain: Unexpected + macros = danger.\nlevel: 2\n\nQ: Healthy scepticism toward unexpected digital requests is:\nParanoia\n*A core security skill\nUnnecessary with antivirus\nOnly for IT staff\nexplain: Human layer of defence.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 5: Information protection",
+      "description": "Files, work security and incident response.",
+      "lessons": [
+        {
+          "title": "Lesson 5.1: Protecting files and backups",
+          "description": "Encryption, access and recovery.",
+          "notesHtml": "<h3>Aim</h3><p>Apply practical file protection and a workable backup routine.</p>"
+        },
+        {
+          "title": "Lesson 5.2: Security at work",
+          "description": "Shared responsibility in organisations.",
+          "notesHtml": "<h3>Aim</h3><p>Follow workplace security rules and report issues promptly.</p>"
+        },
+        {
+          "title": "Lesson 5.3: Reporting and responding to incidents",
+          "description": "What to do when something goes wrong.",
+          "notesHtml": "<h3>Aim</h3><p>Execute a simple personal and workplace incident response sequence.</p>"
+        },
+        {
+          "title": "Module 5 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 5 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Good backups are:\nOnly in the same folder as the originals\n*Separate, tested, and sufficiently frequent for your risk\nNever tested\nOnly in email\nexplain: Separate + tested.\nlevel: 1\n\nQ: Encrypting sensitive files helps when:\nDevices are lost or stolen\n*Devices or drives are lost, stolen or improperly accessed\nYou want slower performance only\nSharing widely without controls\nexplain: Confidentiality at rest.\nlevel: 1\n\nQ: Workplace security is:\nOnly the IT department’s job\n*A shared responsibility; individuals must follow policy and report issues\nOptional for senior staff\nOnly about physical doors\nexplain: Shared responsibility.\nlevel: 1\n\nQ: Reporting incidents early helps:\nCreate panic only\n*Limit damage and speed recovery\nGuarantee no consequences ever\nReplace all controls\nexplain: Time matters.\nlevel: 1\n\nQ: A simple incident response sequence includes:\nDeleting all evidence first\n*Contain, preserve evidence where appropriate, eradicate, recover, and learn\nOnly rebooting\nIgnoring it\nexplain: Structured response.\nlevel: 2\n\nQ: Access to shared drives should follow:\nEveryone gets full access\n*Need-to-know and least privilege\nNo access controls\nOnly alphabetical order\nexplain: Least privilege.\nlevel: 2\n\nQ: Testing a restore from backup is important because:\nBackups never fail\n*Untested backups often fail when needed\nIt is illegal\nIt replaces primary storage\nexplain: Test restores.\nlevel: 1\n\nQ: Suspicious activity on a work account should be:\nHidden to avoid blame\n*Reported according to policy immediately\nDiscussed only on social media\nIgnored if small\nexplain: Prompt reporting.\nlevel: 1\n\nQ: After an incident, learning reviews help:\nBlame individuals only\n*Improve controls and reduce repeat events\nAvoid all documentation\nPunish reporters\nexplain: Systemic improvement.\nlevel: 2\n\nQ: The overall aim of this course is to help you:\nFear all technology\n*Practise realistic digital safety habits that protect you, your money and your organisation\nBecome a professional hacker overnight\nAvoid all online services\nexplain: Practical resilient habits.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "format": "sela-course-pack-1",
+  "course": {
+    "title": "Advanced Artificial Intelligence",
+    "description": "From core concepts of modern AI and generative models to practical tool use and advanced prompting. Progressive path from curious beginner to confident advanced user.",
+    "sequential": true
+  },
+  "modules": [
+    {
+      "title": "Module 1: Modern AI technologies",
+      "description": "How AI and machine learning work at a conceptual level.",
+      "lessons": [
+        {
+          "title": "Lesson 1.1: How AI and machine learning work",
+          "description": "Core ideas without heavy maths.",
+          "notesHtml": "<h3>Aim</h3><p>Explain in plain language what machine learning does and how it differs from traditional programming.</p><h3>Key ideas</h3><p>Traditional software follows explicit rules written by people. Machine learning systems learn patterns from examples. Training uses data; inference applies the learned pattern to new cases. Limitations include data bias, brittleness outside the training distribution, and lack of true understanding.</p>"
+        },
+        {
+          "title": "Lesson 1.2: Key AI technologies today",
+          "description": "Vision, language, speech, recommendation and more.",
+          "notesHtml": "<h3>Aim</h3><p>Name major AI application areas and give a realistic example of each.</p>"
+        },
+        {
+          "title": "Lesson 1.3: Opportunities and limitations",
+          "description": "Where AI helps and where it fails.",
+          "notesHtml": "<h3>Aim</h3><p>List practical opportunities and important limitations of current AI systems.</p>"
+        },
+        {
+          "title": "Module 1 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 1 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Machine learning primarily learns from:\nOnly hand-written rules\n*Examples / data\nRandom numbers only\nUser passwords\nexplain: Learning from data is the core idea.\nlevel: 1\n\nQ: A key limitation of current AI is:\nIt never makes mistakes\n*It can fail on cases unlike its training data\nIt requires no data\nIt always explains its reasoning perfectly\nexplain: Distribution shift causes failures.\nlevel: 2\n\nQ: Traditional programming differs from ML because:\nIt never uses data\n*It relies on explicit rules written by developers\nIt cannot run on computers\nIt is identical to ML\nexplain: Explicit rules vs learned patterns.\nlevel: 1\n\nQ: Bias in training data can lead to:\nPerfect fairness always\n*Biased or unfair model behaviour\nFaster training only\nNo effect\nexplain: Models reflect their data.\nlevel: 1\n\nQ: Computer vision systems mainly process:\nOnly text\n*Images and video\nOnly audio\nOnly spreadsheets\nexplain: Vision = visual input.\nlevel: 1\n\nQ: Recommendation systems typically:\nIgnore user behaviour\n*Suggest items based on patterns in past behaviour and content\nOnly work offline\nReplace all search\nexplain: Patterns drive recommendations.\nlevel: 2\n\nQ: “AI understands language like humans” is:\nStrictly true for all systems\n*An overstatement; systems predict and pattern-match without human-like understanding\nRequired by law\nOnly true for images\nexplain: Current systems lack human understanding.\nlevel: 2\n\nQ: A practical opportunity for AI is:\nEliminating all human judgement forever\n*Automating repetitive pattern-based tasks and augmenting human work\nRemoving the need for data\nGuaranteeing zero errors\nexplain: Augmentation and automation of suitable tasks.\nlevel: 1\n\nQ: Evaluating an AI system should include:\nOnly marketing claims\n*Testing on realistic data and monitoring real-world performance\nIgnoring failures\nUsing only training data for evaluation\nexplain: Realistic evaluation is essential.\nlevel: 2\n\nQ: The difference between training and inference is:\nThere is no difference\n*Training learns from data; inference applies the learned model to new inputs\nInference happens only once ever\nTraining requires no data\nexplain: Two distinct phases.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 2: Generative AI and large language models",
+      "description": "How generative models create content and where they go wrong.",
+      "lessons": [
+        {
+          "title": "Lesson 2.1: How generative AI creates content",
+          "description": "Next-token prediction and sampling.",
+          "notesHtml": "<h3>Aim</h3><p>Explain at a high level how large language models generate text.</p>"
+        },
+        {
+          "title": "Lesson 2.2: Inside large language models",
+          "description": "Scale, training data and emergent abilities.",
+          "notesHtml": "<h3>Aim</h3><p>Describe why scale and diverse training data matter, and what “emergent” abilities roughly means.</p>"
+        },
+        {
+          "title": "Lesson 2.3: Strengths, errors and hallucinations",
+          "description": "When to trust and when to verify.",
+          "notesHtml": "<h3>Aim</h3><p>Recognise strengths of LLMs and the reality of hallucinations; adopt a verify-important-claims habit.</p>"
+        },
+        {
+          "title": "Module 2 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 2 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: Large language models generate text largely by:\nLooking up exact documents only\n*Predicting likely next tokens given context\nRunning SQL queries\nRandom character selection only\nexplain: Next-token prediction is central.\nlevel: 1\n\nQ: A hallucination in this context is:\nA perfect citation\n*A fluent but incorrect or fabricated statement\nA type of image\nA security feature\nexplain: Fluent falsehoods are a known risk.\nlevel: 1\n\nQ: Important factual claims from an LLM should be:\nAlways trusted blindly\n*Verified against reliable sources when decisions matter\nIgnored completely\nOnly used for poetry\nexplain: Verification protects decisions.\nlevel: 1\n\nQ: Scale of models and data often:\nHas no effect\n*Improves capability on many tasks, with diminishing and uneven returns\nGuarantees zero errors\nRemoves the need for prompts\nexplain: Scale helps but is not magic.\nlevel: 2\n\nQ: Generative AI is strong at:\nGuaranteeing legal advice\n*Drafting, summarising, brainstorming and transforming text when guided well\nReplacing all databases\nNever needing human review\nexplain: Strong at language tasks under guidance.\nlevel: 1\n\nQ: Training data influences:\nOnly the model’s colour scheme\n*What the model can do well and where it may be biased or outdated\nOnly inference speed\nNothing\nexplain: Data shapes behaviour.\nlevel: 2\n\nQ: “Emergent abilities” roughly refers to:\nAbilities that appear only after certain scale thresholds\n*Capabilities that become apparent at larger scales and were not explicitly programmed as narrow rules\nOnly image generation\nHardware failures\nexplain: Scale can unlock new behaviours.\nlevel: 2\n\nQ: Using an LLM for medical or legal decisions without expert review is:\nAlways safe\n*Risky because of errors and lack of accountability\nRequired\nThe only modern approach\nexplain: High-stakes domains need expertise.\nlevel: 1\n\nQ: Temperature (sampling) settings affect:\nDatabase schema\n*How random or focused the generated text is\nOnly image resolution\nUser passwords\nexplain: Sampling controls variability.\nlevel: 2\n\nQ: A practical habit with generative AI is:\nNever read the output\n*Treat it as a draft that needs human judgement and verification for important uses\nPublish every output immediately\nAvoid all creativity\nexplain: Human-in-the-loop is wise.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 3: AI tools",
+      "description": "Choose and use text, image and productivity tools responsibly.",
+      "lessons": [
+        {
+          "title": "Lesson 3.1: Choosing the right AI tool",
+          "description": "Match tool to task.",
+          "notesHtml": "<h3>Aim</h3><p>Select an appropriate tool category for a given task and recognise when AI is not the best approach.</p>"
+        },
+        {
+          "title": "Lesson 3.2: Text, image and productivity tools",
+          "description": "Practical use patterns.",
+          "notesHtml": "<h3>Aim</h3><p>Apply common tools to drafting, summarising, image generation and workflow support.</p>"
+        },
+        {
+          "title": "Lesson 3.3: Using tools safely and responsibly",
+          "description": "Privacy, IP and workplace policy.",
+          "notesHtml": "<h3>Aim</h3><p>Apply basic rules for sensitive data, copyright and organisational policy when using AI tools.</p>"
+        },
+        {
+          "title": "Module 3 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 3 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: The first step in choosing an AI tool is:\nPicking the most expensive option\n*Clarifying the task and constraints (privacy, accuracy needs, budget)\nIgnoring the task\nUsing every tool at once\nexplain: Task clarity guides selection.\nlevel: 1\n\nQ: Pasting confidential customer data into a public AI tool is:\nAlways fine\n*A privacy and policy risk\nRequired for good results\nOnly a problem for images\nexplain: Sensitive data needs protection.\nlevel: 1\n\nQ: AI image generators may raise:\nNo issues ever\n*Copyright, likeness and misuse concerns\nOnly colour problems\nOnly speed issues\nexplain: Legal and ethical issues exist.\nlevel: 2\n\nQ: Workplace AI use should follow:\nOnly personal preference\n*Organisational policy and applicable law\nNo rules\nOnly the tool’s marketing page\nexplain: Policy and law apply.\nlevel: 1\n\nQ: AI is often a poor fit when:\nThe task is repetitive pattern matching\n*The cost of errors is extreme and no reliable verification exists\nYou need a first draft\nYou want brainstorming help\nexplain: High-stakes unverified use is dangerous.\nlevel: 2\n\nQ: Summarising a long document with AI is useful when:\nYou never check the summary\n*You still verify key points for important decisions\nThe document is secret and the tool is public\nYou delete the original forever\nexplain: Verification remains necessary.\nlevel: 1\n\nQ: Productivity AI tools can help with:\nOnly replacing all staff\n*Drafting, scheduling support, email cleanup and similar tasks under human oversight\nGuaranteeing zero mistakes\nAvoiding all learning\nexplain: Augmentation under oversight.\nlevel: 1\n\nQ: Attribution and originality concerns arise especially with:\nSimple calculators\n*Generated text and images that may closely resemble existing works\nSpreadsheets only\nHardware\nexplain: Generative outputs can raise IP issues.\nlevel: 2\n\nQ: A responsible default is:\nShare all company data with every tool\n*Minimise sensitive data shared with external tools\nIgnore all policies\nUse the same password everywhere\nexplain: Data minimisation is prudent.\nlevel: 1\n\nQ: When AI output will be published under your name you should:\nNever read it\n*Review and edit so you stand behind the final version\nCopy it unchanged always\nHide the use of AI in all cases without considering policy\nexplain: You remain accountable.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    },
+    {
+      "title": "Module 4: Advanced prompting",
+      "description": "Engineer prompts that reliably produce useful results.",
+      "lessons": [
+        {
+          "title": "Lesson 4.1: Prompt engineering principles",
+          "description": "Clarity, context, constraints and role.",
+          "notesHtml": "<h3>Aim</h3><p>Write prompts that specify role, task, context, format and constraints clearly.</p>"
+        },
+        {
+          "title": "Lesson 4.2: Structuring complex prompts",
+          "description": "Multi-step and few-shot patterns.",
+          "notesHtml": "<h3>Aim</h3><p>Break complex tasks into steps and use examples (few-shot) when helpful.</p>"
+        },
+        {
+          "title": "Lesson 4.3: Testing and improving prompts",
+          "description": "Iterate with evaluation criteria.",
+          "notesHtml": "<h3>Aim</h3><p>Define what “good” looks like and iterate prompts against that standard.</p>"
+        },
+        {
+          "title": "Module 4 review and assessment",
+          "description": "Module check. Pass mark 70 %.",
+          "notesHtml": "<h3>Module 4 review and assessment</h3><p>10 questions. Pass mark 70 %.</p>",
+          "quiz": "Q: A strong prompt usually includes:\nOnly one vague word\n*Clear task, relevant context, desired format and constraints\nOnly the model’s name\nRandom characters\nexplain: Specificity improves results.\nlevel: 1\n\nQ: Assigning a role in a prompt can:\nNever help\n*Focus the style and expertise the model tries to emulate\nDelete the model\nChange the weather\nexplain: Role-setting shapes output.\nlevel: 1\n\nQ: Few-shot prompting means:\nUsing no examples\n*Providing a few input-output examples in the prompt\nTraining a new model from scratch\nOnly using images\nexplain: Examples guide the pattern.\nlevel: 1\n\nQ: For complex tasks it often helps to:\nAsk for everything in one vague sentence\n*Break the work into ordered steps\nAvoid all structure\nUse only one-word prompts\nexplain: Decomposition improves reliability.\nlevel: 1\n\nQ: Evaluating prompt quality requires:\nOnly liking the first output\n*Criteria for what “good enough” means and iterative testing\nNever changing the prompt\nIgnoring failures\nexplain: Criteria + iteration = improvement.\nlevel: 2\n\nQ: Specifying output format (e.g. bullet list, JSON, table) helps because:\nModels ignore format\n*It makes results easier to use and compare\nIt always reduces accuracy\nIt is only for images\nexplain: Format constraints aid usability.\nlevel: 1\n\nQ: Adding irrelevant context to a prompt usually:\nImproves focus\n*Dilutes attention and can hurt results\nIs required\nOnly affects colour\nexplain: Relevant context is better.\nlevel: 2\n\nQ: When a prompt fails you should:\nGive up permanently\n*Diagnose (ambiguity, missing context, wrong constraints) and revise\nOnly buy a new computer\nBlame the user of the output\nexplain: Systematic revision works.\nlevel: 1\n\nQ: Constraints such as “use only the provided text” help:\nEncourage hallucination\n*Reduce fabrication and keep answers grounded\nSlow the model only\nHide all sources\nexplain: Grounding constraints reduce hallucinations.\nlevel: 2\n\nQ: Advanced prompting is best viewed as:\nA one-time magic spell\n*An iterative engineering skill that improves with practice and evaluation\nUnnecessary for all tasks\nOnly for researchers\nexplain: Skill + iteration beats one-shot luck.\nlevel: 1",
+          "assessN": 10,
+          "passMark": 70
+        }
+      ]
+    }
+  ]
+}
